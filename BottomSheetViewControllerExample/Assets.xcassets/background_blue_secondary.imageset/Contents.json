@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "background_blue_secondary.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
