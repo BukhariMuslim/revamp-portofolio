@@ -208,10 +208,10 @@ class HomeViewController: UIViewController {
         
         
         //slicing new ui
-//        let vc = CardDetailManagerVC()
-//        navigationController?.pushViewController(vc, animated: true)
-        
-        let vc = CardDetailInformationVC()
+        let vc = CardDetailManagerVC()
         navigationController?.pushViewController(vc, animated: true)
+        
+//        let vc = CardDetailInformationVC()
+//        navigationController?.pushViewController(vc, animated: true)
     }
 }

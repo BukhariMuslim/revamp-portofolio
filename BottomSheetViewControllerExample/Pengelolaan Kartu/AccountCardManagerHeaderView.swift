@@ -30,7 +30,6 @@ class AccountCardManagerHeaderView: UIView {
 
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Rp10.000.000"
         label.font = .Brimo.Headline.smallSemiBold
         label.textColor = ConstantsColor.white900
         label.numberOfLines = 1
@@ -42,6 +41,21 @@ class AccountCardManagerHeaderView: UIView {
         btn.setImage(UIImage(named: "ic_copy"), for: .normal)
         return btn
     }()
+    
+    private let maskedText: String = "Rp\u{2022}\u{2022}\u{2022}\u{2022}\u{2022}\u{2022}\u{2022}\u{2022}"
+    private let DEFAULT_TEXT: String = "Rp10.000.000"
+    
+    public var isMasked: Bool = false {
+        didSet {
+            updateMaskedText()
+        }
+    }
+    
+    public var subtitle: String? {
+        didSet {
+            updateMaskedText()
+        }
+    }
 
     // MARK: - Init
 
@@ -62,6 +76,9 @@ class AccountCardManagerHeaderView: UIView {
         addSubview(copyBtn)
         addSubview(subtitleLabel)
         addSubview(eyeBtn)
+        subtitle = DEFAULT_TEXT
+        eyeBtn
+            .addTarget(self, action: #selector(toggleEye), for: .touchUpInside)
 
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -83,5 +100,13 @@ class AccountCardManagerHeaderView: UIView {
             make.leading.equalTo(subtitleLabel.snp.trailing).offset(8)
             make.bottom.equalToSuperview()
         }
+    }
+    
+    private func updateMaskedText() {
+        subtitleLabel.text = isMasked ? maskedText : (subtitle ?? DEFAULT_TEXT)
+    }
+    
+    @objc private func toggleEye() {
+        isMasked = !isMasked
     }
 }

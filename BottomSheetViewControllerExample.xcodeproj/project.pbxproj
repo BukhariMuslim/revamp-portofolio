@@ -57,6 +57,15 @@
 		87B2B4C12E1A5A9D00F7D6CB /* AccountListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B2B4C02E1A5A9D00F7D6CB /* AccountListTableViewCell.swift */; };
 		87E3F8862E0E956300517830 /* BrimonsSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E3F8852E0E954E00517830 /* BrimonsSearchView.swift */; };
 		87E3F89B2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E3F89A2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift */; };
+		D64457FD2E1D24B9006BF51F /* CardManagementVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64457FC2E1D24B9006BF51F /* CardManagementVC.swift */; };
+		D64457FF2E1D29E3006BF51F /* MainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64457FE2E1D29E3006BF51F /* MainHelper.swift */; };
+		D64458032E1D2D38006BF51F /* CardManagementHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64458022E1D2D38006BF51F /* CardManagementHeaderView.swift */; };
+		D64458072E1D3A45006BF51F /* CardInfoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64458062E1D3A45006BF51F /* CardInfoItem.swift */; };
+		D644580B2E1D7054006BF51F /* StickyRoundedContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D644580A2E1D7054006BF51F /* StickyRoundedContainerView.swift */; };
+		D644580E2E1DFA64006BF51F /* CardSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D644580D2E1DFA64006BF51F /* CardSettingsItem.swift */; };
+		D64458112E1E1008006BF51F /* CardManagementSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64458102E1E1008006BF51F /* CardManagementSettingsView.swift */; };
+		D64458132E1E1CB4006BF51F /* CostumizedSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64458122E1E1CB4006BF51F /* CostumizedSwitch.swift */; };
+		D64458152E1E1CD6006BF51F /* CostumizedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64458142E1E1CD6006BF51F /* CostumizedImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -127,6 +136,15 @@
 		87E3F8852E0E954E00517830 /* BrimonsSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrimonsSearchView.swift; sourceTree = "<group>"; };
 		87E3F89A2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOpeningBranchSearchVC.swift; sourceTree = "<group>"; };
 		98A4FEAB4C8EEF3551E1F7B3 /* Pods-BottomSheetViewControllerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BottomSheetViewControllerExample.release.xcconfig"; path = "Target Support Files/Pods-BottomSheetViewControllerExample/Pods-BottomSheetViewControllerExample.release.xcconfig"; sourceTree = "<group>"; };
+		D64457FC2E1D24B9006BF51F /* CardManagementVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagementVC.swift; sourceTree = "<group>"; };
+		D64457FE2E1D29E3006BF51F /* MainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHelper.swift; sourceTree = "<group>"; };
+		D64458022E1D2D38006BF51F /* CardManagementHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagementHeaderView.swift; sourceTree = "<group>"; };
+		D64458062E1D3A45006BF51F /* CardInfoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoItem.swift; sourceTree = "<group>"; };
+		D644580A2E1D7054006BF51F /* StickyRoundedContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyRoundedContainerView.swift; sourceTree = "<group>"; };
+		D644580D2E1DFA64006BF51F /* CardSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSettingsItem.swift; sourceTree = "<group>"; };
+		D64458102E1E1008006BF51F /* CardManagementSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagementSettingsView.swift; sourceTree = "<group>"; };
+		D64458122E1E1CB4006BF51F /* CostumizedSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostumizedSwitch.swift; sourceTree = "<group>"; };
+		D64458142E1E1CD6006BF51F /* CostumizedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostumizedImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +170,8 @@
 		363EFD422E1B77310043BCFF /* Pengelolaan Kartu */ = {
 			isa = PBXGroup;
 			children = (
+				D644580C2E1DF97C006BF51F /* Views */,
+				D64457FB2E1D24A7006BF51F /* CardManagement */,
 				363EFD522E1BD21B0043BCFF /* CardDetailInformationVC */,
 				363EFD432E1B77460043BCFF /* CardDetailManagerVC.swift */,
 				363EFD452E1B80740043BCFF /* AccountCardManagerHeaderView.swift */,
@@ -166,6 +186,7 @@
 			children = (
 				36432D8A2E1CBF3900055F79 /* FormFieldInformationView.swift */,
 				36432D852E1CB50000055F79 /* InputField.swift */,
+				D64457FE2E1D29E3006BF51F /* MainHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -337,6 +358,36 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D64457FB2E1D24A7006BF51F /* CardManagement */ = {
+			isa = PBXGroup;
+			children = (
+				D644580F2E1E02DA006BF51F /* Views */,
+				D64457FC2E1D24B9006BF51F /* CardManagementVC.swift */,
+			);
+			path = CardManagement;
+			sourceTree = "<group>";
+		};
+		D644580C2E1DF97C006BF51F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D644580A2E1D7054006BF51F /* StickyRoundedContainerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D644580F2E1E02DA006BF51F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D64458022E1D2D38006BF51F /* CardManagementHeaderView.swift */,
+				D64458062E1D3A45006BF51F /* CardInfoItem.swift */,
+				D644580D2E1DFA64006BF51F /* CardSettingsItem.swift */,
+				D64458102E1E1008006BF51F /* CardManagementSettingsView.swift */,
+				D64458122E1E1CB4006BF51F /* CostumizedSwitch.swift */,
+				D64458142E1E1CD6006BF51F /* CostumizedImage.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -455,16 +506,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D64458072E1D3A45006BF51F /* CardInfoItem.swift in Sources */,
+				D644580B2E1D7054006BF51F /* StickyRoundedContainerView.swift in Sources */,
+				D64457FF2E1D29E3006BF51F /* MainHelper.swift in Sources */,
 				86C8094B2A30D4F9008204D8 /* PageSettings.swift in Sources */,
 				87B2B4BF2E1A5A9100F7D6CB /* AccountListViewController.swift in Sources */,
+				D64457FD2E1D24B9006BF51F /* CardManagementVC.swift in Sources */,
 				87A6E5B32E0F6F2900C3F4A3 /* AccountOpeningDepositConfirmationVC.swift in Sources */,
 				8793F7802E111067008A47D5 /* AccountSuccessOpenInfoView.swift in Sources */,
 				87559E0D2E0FA0AB00741096 /* AccountOpeningCompleteViewController.swift in Sources */,
 				36432D8E2E1CD2AD00055F79 /* BiFastSetupVC.swift in Sources */,
+				D64458132E1E1CB4006BF51F /* CostumizedSwitch.swift in Sources */,
 				363EFD562E1C84210043BCFF /* CardAccountDetailInfoView.swift in Sources */,
 				8793F78B2E112F91008A47D5 /* BrimoNsPinReusableView.swift in Sources */,
 				8793F7912E1132FF008A47D5 /* AccountOpeningPinViewVC.swift in Sources */,
 				363EFD542E1BD23B0043BCFF /* CardDetailInformationVC.swift in Sources */,
+				D64458032E1D2D38006BF51F /* CardManagementHeaderView.swift in Sources */,
 				36432D902E1CD3EB00055F79 /* BiFastCardView.swift in Sources */,
 				87E3F89B2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift in Sources */,
 				36432D892E1CB68900055F79 /* CardDetailEditInformationVC.swift in Sources */,
@@ -476,6 +533,7 @@
 				36432D922E1CEAE700055F79 /* InformationAlertView.swift in Sources */,
 				8733248C2E0F81320040698B /* FundingSourceSectionView.swift in Sources */,
 				36432D952E1CFF4A00055F79 /* BiFastActiveVC.swift in Sources */,
+				D64458152E1E1CD6006BF51F /* CostumizedImage.swift in Sources */,
 				8793F7972E114595008A47D5 /* SetoranAwalViewController.swift in Sources */,
 				87B2B4BC2E1A590B00F7D6CB /* Brimo.swift in Sources */,
 				8726DE4F2E19207500EE4B73 /* DepositoKeyValueItemSet.swift in Sources */,
@@ -493,7 +551,9 @@
 				363EFD462E1B80740043BCFF /* AccountCardManagerHeaderView.swift in Sources */,
 				8793F78F2E1130AA008A47D5 /* AccountOpeningPinViewVM.swift in Sources */,
 				363EFD482E1B82000043BCFF /* Helper.swift in Sources */,
+				D644580E2E1DFA64006BF51F /* CardSettingsItem.swift in Sources */,
 				8793F7862E111657008A47D5 /* RecommendedProductCell.swift in Sources */,
+				D64458112E1E1008006BF51F /* CardManagementSettingsView.swift in Sources */,
 				8793F7882E1126EA008A47D5 /* AccountOpeningCompleteHeaderView.swift in Sources */,
 				87E3F8862E0E956300517830 /* BrimonsSearchView.swift in Sources */,
 				87B2B4C12E1A5A9D00F7D6CB /* AccountListTableViewCell.swift in Sources */,

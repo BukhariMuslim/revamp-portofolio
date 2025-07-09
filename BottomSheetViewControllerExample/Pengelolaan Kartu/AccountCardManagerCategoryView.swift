@@ -30,8 +30,11 @@ class AccountCardManagerCard: UIView {
         return label
     }()
     
-    init(title: String, image: String) {
+    private var action: EventHandler?
+    
+    init(title: String, image: String, action: EventHandler?) {
         super.init(frame: .zero)
+        self.action = action
         setupUI()
         iconView.image = UIImage(named: image)
         titleLabel.text = title
@@ -53,8 +56,18 @@ class AccountCardManagerCard: UIView {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(iconView.snp.bottom).offset(8)
             make.bottom.leading.trailing.equalToSuperview()
-            
         }
+        
+        if action != nil {
+            isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+            self.addGestureRecognizer(tap)
+            self.isUserInteractionEnabled = true
+        }
+    }
+    
+    @objc private func viewTapped() {
+        action?()
     }
 }
 
@@ -85,11 +98,11 @@ class AccountCardManagerCategoryView: UIView {
         }
     }
 
-    func configure(items: [(title: String, image: String)]) {
+    func configure(items: [CardMenuItem]) {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
         for item in items {
-            let view = AccountCardManagerCard(title: item.title, image: item.image)
+            let view = AccountCardManagerCard(title: item.title, image: item.image, action: item.action)
             stackView.addArrangedSubview(view)
         }
 

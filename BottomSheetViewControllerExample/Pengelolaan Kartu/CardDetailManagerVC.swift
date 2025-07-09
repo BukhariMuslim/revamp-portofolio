@@ -12,6 +12,13 @@ import SnapKit
 struct CardMenuItem {
     let title: String
     let image: String
+    let action: EventHandler?
+    
+    init(title: String, image: String, action: EventHandler? = nil) {
+        self.title = title
+        self.image = image
+        self.action = action
+    }
 }
 
 
@@ -44,7 +51,6 @@ final class CardDetailManagerVC: UIViewController {
         super.viewDidLayoutSubviews()
         roundBackgroundView.roundCorners(corners: [.topLeft, .topRight], radius: 24)
     }
-
     
     private func setupView(){
         view.backgroundColor = ConstantsColor.white900
@@ -52,13 +58,22 @@ final class CardDetailManagerVC: UIViewController {
         roundBackgroundView.addSubview(listActivityView)
         
         let menuItems: [CardMenuItem] = [
-            CardMenuItem(title: "Informasi Rekeningss", image: "category_image"),
-            CardMenuItem(title: "Detail Kartu", image: "category_image"),
+            CardMenuItem(title: "Informasi Rekening", image: "category_image", action: showDetailInformation),
+            CardMenuItem(title: "Detail Kartu", image: "category_image", action: showDetailCard),
             CardMenuItem(title: "E-Statement", image: "category_image")
         ]
 
-        let menu = menuItems.map { (title: $0.title, image: $0.image) }
-        menuCollectionView.configure(items: menu)
+        menuCollectionView.configure(items: menuItems)
+    }
+    
+    private func showDetailInformation() {
+        let vc = CardDetailInformationVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func showDetailCard() {
+        let vc = CardManagementVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func setupConstraint(){

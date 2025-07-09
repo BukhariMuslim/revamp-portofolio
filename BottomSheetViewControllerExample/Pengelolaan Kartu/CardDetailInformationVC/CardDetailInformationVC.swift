@@ -208,7 +208,8 @@ class CardDetailInformationVC: UIViewController, UITableViewDataSource, UITableV
             CardDetailItem(title: "Proxy BI-Fast", value: "Atur Sekarang", showCopyButton: false, showDisclosure: true),
             CardDetailItem(title: "Status Finansial", value: "Aktif", showCopyButton: false, showDisclosure: true),
             CardDetailItem(title: "Status Rekening", value: "Bukan Rekening Utama", showCopyButton: false, showDisclosure: true),
-            CardDetailItem(title: "Status Notifikasi SMS", value: "Tidak Aktif", showCopyButton: false, showDisclosure: true),
+            CardDetailItem(title: "Status Notifikasi Transaksi", value: "Tidak Aktif", showCopyButton: false, showDisclosure: true),
+            
             CardDetailItem(title: "Nama Alias", value: "(Belum ada Nama Alias)", showCopyButton: false, showDisclosure: true),
             CardDetailItem(title: "Proxy BI-Fast", value: "Atur Sekarang", showCopyButton: false, showDisclosure: true),
             CardDetailItem(title: "Status Finansial", value: "Aktif", showCopyButton: false, showDisclosure: true),
