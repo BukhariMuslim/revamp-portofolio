@@ -34,7 +34,7 @@ final class StickyRoundedContainerView: UIView {
         addSubview(roundedContainer)
         addSubview(scrollView)
 
-        scrollView.backgroundColor = isStickyEnabled ? .clear : .Brimo.White.main
+        scrollView.backgroundColor = .clear
         scrollView.addSubview(scrollContent)
         scrollContent.addSubview(spacerView)
         scrollContent.addSubview(contentWrapper)
@@ -43,7 +43,7 @@ final class StickyRoundedContainerView: UIView {
         scrollView.showsVerticalScrollIndicator = false
         scrollView.isScrollEnabled = false
         
-        contentWrapper.backgroundColor = .Brimo.White.main
+        contentWrapper.backgroundColor = isStickyEnabled ? .Brimo.White.main : .clear
         roundedContainer.backgroundColor = .Brimo.White.main
         roundedContainer.layer.cornerRadius = 24
         roundedContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -57,7 +57,7 @@ final class StickyRoundedContainerView: UIView {
             if isStickyEnabled {
                 make.top.equalToSuperview().offset(24)
             } else {
-                make.top.equalTo(roundedContainer.snp.bottom).offset(-16)
+                make.top.equalTo(roundedContainer.snp.top)
             }
             make.leading.trailing.bottom.equalToSuperview()
         }
@@ -78,7 +78,12 @@ final class StickyRoundedContainerView: UIView {
         }
         
         contentView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            if isStickyEnabled {
+                make.edges.equalToSuperview()
+            } else {
+                make.top.equalToSuperview().offset(16)
+                make.leading.trailing.bottom.equalToSuperview()
+            }
         }
         
         roundedContainer.snp.makeConstraints { [weak self] make in
@@ -86,9 +91,10 @@ final class StickyRoundedContainerView: UIView {
             if isStickyEnabled {
                 self.topConstraint = make.top.equalTo(self.headerView.snp.top).constraint
                 make.height.greaterThanOrEqualTo(48)
+                make.bottom.equalToSuperview()
             } else {
                 make.top.equalTo(headerView.snp.bottom)
-                make.height.equalTo(48)
+                make.bottom.equalToSuperview()
             }
             make.leading.trailing.equalToSuperview()
         }
