@@ -145,7 +145,8 @@ class CardManagementVC: UIViewController {
         
         scrollContainerView = StickyRoundedContainerView(
             headerView: headerView,
-            contentView: contentView
+            contentView: contentView,
+            isStickyEnabled: false
         )
         
         view.backgroundColor = ConstantsColor.white900

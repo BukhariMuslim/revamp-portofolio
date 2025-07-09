@@ -14,10 +14,13 @@ final class StickyRoundedContainerView: UIView {
     private var spacerHeightConstraint: Constraint?
     private var headerHeight: CGFloat = 0
     private var topConstraint: Constraint?
+    
+    private var isStickyEnabled: Bool
 
-    init(headerView: UIView, contentView: UIView) {
+    init(headerView: UIView, contentView: UIView, isStickyEnabled: Bool = true) {
         self.headerView = headerView
         self.contentView = contentView
+        self.isStickyEnabled = isStickyEnabled
         super.init(frame: .zero)
         setupLayout()
     }
@@ -31,6 +34,7 @@ final class StickyRoundedContainerView: UIView {
         addSubview(roundedContainer)
         addSubview(scrollView)
 
+        scrollView.backgroundColor = isStickyEnabled ? .clear : .Brimo.White.main
         scrollView.addSubview(scrollContent)
         scrollContent.addSubview(spacerView)
         scrollContent.addSubview(contentWrapper)
@@ -50,7 +54,11 @@ final class StickyRoundedContainerView: UIView {
         }
         
         scrollView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(24)
+            if isStickyEnabled {
+                make.top.equalToSuperview().offset(24)
+            } else {
+                make.top.equalTo(roundedContainer.snp.bottom).offset(-16)
+            }
             make.leading.trailing.bottom.equalToSuperview()
         }
         
@@ -75,9 +83,14 @@ final class StickyRoundedContainerView: UIView {
         
         roundedContainer.snp.makeConstraints { [weak self] make in
             guard let self = self else { return }
-            self.topConstraint = make.top.equalTo(self.headerView.snp.top).constraint
+            if isStickyEnabled {
+                self.topConstraint = make.top.equalTo(self.headerView.snp.top).constraint
+                make.height.greaterThanOrEqualTo(48)
+            } else {
+                make.top.equalTo(headerView.snp.bottom)
+                make.height.equalTo(48)
+            }
             make.leading.trailing.equalToSuperview()
-            make.height.greaterThanOrEqualTo(48)
         }
         
         scrollView.delegate = self
@@ -85,17 +98,20 @@ final class StickyRoundedContainerView: UIView {
 
     func setHeaderHeight(_ height: CGFloat) {
         self.headerHeight = height
-        spacerView.snp.updateConstraints { $0.height.equalTo(height) }
         scrollView.contentInset.top = 0
-        scrollView.contentOffset = .zero
         scrollView.isScrollEnabled = true
-        
+        scrollView.contentOffset = .zero
         scrollViewDidScroll(scrollView)
+        
+        if isStickyEnabled {
+            spacerView.snp.updateConstraints { $0.height.equalTo(height) }
+        }
     }
 }
 
 extension StickyRoundedContainerView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard isStickyEnabled else { return }
         let offsetY = scrollView.contentOffset.y
         let pinnedOffset = max(0, headerHeight - offsetY)
         topConstraint?.update(offset: pinnedOffset)
