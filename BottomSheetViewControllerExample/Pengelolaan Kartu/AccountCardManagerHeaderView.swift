@@ -38,7 +38,7 @@ class AccountCardManagerHeaderView: UIView {
 
     private let eyeBtn: UIButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "ic_copy"), for: .normal)
+        btn.setImage(UIImage(named: "unhide_eye"), for: .normal)
         return btn
     }()
     

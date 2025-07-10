@@ -370,4 +370,9 @@ extension UIViewController {
     func getTopSafeAreaHeight() -> CGFloat {
         return view.safeAreaInsets.top
     }
+    
+    func getBottomSafeAreaHeight() -> CGFloat {
+        return view.safeAreaInsets.bottom
+    }
 }
+

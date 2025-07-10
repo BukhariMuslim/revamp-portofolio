@@ -26,6 +26,9 @@
 		3687FBEB2E1E12DE00BCC6EC /* BIFastCardSuccessFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3687FBEA2E1E12DE00BCC6EC /* BIFastCardSuccessFooterView.swift */; };
 		3687FBED2E1E3D0F00BCC6EC /* BottomSheetWithTwoBtnVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3687FBEC2E1E3D0F00BCC6EC /* BottomSheetWithTwoBtnVC.swift */; };
 		3687FBF02E1E529E00BCC6EC /* BiFastActivatedEmaillVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3687FBEF2E1E529E00BCC6EC /* BiFastActivatedEmaillVC.swift */; };
+		3694837C2E1F98310069E46F /* PhoneNumberInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3694837B2E1F98310069E46F /* PhoneNumberInfoView.swift */; };
+		3694837F2E1F9ACE0069E46F /* WhatsAppNotificationConfigVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3694837E2E1F9ACE0069E46F /* WhatsAppNotificationConfigVC.swift */; };
+		369483872E1FB9C20069E46F /* AccountOpeningCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369483822E1FB9C20069E46F /* AccountOpeningCompleteViewController.swift */; };
 		36E7CD042E1F21C500FACACF /* NotifyTransactionManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E7CD032E1F21C500FACACF /* NotifyTransactionManagerVC.swift */; };
 		80992495A6EE83CB0D199D80 /* Pods_BottomSheetViewControllerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FBE2FA2E838D49EA8B73D2 /* Pods_BottomSheetViewControllerExample.framework */; };
 		8619D25C2A2C751B00AB91A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8619D25B2A2C751B00AB91A8 /* AppDelegate.swift */; };
@@ -42,7 +45,6 @@
 		8733248C2E0F81320040698B /* FundingSourceSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733248B2E0F81320040698B /* FundingSourceSectionView.swift */; };
 		8733248E2E0F813D0040698B /* InitialDepositDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733248D2E0F813D0040698B /* InitialDepositDetailView.swift */; };
 		873324902E0F82AD0040698B /* BranchOpeningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733248F2E0F82AD0040698B /* BranchOpeningView.swift */; };
-		87559E0D2E0FA0AB00741096 /* AccountOpeningCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87559E0C2E0FA0AB00741096 /* AccountOpeningCompleteViewController.swift */; };
 		8793F7802E111067008A47D5 /* AccountSuccessOpenInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8793F77F2E111067008A47D5 /* AccountSuccessOpenInfoView.swift */; };
 		8793F7842E1114FA008A47D5 /* RecommendedProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8793F7832E1114F8008A47D5 /* RecommendedProductsView.swift */; };
 		8793F7862E111657008A47D5 /* RecommendedProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8793F7852E111657008A47D5 /* RecommendedProductCell.swift */; };
@@ -107,6 +109,9 @@
 		3687FBEA2E1E12DE00BCC6EC /* BIFastCardSuccessFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BIFastCardSuccessFooterView.swift; sourceTree = "<group>"; };
 		3687FBEC2E1E3D0F00BCC6EC /* BottomSheetWithTwoBtnVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetWithTwoBtnVC.swift; sourceTree = "<group>"; };
 		3687FBEF2E1E529E00BCC6EC /* BiFastActivatedEmaillVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiFastActivatedEmaillVC.swift; sourceTree = "<group>"; };
+		3694837B2E1F98310069E46F /* PhoneNumberInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInfoView.swift; sourceTree = "<group>"; };
+		3694837E2E1F9ACE0069E46F /* WhatsAppNotificationConfigVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsAppNotificationConfigVC.swift; sourceTree = "<group>"; };
+		369483822E1FB9C20069E46F /* AccountOpeningCompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOpeningCompleteViewController.swift; sourceTree = "<group>"; };
 		36E7CD032E1F21C500FACACF /* NotifyTransactionManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTransactionManagerVC.swift; sourceTree = "<group>"; };
 		4293F4D43D94AD655BC8BE2B /* Pods-BottomSheetViewControllerExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BottomSheetViewControllerExample.debug.xcconfig"; path = "Target Support Files/Pods-BottomSheetViewControllerExample/Pods-BottomSheetViewControllerExample.debug.xcconfig"; sourceTree = "<group>"; };
 		8619D2582A2C751B00AB91A8 /* BottomSheetViewControllerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BottomSheetViewControllerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,7 +130,6 @@
 		8733248B2E0F81320040698B /* FundingSourceSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundingSourceSectionView.swift; sourceTree = "<group>"; };
 		8733248D2E0F813D0040698B /* InitialDepositDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialDepositDetailView.swift; sourceTree = "<group>"; };
 		8733248F2E0F82AD0040698B /* BranchOpeningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchOpeningView.swift; sourceTree = "<group>"; };
-		87559E0C2E0FA0AB00741096 /* AccountOpeningCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOpeningCompleteViewController.swift; sourceTree = "<group>"; };
 		8793F77F2E111067008A47D5 /* AccountSuccessOpenInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSuccessOpenInfoView.swift; sourceTree = "<group>"; };
 		8793F7832E1114F8008A47D5 /* RecommendedProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedProductsView.swift; sourceTree = "<group>"; };
 		8793F7852E111657008A47D5 /* RecommendedProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedProductCell.swift; sourceTree = "<group>"; };
@@ -252,11 +256,29 @@
 			path = BiFastActivatedEmail;
 			sourceTree = "<group>";
 		};
+		3694837D2E1F9A5F0069E46F /* AturNotificationWhatsApp */ = {
+			isa = PBXGroup;
+			children = (
+				3694837E2E1F9ACE0069E46F /* WhatsAppNotificationConfigVC.swift */,
+			);
+			path = AturNotificationWhatsApp;
+			sourceTree = "<group>";
+		};
+		369483812E1FB9A40069E46F /* ConfirmationView */ = {
+			isa = PBXGroup;
+			children = (
+				369483822E1FB9C20069E46F /* AccountOpeningCompleteViewController.swift */,
+			);
+			path = ConfirmationView;
+			sourceTree = "<group>";
+		};
 		36E7CD022E1F214800FACACF /* NotifyTransactionManagerView */ = {
 			isa = PBXGroup;
 			children = (
+				3694837D2E1F9A5F0069E46F /* AturNotificationWhatsApp */,
 				36E7CD032E1F21C500FACACF /* NotifyTransactionManagerVC.swift */,
 				3674B1BC2E1F25FB0065BE1F /* NotifyTransactionView.swift */,
+				3694837B2E1F98310069E46F /* PhoneNumberInfoView.swift */,
 			);
 			path = NotifyTransactionManagerView;
 			sourceTree = "<group>";
@@ -282,6 +304,7 @@
 		8619D25A2A2C751B00AB91A8 /* BottomSheetViewControllerExample */ = {
 			isa = PBXGroup;
 			children = (
+				369483812E1FB9A40069E46F /* ConfirmationView */,
 				363EFD4B2E1B88150043BCFF /* Helper */,
 				363EFD422E1B77310043BCFF /* Pengelolaan Kartu */,
 				87B2B4BD2E1A5A8A00F7D6CB /* ListRekening */,
@@ -332,7 +355,6 @@
 			children = (
 				8793F7872E1126EA008A47D5 /* AccountOpeningCompleteHeaderView.swift */,
 				8793F7852E111657008A47D5 /* RecommendedProductCell.swift */,
-				87559E0C2E0FA0AB00741096 /* AccountOpeningCompleteViewController.swift */,
 				8793F7832E1114F8008A47D5 /* RecommendedProductsView.swift */,
 				8793F77F2E111067008A47D5 /* AccountSuccessOpenInfoView.swift */,
 			);
@@ -545,7 +567,7 @@
 				D64457FD2E1D24B9006BF51F /* CardManagementVC.swift in Sources */,
 				87A6E5B32E0F6F2900C3F4A3 /* AccountOpeningDepositConfirmationVC.swift in Sources */,
 				8793F7802E111067008A47D5 /* AccountSuccessOpenInfoView.swift in Sources */,
-				87559E0D2E0FA0AB00741096 /* AccountOpeningCompleteViewController.swift in Sources */,
+				3694837F2E1F9ACE0069E46F /* WhatsAppNotificationConfigVC.swift in Sources */,
 				36432D8E2E1CD2AD00055F79 /* BiFastSetupVC.swift in Sources */,
 				D64458132E1E1CB4006BF51F /* CostumizedSwitch.swift in Sources */,
 				363EFD562E1C84210043BCFF /* CardAccountDetailInfoView.swift in Sources */,
@@ -555,18 +577,20 @@
 				D64458032E1D2D38006BF51F /* CardManagementHeaderView.swift in Sources */,
 				36E7CD042E1F21C500FACACF /* NotifyTransactionManagerVC.swift in Sources */,
 				36432D902E1CD3EB00055F79 /* BiFastCardView.swift in Sources */,
+				3694837C2E1F98310069E46F /* PhoneNumberInfoView.swift in Sources */,
 				87E3F89B2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift in Sources */,
 				36432D892E1CB68900055F79 /* CardDetailEditInformationVC.swift in Sources */,
 				3687FBEB2E1E12DE00BCC6EC /* BIFastCardSuccessFooterView.swift in Sources */,
 				87B2B4BA2E1A58E500F7D6CB /* ConstantsColor.swift in Sources */,
 				8619D2732A2CA0E800AB91A8 /* DemoBottomSheetViewController.swift in Sources */,
 				8619D2602A2C751B00AB91A8 /* HomeViewController.swift in Sources */,
+				369483872E1FB9C20069E46F /* AccountOpeningCompleteViewController.swift in Sources */,
 				87282D042E15410D006A9B63 /* MainTableViewCell.swift in Sources */,
 				3687FBF02E1E529E00BCC6EC /* BiFastActivatedEmaillVC.swift in Sources */,
 				363EFD4F2E1BA01D0043BCFF /* AccountCardManagerCategoryView.swift in Sources */,
 				36432D922E1CEAE700055F79 /* BiInformationAlertView.swift in Sources */,
 				8733248C2E0F81320040698B /* FundingSourceSectionView.swift in Sources */,
-				36432D952E1CFF4A00055F79 /* BiFastActiveVC.swift in Sources */,
+				36432D952E1CFF4A00055F79 /* BiFastActivatedPhoneVC.swift in Sources */,
 				D64458152E1E1CD6006BF51F /* CostumizedImage.swift in Sources */,
 				36432D952E1CFF4A00055F79 /* BiFastActivatedPhoneVC.swift in Sources */,
 				8793F7972E114595008A47D5 /* SetoranAwalViewController.swift in Sources */,

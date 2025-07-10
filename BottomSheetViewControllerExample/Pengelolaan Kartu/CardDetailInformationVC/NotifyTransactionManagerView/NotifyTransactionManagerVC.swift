@@ -31,14 +31,19 @@ class NotifyTransactionManagerVC: UIViewController {
         return label
     }()
     
+    private let phoneNumberInfoView: PhoneNumberInfoView = {
+        let view = PhoneNumberInfoView()
+        return view
+    }()
+    
     private let notifyWhatsAppView: NotifyTransactionView = {
         let view = NotifyTransactionView()
-        view.isDetailVisible = true
         return view
     }()
     
     private let notifyWhatsAppTextView: NotifyTransactionView = {
         let view = NotifyTransactionView()
+        view.setupContent(item: NotifyTransactionContent(image: "sms_orange_ic", title: "Whatsapp"))
         return view
     }()
     
@@ -48,10 +53,23 @@ class NotifyTransactionManagerVC: UIViewController {
         setupConstraint()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        roundBackgroundView.roundCorners(corners: [.topLeft, .topRight], radius: 24)
+    }
+    
     private func setupView(){
         view.backgroundColor = ConstantsColor.white900
         view.addSubviews(backgroundContainerView, roundBackgroundView)
-        roundBackgroundView.addSubviews(titleLabel, notifyWhatsAppView, notifyWhatsAppTextView)
+        roundBackgroundView.addSubviews(titleLabel, phoneNumberInfoView, notifyWhatsAppView, notifyWhatsAppTextView)
+        
+        notifyWhatsAppView.toggleSwitch.addTarget(self, action: #selector(notifyWhatsAppViewAction), for: .touchUpInside)
+    }
+    
+    @objc private func notifyWhatsAppViewAction(){
+        let vc = WhatsAppNotificationConfigVC()
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func setupConstraint(){
@@ -69,9 +87,14 @@ class NotifyTransactionManagerVC: UIViewController {
             $0.top.equalTo(roundBackgroundView.snp.top).offset(24)
         }
         
-        notifyWhatsAppView.snp.remakeConstraints {
+        phoneNumberInfoView.snp.remakeConstraints {
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.top.equalTo(titleLabel.snp.bottom).offset(24)
+        }
+        
+        notifyWhatsAppView.snp.remakeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.top.equalTo(phoneNumberInfoView.snp.bottom).offset(24)
         }
         
         notifyWhatsAppTextView.snp.remakeConstraints {
@@ -79,9 +102,11 @@ class NotifyTransactionManagerVC: UIViewController {
             $0.top.equalTo(notifyWhatsAppView.snp.bottom).offset(24)
         }
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        roundBackgroundView.roundCorners(corners: [.topLeft, .topRight], radius: 24)
+}
+
+
+extension NotifyTransactionManagerVC: WhatsAppNotificationProtocol {
+    func successAddNotification() {
+        notifyWhatsAppView.isDetailVisible = true
     }
 }

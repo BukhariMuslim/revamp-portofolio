@@ -1,9 +1,12 @@
 //
-//  CollapsibleTextViewController.swift
-//  BottomSheetViewControllerExample
+//  AccountOpeningCompleteViewController.swift
+//  brimo-native
 //
-//  Created by PT Diksha Teknologi Indonesia on 28/06/25.
+//  Created by PT Diksha Teknologi Indonesia on 05/07/25.
+//  Copyright © 2025 BRImo. All rights reserved.
 //
+
+
 import UIKit
 import Foundation
 import SnapKit
@@ -12,20 +15,37 @@ final class AccountOpeningCompleteViewController: UIViewController {
 
     private let scrollView = UIScrollView()
     private let contentView = UIView()
+    
 
     private let headerView = AccountOpeningCompleteHeaderView()
     private var depositDetailView: KeyValueComponentView!
     private let infoView = AccountSuccessOpenInfoView()
     private let recommendedProductsView = RecommendedProductsView()
+    
+    private lazy var backgroundImgView: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "recipe_success_ic")
+        return image
+    }()
 
-    private var isExpanded = false
+    // later should support from api
+    // api still on progress
+//    var receiptData: OpenAccountReceiptResponseData?{
+//        didSet {
+//            if let receiptData {
+////                headerView.configure(title: "Berhasil! Tabungan Baru Kamu Siap Digunakan", date: receiptData.referenceDataView?.first?.value ?? "", image: UIImage(named: "coin_success"), name: <#T##String#>, accountNumber: <#T##String#>)
+////                OpenAccountReceiptResponseData
+//            }
+//        }
+//    }
 
     private let doneBtn: UIButton = {
         let btn = UIButton()
         btn.setTitle("Selesai", for: .normal)
-        btn.backgroundColor = UIColor.blue
+        btn.setTitleColor(ConstantsColor.white900, for: .normal)
+        btn.titleLabel?.font = UIFont.Brimo.Body.largeSemiBold
+        btn.backgroundColor = ConstantsColor.blue500
         btn.layer.cornerRadius = 28
-        btn.setTitleColor(.white, for: .normal)
         return btn
     }()
 
@@ -37,16 +57,20 @@ final class AccountOpeningCompleteViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = ConstantsColor.black100
+        scrollView.backgroundColor = .clear
 
         configureDetailViewData()
         setupLayout()
+        
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     private func setupLayout() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
 
+        contentView.addSubview(backgroundImgView)
         contentView.addSubview(headerView)
         contentView.addSubview(depositDetailView)
         contentView.addSubview(infoView)
@@ -54,6 +78,11 @@ final class AccountOpeningCompleteViewController: UIViewController {
 
         view.addSubview(backgroundDoneBtnView)
         backgroundDoneBtnView.addSubview(doneBtn)
+        
+        backgroundImgView.snp.remakeConstraints {
+            $0.leading.trailing.top.equalToSuperview()
+            $0.height.equalTo(812)
+        }
 
         scrollView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)

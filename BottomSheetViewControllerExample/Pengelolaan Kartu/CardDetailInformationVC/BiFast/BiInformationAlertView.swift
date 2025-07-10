@@ -11,18 +11,6 @@ import SnapKit
 
 final class BiInformationAlertView: UIView {
 
-    // MARK: - Init
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-        setupConstraints()
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-
     // MARK: - UI Components
 
     private let infoIcon: UIImageView = {
@@ -54,7 +42,19 @@ final class BiInformationAlertView: UIView {
         """
         return label
     }()
+    
+    // MARK: - Init
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+        setupConstraints()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     // MARK: - Setup
 
     private func setupView() {
@@ -89,29 +89,33 @@ final class BiInformationAlertView: UIView {
     }
     
     func configure(
-          icon: String = "",
-          iconTintColor: UIColor = .systemBlue,
-          titleText: String = "",
-          titleTextColor: UIColor = ConstantsColor.black900,
-          titleFont: UIFont = .Brimo.Body.mediumSemiBold,
-          messageText: String? = "",
-          messageTextColor: UIColor = ConstantsColor.black900,
-          messageFont: UIFont = .Brimo.Body.mediumRegular,
-          backgroundColor: UIColor = ConstantsColor.primary100,
-          borderColor: UIColor = UIColor.Brimo.Primary.main
-      ) {
-          infoIcon.image = UIImage(named: icon)
-          infoIcon.tintColor = iconTintColor
+        icon: String? = nil,
+        iconTintColor: UIColor? = nil,
+        titleText: String? = nil,
+        titleTextColor: UIColor? = nil,
+        titleFont: UIFont? = nil,
+        messageText: String? = nil,
+        messageTextColor: UIColor? = nil,
+        messageFont: UIFont? = nil,
+        backgroundColor: UIColor? = nil,
+        borderColor: UIColor? = nil
+    ) {
+        // Icon image
+        let imageName = (icon?.isEmpty == false ? icon : nil) ?? "info_ic"
 
-          infoLabel.text = titleText
-          infoLabel.textColor = titleTextColor
-          infoLabel.font = titleFont
+        // Title
+        infoLabel.text = titleText?.isEmpty == false ? titleText : ""
+        infoLabel.textColor = titleTextColor ?? ConstantsColor.black900
+        infoLabel.font = titleFont ?? .Brimo.Body.mediumSemiBold
 
-          bulletLabel.text = messageText
-          bulletLabel.textColor = messageTextColor
-          bulletLabel.font = messageFont
+        // Message
+        bulletLabel.text = messageText?.isEmpty == false ? messageText : ""
+        bulletLabel.textColor = messageTextColor ?? ConstantsColor.black900
+        bulletLabel.font = messageFont ?? .Brimo.Body.mediumRegular
 
-          self.backgroundColor = backgroundColor
-          self.layer.borderColor = borderColor.cgColor
-      }
+        // Background & Border
+        self.backgroundColor = backgroundColor ?? ConstantsColor.primary100
+        self.layer.borderColor = (borderColor ?? UIColor.Brimo.Primary.main).cgColor
+    }
+
 }

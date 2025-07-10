@@ -14,8 +14,8 @@ class FundingSourceSectionView: UIView {
     private let titleSectionLabel: UILabel = {
         let label = UILabel()
         label.text = "Sumber Dana"
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
-        label.textColor = .black
+        label.font = .Brimo.Body.largeSemiBold
+        label.textColor = ConstantsColor.black900
         label.numberOfLines = 1
         return label
     }()
@@ -23,7 +23,7 @@ class FundingSourceSectionView: UIView {
     
     private let backgroundContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = ConstantsColor.black100
         view.layer.cornerRadius = 16
         view.clipsToBounds = true
         return view
@@ -39,16 +39,16 @@ class FundingSourceSectionView: UIView {
 
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
-        label.textColor = .label
+        label.font = .Brimo.Body.mediumRegular
+        label.textColor = ConstantsColor.black900
         label.numberOfLines = 1
         return label
     }()
 
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
-        label.textColor = .secondaryLabel
+        label.font = .Brimo.Body.mediumRegular
+        label.textColor = ConstantsColor.black900
         label.numberOfLines = 1
         return label
     }()
