@@ -47,6 +47,11 @@ final class CardDetailManagerVC: UIViewController {
         setupConstraint()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        title = "BritAma"
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         roundBackgroundView.roundCorners(corners: [.topLeft, .topRight], radius: 24)

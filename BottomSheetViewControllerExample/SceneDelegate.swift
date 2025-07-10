@@ -16,6 +16,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        let backAppearance = UIBarButtonItemAppearance()
+        backAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
+        backAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: -1000, vertical: 0) // fully hides text
+
+        let image = UIImage(named: "arrows/left")?.withRenderingMode(
+            .alwaysOriginal
+        )
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.setBackIndicatorImage(image, transitionMaskImage: image)
+        appearance.backButtonAppearance = backAppearance
+        
+        appearance.titleTextAttributes = [
+            .foregroundColor: UIColor.Brimo.White.main,
+            .font: UIFont.Brimo.Title.mediumSemiBold
+        ]
+        
+        appearance.largeTitleTextAttributes = [
+            .foregroundColor: UIColor.Brimo.White.main,
+            .font: UIFont.Brimo.Title.mediumSemiBold
+        ]
+        let navBar = UINavigationBar.appearance()
+        navBar.standardAppearance = appearance
+        navBar.scrollEdgeAppearance = appearance
+        
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 

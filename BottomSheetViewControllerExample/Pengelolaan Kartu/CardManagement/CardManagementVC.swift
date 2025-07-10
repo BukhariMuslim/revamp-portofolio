@@ -92,45 +92,45 @@ class CardManagementVC: UIViewController {
         
         settingsSectionView.items = [
             CardSettingsItem(
-                icon: UIImage(named: "bi_fast_email_ic"),
+                icon: UIImage(named: "essentials/bank/single_outline"),
                 text: "Status Kartu",
                 showBottomBorder: true,
                 rightView: CustomSizedSwitch()
             ),
             CardSettingsItem(
-                icon: UIImage(named: "bi_fast_email_ic"),
+                icon: UIImage(named: "utilities/globe"),
                 text: "Transaksi Online",
                 showBottomBorder: true,
                 rightView: CustomSizedSwitch()
             ),
             CardSettingsItem(
-                icon: UIImage(named: "bi_fast_email_ic"),
+                icon: UIImage(named: "utilities/rp"),
                 text: "Transaksi Dalam Negeri",
                 showBottomBorder: true,
                 rightView: CustomSizedSwitch()
             ),
             CardSettingsItem(
-                icon: UIImage(named: "bi_fast_email_ic"),
+                icon: UIImage(named: "essentials/dollar_square_outline"),
                 text: "Transaksi Luar Negeri",
                 showBottomBorder: true,
                 rightView: CustomSizedSwitch()
             ),
             CardSettingsItem(
-                icon: UIImage(named: "bi_fast_email_ic"),
+                icon: UIImage(named: "utilities/setting_outline"),
                 text: "Transaksi Ubah Limit",
                 showBottomBorder: true,
-                rightView: CustomizedImage(imageName: "bi_fast_email_ic")
+                rightView: CustomizedImage(imageName: "arrows/chevron_right")
             ),
             CardSettingsItem(
-                icon: UIImage(named: "bi_fast_email_ic"),
+                icon: UIImage(named: "utilities/card_edit_outline"),
                 text: "Ubah PIN Kartu Debit",
                 showBottomBorder: true,
-                rightView: CustomizedImage(imageName: "bi_fast_email_ic")
+                rightView: CustomizedImage(imageName: "arrows/chevron_right")
             ),
             CardSettingsItem(
-                icon: UIImage(named: "bi_fast_email_ic"),
+                icon: UIImage(named: "utilities/lock"),
                 text: "Blokir kartu permanen",
-                rightView: CustomizedImage(imageName: "bi_fast_email_ic")
+                rightView: CustomizedImage(imageName: "arrows/chevron_right")
             )
         ]
         

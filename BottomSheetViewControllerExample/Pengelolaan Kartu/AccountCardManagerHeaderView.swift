@@ -12,7 +12,6 @@ import SnapKit
 class AccountCardManagerHeaderView: UIView {
 
     // MARK: - UI Elements
-
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "6013 01 3455 504"
@@ -23,7 +22,7 @@ class AccountCardManagerHeaderView: UIView {
     }()
 
     private let copyBtn: UIButton = {
-        let btn = UIButton()
+        let btn = UIButton(type: .system)
         btn.setImage(UIImage(named: "ic_copy"), for: .normal)
         return btn
     }()
@@ -38,18 +37,19 @@ class AccountCardManagerHeaderView: UIView {
 
     private let eyeBtn: UIButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "unhide_eye"), for: .normal)
+        btn
+            .setImage(
+                UIImage(named: "utilities/hide_eye")?
+                    .withRenderingMode(.alwaysTemplate),
+                for: .normal
+            )
         return btn
     }()
     
     private let maskedText: String = "Rp\u{2022}\u{2022}\u{2022}\u{2022}\u{2022}\u{2022}\u{2022}\u{2022}"
     private let DEFAULT_TEXT: String = "Rp10.000.000"
     
-    public var isMasked: Bool = false {
-        didSet {
-            updateMaskedText()
-        }
-    }
+    public var isMasked: Bool = false
     
     public var subtitle: String? {
         didSet {
@@ -79,6 +79,8 @@ class AccountCardManagerHeaderView: UIView {
         subtitle = DEFAULT_TEXT
         eyeBtn
             .addTarget(self, action: #selector(toggleEye), for: .touchUpInside)
+        
+        updateMaskedText()
 
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -104,9 +106,15 @@ class AccountCardManagerHeaderView: UIView {
     
     private func updateMaskedText() {
         subtitleLabel.text = isMasked ? maskedText : (subtitle ?? DEFAULT_TEXT)
+        let imageName = isMasked ? "utilities/hide_eye" : "utilities/unhide_eye"
+        
+        let image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
+        eyeBtn.setImage(image, for: .normal)
+        eyeBtn.tintColor = ConstantsColor.white900
     }
     
     @objc private func toggleEye() {
-        isMasked = !isMasked
+        isMasked.toggle()
+        updateMaskedText()
     }
 }
