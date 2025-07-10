@@ -38,6 +38,7 @@ final class BiInformationAlertView: UIView {
         label.text = "Informasi"
         label.textColor = ConstantsColor.black900
         label.font = .Brimo.Body.mediumSemiBold
+        label.numberOfLines = 0
         return label
     }()
 
@@ -86,4 +87,31 @@ final class BiInformationAlertView: UIView {
             $0.bottom.equalToSuperview().inset(12)
         }
     }
+    
+    func configure(
+          icon: String = "",
+          iconTintColor: UIColor = .systemBlue,
+          titleText: String = "",
+          titleTextColor: UIColor = ConstantsColor.black900,
+          titleFont: UIFont = .Brimo.Body.mediumSemiBold,
+          messageText: String? = "",
+          messageTextColor: UIColor = ConstantsColor.black900,
+          messageFont: UIFont = .Brimo.Body.mediumRegular,
+          backgroundColor: UIColor = ConstantsColor.primary100,
+          borderColor: UIColor = UIColor.Brimo.Primary.main
+      ) {
+          infoIcon.image = UIImage(named: icon)
+          infoIcon.tintColor = iconTintColor
+
+          infoLabel.text = titleText
+          infoLabel.textColor = titleTextColor
+          infoLabel.font = titleFont
+
+          bulletLabel.text = messageText
+          bulletLabel.textColor = messageTextColor
+          bulletLabel.font = messageFont
+
+          self.backgroundColor = backgroundColor
+          self.layer.borderColor = borderColor.cgColor
+      }
 }

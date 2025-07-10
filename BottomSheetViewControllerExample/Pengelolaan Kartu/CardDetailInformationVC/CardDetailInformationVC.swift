@@ -208,13 +208,7 @@ class CardDetailInformationVC: UIViewController, UITableViewDataSource, UITableV
             CardDetailItem(title: "Proxy BI-Fast", value: "Atur Sekarang", showCopyButton: false, showDisclosure: true),
             CardDetailItem(title: "Status Finansial", value: "Aktif", showCopyButton: false, showDisclosure: true),
             CardDetailItem(title: "Status Rekening", value: "Bukan Rekening Utama", showCopyButton: false, showDisclosure: true),
-            CardDetailItem(title: "Status Notifikasi Transaksi", value: "Tidak Aktif", showCopyButton: false, showDisclosure: true),
-            
-            CardDetailItem(title: "Nama Alias", value: "(Belum ada Nama Alias)", showCopyButton: false, showDisclosure: true),
-            CardDetailItem(title: "Proxy BI-Fast", value: "Atur Sekarang", showCopyButton: false, showDisclosure: true),
-            CardDetailItem(title: "Status Finansial", value: "Aktif", showCopyButton: false, showDisclosure: true),
-            CardDetailItem(title: "Status Rekening", value: "Bukan Rekening Utama", showCopyButton: false, showDisclosure: true),
-            CardDetailItem(title: "Status Notifikasi SMS", value: "Tidak Aktif", showCopyButton: false, showDisclosure: true)
+            CardDetailItem(title: "Status Notifikasi Transaksi", value: "Tidak Aktif", showCopyButton: false, showDisclosure: true)
         ]
     }
 
@@ -231,12 +225,131 @@ class CardDetailInformationVC: UIViewController, UITableViewDataSource, UITableV
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // later please change with enum
         if indexPath.row == 2 {
             let vc = CardDetailEditInformationVC()
             navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.row == 3 {
-            let vc = BiFastSetupVC()
-            navigationController?.pushViewController(vc, animated: true)
+            dummyBiFastSetup()
+        } else if indexPath.row == 4 {
+            dummyChangeFinanceView()
+        } else if indexPath.row == 5 {
+            showRekStatus()
+        } else if indexPath.row == 6 {
+            moveToDetailNotifyTransaction()
         }
+    }
+    
+    private func dummyBiFastSetup(){
+        let alert = UIAlertController(
+            title: "Dummy Data",
+            message: "Dummy Direction View",
+            preferredStyle: .alert
+        )
+
+        let cancelAction = UIAlertAction(title: "Success", style: .default) { [weak self] _ in
+            guard let self else { return }
+            let vc = BiFastSetupVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+
+        let disableAction = UIAlertAction(title: "Terhubung dengan bank lain", style: .default) { 
+            [weak self] _ in
+            guard let self else { return }
+            let vc = BiFastActivatedPhoneVC()
+            vc.biFastStatus = .connectToAnotherBank
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+
+        let deleteAction = UIAlertAction(title: "Terhubung Dengan rekening di bank lain [terblockir]", style: .default) {
+            [weak self] _ in
+            guard let self else { return }
+            let vc = BiFastActivatedPhoneVC()
+            vc.biFastStatus = .anotherBankBlock
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+
+        alert.addAction(cancelAction)
+        alert.addAction(disableAction)
+        alert.addAction(deleteAction)
+
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+extension CardDetailInformationVC {
+    private func dummyChangeFinanceView(){
+        let alert = UIAlertController(
+            title: "Dummy Data",
+            message: "Dummy Direction View",
+            preferredStyle: .alert
+        )
+
+        let success = UIAlertAction(title: "Success", style: .default) { [weak self] _ in
+            guard let self else { return }
+            dismiss(animated: true)
+            // waiting dismiss pop up later don't need implement delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                let vc = BottomSheetWithTwoBtnVC()
+                vc.setupContent(item: BottomSheetTwoButtonContent(
+                    image: "warning_bottomshet_ic",
+                    title: "Nonaktifkan Rekening Finansial?",
+                    subtitle: "Kamu tidak dapat melakukan transaksi menggunakan rekening di BRImo jika dinonaktifkan",
+                    agreeBtnTitle: "Nonaktifkan",
+                    cancelBtnTitle: "Batalkan",
+                    hideCancelBtn: true
+                ))
+                
+                self.presentBrimonsBottomSheet(viewController: vc)
+            }
+        }
+
+        let failed = UIAlertAction(title: "Failed", style: .default) { [weak self] _ in
+            guard let self else { return }
+            dismiss(animated: true)
+            // waiting dismiss pop up later don't need implement delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                let vc = BottomSheetWithTwoBtnVC()
+                vc.setupContent(item: BottomSheetTwoButtonContent(
+                    image: "failed_bottomsheet_ic",
+                    title: "Gagal Memuat Halaman",
+                    subtitle: "Terjadi kendala saat memuat halaman. Silakan coba muat ulang untuk lanjutkan prosesmu.",
+                    agreeBtnTitle: "Muat Ulang",
+                    cancelBtnTitle: "",
+                    hideCancelBtn: true
+                ))
+                
+                self.presentBrimonsBottomSheet(viewController: vc)
+            }
+        }
+
+
+        alert.addAction(success)
+        alert.addAction(failed)
+
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+// status rekening
+extension CardDetailInformationVC {
+    private func showRekStatus(){
+        let vc = BottomSheetWithTwoBtnVC()
+        vc.setupContent(item: BottomSheetTwoButtonContent(
+            image: "warning_bottomshet_ic",
+            title: "Jadikan Rekening Utama",
+            subtitle: "Apakah kamu yakin ingin mengubah rekening ini sebagai rekening utama ?",
+            agreeBtnTitle: "Ya, Jadikan Rekening Utama",
+            cancelBtnTitle: "Batalkan"
+        ))
+        
+        self.presentBrimonsBottomSheet(viewController: vc)
+    }
+}
+
+extension CardDetailInformationVC {
+    private func moveToDetailNotifyTransaction(){
+        let vc = NotifyTransactionManagerVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -97,20 +97,27 @@ class AccountCardManagerCategoryView: UIView {
             make.edges.equalToSuperview()
         }
     }
+    
+    var selectedIndex: ((Int)-> Void)?
 
     func configure(items: [CardMenuItem]) {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
-        for item in items {
+        for (index, item) in items.enumerated() {
             let view = AccountCardManagerCard(title: item.title, image: item.image, action: item.action)
             stackView.addArrangedSubview(view)
         }
-
         // Adjust distribution
         if items.count <= 2 {
             stackView.distribution = .equalSpacing
         } else {
             stackView.distribution = .fillEqually
         }
+    }
+    
+    @objc private func handleCardTap(_ sender: UITapGestureRecognizer) {
+        guard let tappedView = sender.view else { return }
+        let index = tappedView.tag
+        selectedIndex?(index)
     }
 }

@@ -49,7 +49,15 @@ class BiFastSetupVC: UIViewController {
         phoneBiFastCardView.connectBtnAction = {
             [weak self] in
             guard let self else { return }
-            let vc = BiFastActiveVC()
+            let vc = BiFastActivatedPhoneVC()
+            vc.biFastStatus = .success
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        emailBiFastCardView.connectBtnAction = {
+            [weak self] in
+            guard let self else { return }
+            let vc = BiFastActivatedEmaillVC()
             navigationController?.pushViewController(vc, animated: true)
         }
     }

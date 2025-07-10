@@ -30,15 +30,15 @@ final class BiFastCardView: UIView {
 
     let titleLabel: UILabel = {
         let label = UILabel()
+        label.font = .Brimo.Body.mediumRegular
         label.textColor = ConstantsColor.black900
-        label.font = .Brimo.Body.largeSemiBold
         return label
     }()
 
     let subTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .Brimo.Body.mediumRegular
         label.textColor = ConstantsColor.black900
+        label.font = .Brimo.Body.largeSemiBold
         return label
     }()
 
@@ -78,8 +78,8 @@ final class BiFastCardView: UIView {
         layer.cornerRadius = 16
         clipsToBounds = true
 
-        infoStack.addArrangedSubview(subTitleLabel)
         infoStack.addArrangedSubview(titleLabel)
+        infoStack.addArrangedSubview(subTitleLabel)
 
         addSubviews(leftIconView, infoStack, connectButton)
         connectButton.addTarget(self, action: #selector(connectBtn), for: .touchUpInside)

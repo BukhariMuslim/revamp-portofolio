@@ -19,9 +19,14 @@
 		36432D8B2E1CBF3900055F79 /* FormFieldInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36432D8A2E1CBF3900055F79 /* FormFieldInformationView.swift */; };
 		36432D8E2E1CD2AD00055F79 /* BiFastSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36432D8D2E1CD2AD00055F79 /* BiFastSetupVC.swift */; };
 		36432D902E1CD3EB00055F79 /* BiFastCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36432D8F2E1CD3EB00055F79 /* BiFastCardView.swift */; };
-		36432D922E1CEAE700055F79 /* InformationAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36432D912E1CEAE700055F79 /* InformationAlertView.swift */; };
-		36432D952E1CFF4A00055F79 /* BiFastActiveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36432D942E1CFF4A00055F79 /* BiFastActiveVC.swift */; };
-		36432D972E1D02C700055F79 /* ProxyAccountCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36432D962E1D02C700055F79 /* ProxyAccountCardView.swift */; };
+		36432D922E1CEAE700055F79 /* BiInformationAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36432D912E1CEAE700055F79 /* BiInformationAlertView.swift */; };
+		36432D952E1CFF4A00055F79 /* BiFastActivatedPhoneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36432D942E1CFF4A00055F79 /* BiFastActivatedPhoneVC.swift */; };
+		36432D972E1D02C700055F79 /* BIFastCardActiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36432D962E1D02C700055F79 /* BIFastCardActiveView.swift */; };
+		3674B1BD2E1F25FB0065BE1F /* NotifyTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3674B1BC2E1F25FB0065BE1F /* NotifyTransactionView.swift */; };
+		3687FBEB2E1E12DE00BCC6EC /* BIFastCardSuccessFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3687FBEA2E1E12DE00BCC6EC /* BIFastCardSuccessFooterView.swift */; };
+		3687FBED2E1E3D0F00BCC6EC /* BottomSheetWithTwoBtnVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3687FBEC2E1E3D0F00BCC6EC /* BottomSheetWithTwoBtnVC.swift */; };
+		3687FBF02E1E529E00BCC6EC /* BiFastActivatedEmaillVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3687FBEF2E1E529E00BCC6EC /* BiFastActivatedEmaillVC.swift */; };
+		36E7CD042E1F21C500FACACF /* NotifyTransactionManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E7CD032E1F21C500FACACF /* NotifyTransactionManagerVC.swift */; };
 		80992495A6EE83CB0D199D80 /* Pods_BottomSheetViewControllerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FBE2FA2E838D49EA8B73D2 /* Pods_BottomSheetViewControllerExample.framework */; };
 		8619D25C2A2C751B00AB91A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8619D25B2A2C751B00AB91A8 /* AppDelegate.swift */; };
 		8619D25E2A2C751B00AB91A8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8619D25D2A2C751B00AB91A8 /* SceneDelegate.swift */; };
@@ -95,9 +100,14 @@
 		36432D8A2E1CBF3900055F79 /* FormFieldInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldInformationView.swift; sourceTree = "<group>"; };
 		36432D8D2E1CD2AD00055F79 /* BiFastSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiFastSetupVC.swift; sourceTree = "<group>"; };
 		36432D8F2E1CD3EB00055F79 /* BiFastCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiFastCardView.swift; sourceTree = "<group>"; };
-		36432D912E1CEAE700055F79 /* InformationAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationAlertView.swift; sourceTree = "<group>"; };
-		36432D942E1CFF4A00055F79 /* BiFastActiveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiFastActiveVC.swift; sourceTree = "<group>"; };
-		36432D962E1D02C700055F79 /* ProxyAccountCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyAccountCardView.swift; sourceTree = "<group>"; };
+		36432D912E1CEAE700055F79 /* BiInformationAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiInformationAlertView.swift; sourceTree = "<group>"; };
+		36432D942E1CFF4A00055F79 /* BiFastActivatedPhoneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiFastActivatedPhoneVC.swift; sourceTree = "<group>"; };
+		36432D962E1D02C700055F79 /* BIFastCardActiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BIFastCardActiveView.swift; sourceTree = "<group>"; };
+		3674B1BC2E1F25FB0065BE1F /* NotifyTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTransactionView.swift; sourceTree = "<group>"; };
+		3687FBEA2E1E12DE00BCC6EC /* BIFastCardSuccessFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BIFastCardSuccessFooterView.swift; sourceTree = "<group>"; };
+		3687FBEC2E1E3D0F00BCC6EC /* BottomSheetWithTwoBtnVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetWithTwoBtnVC.swift; sourceTree = "<group>"; };
+		3687FBEF2E1E529E00BCC6EC /* BiFastActivatedEmaillVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiFastActivatedEmaillVC.swift; sourceTree = "<group>"; };
+		36E7CD032E1F21C500FACACF /* NotifyTransactionManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTransactionManagerVC.swift; sourceTree = "<group>"; };
 		4293F4D43D94AD655BC8BE2B /* Pods-BottomSheetViewControllerExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BottomSheetViewControllerExample.debug.xcconfig"; path = "Target Support Files/Pods-BottomSheetViewControllerExample/Pods-BottomSheetViewControllerExample.debug.xcconfig"; sourceTree = "<group>"; };
 		8619D2582A2C751B00AB91A8 /* BottomSheetViewControllerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BottomSheetViewControllerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8619D25B2A2C751B00AB91A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -187,6 +197,7 @@
 				36432D8A2E1CBF3900055F79 /* FormFieldInformationView.swift */,
 				36432D852E1CB50000055F79 /* InputField.swift */,
 				D64457FE2E1D29E3006BF51F /* MainHelper.swift */,
+				3687FBEC2E1E3D0F00BCC6EC /* BottomSheetWithTwoBtnVC.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -194,6 +205,7 @@
 		363EFD522E1BD21B0043BCFF /* CardDetailInformationVC */ = {
 			isa = PBXGroup;
 			children = (
+				36E7CD022E1F214800FACACF /* NotifyTransactionManagerView */,
 				36432D8C2E1CD28E00055F79 /* BiFast */,
 				36432D872E1CB65D00055F79 /* EditInformation */,
 				363EFD532E1BD23B0043BCFF /* CardDetailInformationVC.swift */,
@@ -213,8 +225,9 @@
 		36432D8C2E1CD28E00055F79 /* BiFast */ = {
 			isa = PBXGroup;
 			children = (
+				3687FBEE2E1E527B00BCC6EC /* BiFastActivatedEmail */,
 				36432D932E1CFF2700055F79 /* BiFastActive */,
-				36432D912E1CEAE700055F79 /* InformationAlertView.swift */,
+				36432D912E1CEAE700055F79 /* BiInformationAlertView.swift */,
 				36432D8F2E1CD3EB00055F79 /* BiFastCardView.swift */,
 				36432D8D2E1CD2AD00055F79 /* BiFastSetupVC.swift */,
 			);
@@ -224,10 +237,28 @@
 		36432D932E1CFF2700055F79 /* BiFastActive */ = {
 			isa = PBXGroup;
 			children = (
-				36432D962E1D02C700055F79 /* ProxyAccountCardView.swift */,
-				36432D942E1CFF4A00055F79 /* BiFastActiveVC.swift */,
+				36432D962E1D02C700055F79 /* BIFastCardActiveView.swift */,
+				36432D942E1CFF4A00055F79 /* BiFastActivatedPhoneVC.swift */,
+				3687FBEA2E1E12DE00BCC6EC /* BIFastCardSuccessFooterView.swift */,
 			);
 			path = BiFastActive;
+			sourceTree = "<group>";
+		};
+		3687FBEE2E1E527B00BCC6EC /* BiFastActivatedEmail */ = {
+			isa = PBXGroup;
+			children = (
+				3687FBEF2E1E529E00BCC6EC /* BiFastActivatedEmaillVC.swift */,
+			);
+			path = BiFastActivatedEmail;
+			sourceTree = "<group>";
+		};
+		36E7CD022E1F214800FACACF /* NotifyTransactionManagerView */ = {
+			isa = PBXGroup;
+			children = (
+				36E7CD032E1F21C500FACACF /* NotifyTransactionManagerVC.swift */,
+				3674B1BC2E1F25FB0065BE1F /* NotifyTransactionView.swift */,
+			);
+			path = NotifyTransactionManagerView;
 			sourceTree = "<group>";
 		};
 		8619D24F2A2C751B00AB91A8 = {
@@ -522,23 +553,28 @@
 				8793F7912E1132FF008A47D5 /* AccountOpeningPinViewVC.swift in Sources */,
 				363EFD542E1BD23B0043BCFF /* CardDetailInformationVC.swift in Sources */,
 				D64458032E1D2D38006BF51F /* CardManagementHeaderView.swift in Sources */,
+				36E7CD042E1F21C500FACACF /* NotifyTransactionManagerVC.swift in Sources */,
 				36432D902E1CD3EB00055F79 /* BiFastCardView.swift in Sources */,
 				87E3F89B2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift in Sources */,
 				36432D892E1CB68900055F79 /* CardDetailEditInformationVC.swift in Sources */,
+				3687FBEB2E1E12DE00BCC6EC /* BIFastCardSuccessFooterView.swift in Sources */,
 				87B2B4BA2E1A58E500F7D6CB /* ConstantsColor.swift in Sources */,
 				8619D2732A2CA0E800AB91A8 /* DemoBottomSheetViewController.swift in Sources */,
 				8619D2602A2C751B00AB91A8 /* HomeViewController.swift in Sources */,
 				87282D042E15410D006A9B63 /* MainTableViewCell.swift in Sources */,
+				3687FBF02E1E529E00BCC6EC /* BiFastActivatedEmaillVC.swift in Sources */,
 				363EFD4F2E1BA01D0043BCFF /* AccountCardManagerCategoryView.swift in Sources */,
-				36432D922E1CEAE700055F79 /* InformationAlertView.swift in Sources */,
+				36432D922E1CEAE700055F79 /* BiInformationAlertView.swift in Sources */,
 				8733248C2E0F81320040698B /* FundingSourceSectionView.swift in Sources */,
 				36432D952E1CFF4A00055F79 /* BiFastActiveVC.swift in Sources */,
 				D64458152E1E1CD6006BF51F /* CostumizedImage.swift in Sources */,
+				36432D952E1CFF4A00055F79 /* BiFastActivatedPhoneVC.swift in Sources */,
 				8793F7972E114595008A47D5 /* SetoranAwalViewController.swift in Sources */,
 				87B2B4BC2E1A590B00F7D6CB /* Brimo.swift in Sources */,
 				8726DE4F2E19207500EE4B73 /* DepositoKeyValueItemSet.swift in Sources */,
+				3687FBED2E1E3D0F00BCC6EC /* BottomSheetWithTwoBtnVC.swift in Sources */,
 				8793F7952E11453B008A47D5 /* CustomNumberKeyboard.swift in Sources */,
-				36432D972E1D02C700055F79 /* ProxyAccountCardView.swift in Sources */,
+				36432D972E1D02C700055F79 /* BIFastCardActiveView.swift in Sources */,
 				36432D862E1CB50000055F79 /* InputField.swift in Sources */,
 				363EFD512E1BA8060043BCFF /* AccountCardDetailManagerAtivityView.swift in Sources */,
 				8793F7932E113A6D008A47D5 /* BrimoNsReachMaxAttemptPinVC.swift in Sources */,
@@ -559,6 +595,7 @@
 				87B2B4C12E1A5A9D00F7D6CB /* AccountListTableViewCell.swift in Sources */,
 				87B2B4B82E1A58B300F7D6CB /* BrimoTypographyType.swift in Sources */,
 				8619D25E2A2C751B00AB91A8 /* SceneDelegate.swift in Sources */,
+				3674B1BD2E1F25FB0065BE1F /* NotifyTransactionView.swift in Sources */,
 				8733248E2E0F813D0040698B /* InitialDepositDetailView.swift in Sources */,
 				873324902E0F82AD0040698B /* BranchOpeningView.swift in Sources */,
 			);
