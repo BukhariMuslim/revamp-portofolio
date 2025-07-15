@@ -44,9 +44,39 @@ class BlockedCardManagementVC: UIViewController {
         return label
     }()
     
+    private lazy var backgroundBtnView: UIView = {
+        let view = UIView()
+        view.backgroundColor = ConstantsColor.white900
+        return view
+    }()
+
+    private lazy var separatorBtnView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .Brimo.Black.x300
+        return view
+    }()
+
+    private lazy var saveBtn: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = .Brimo.Primary.main
+        btn.setTitleColor(ConstantsColor.white900, for: .normal)
+        btn.titleLabel?.font = .Brimo.Title.smallSemiBold
+        btn.setTitle("Buat Kartu Debit Virtual", for: .normal)
+        btn.layer.cornerRadius = 28
+        return btn
+    }()
+    
     private let headerView: UIView = UIView()
     private let contentView: UIView = UIView()
     private let centerContainerView: UIView = UIView()
+    private lazy var contentStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 0
+        return stackView
+    }()
     private let textContainerView: UIView = UIView()
     private var scrollContainerView: StickyRoundedContainerView!
     
@@ -69,13 +99,22 @@ class BlockedCardManagementVC: UIViewController {
     }
     
     private func setupView() {
-        centerContainerView.addSubviews(mainImage, titleLabel, subTitleLabel)
+        contentStackView.addArrangedSubview(mainImage)
+        contentStackView.setCustomSpacing(16, after: mainImage)
+
+        contentStackView.addArrangedSubview(titleLabel)
+        contentStackView.setCustomSpacing(4, after: titleLabel)
+
+        contentStackView.addArrangedSubview(subTitleLabel)
+        
+        centerContainerView.addSubviews(contentStackView, backgroundBtnView)
+        backgroundBtnView.addSubviews(separatorBtnView, saveBtn)
         contentView.addSubviews(centerContainerView)
         
         scrollContainerView = StickyRoundedContainerView(
             headerView: headerView,
             contentView: contentView,
-            isStickyEnabled: false
+            isStickyEnabled: true
         )
         
         view.backgroundColor = ConstantsColor.white900
@@ -94,30 +133,41 @@ class BlockedCardManagementVC: UIViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
+        contentView.snp.makeConstraints {
+            $0.width.equalTo(scrollContainerView.snp.width)
+            $0.height.greaterThanOrEqualTo(scrollContainerView.snp.height)
+        }
+        
+        contentStackView.snp.makeConstraints {
+            $0.width.lessThanOrEqualTo(contentView.snp.width)
+            $0.edges.equalToSuperview()
+        }
+        
         centerContainerView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview()
-            $0.top.bottom.trailing.leading
-                .greaterThanOrEqualToSuperview()
-                .offset(16)
+            $0.center.equalToSuperview()
+            $0.leading.greaterThanOrEqualToSuperview().offset(16)
+            $0.trailing.lessThanOrEqualToSuperview().offset(-16)
+            $0.top.greaterThanOrEqualToSuperview().offset(24)
+            $0.bottom.lessThanOrEqualToSuperview().offset(-24)
         }
         
-        mainImage.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(24)
-            $0.centerX.equalToSuperview()
-            $0.leading.trailing.greaterThanOrEqualToSuperview()
+        backgroundBtnView.snp.remakeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(96)
         }
-        
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(mainImage.snp.bottom).offset(16)
-            $0.leading.trailing.equalToSuperview().offset(16)
+
+        separatorBtnView.snp.remakeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
+            $0.bottom.equalTo(backgroundBtnView.snp.top)
         }
-        
-        subTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(4)
-            $0.leading.trailing.equalToSuperview().offset(16)
-            $0.bottom.equalToSuperview().inset(24)
+
+        saveBtn.snp.remakeConstraints {
+            $0.leading.top.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(56)
         }
+
     }
     
     private func updateScrollHeaderHeight() {

@@ -358,6 +358,8 @@ extension CardManagementVC {
             actionButtonTap: { [weak self] in
                 guard let self = self else { return }
                 self.blockAction?()
+                let vc: BlockedCardManagementVC = BlockedCardManagementVC()
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         )
         vc.setupContent(item: buttonContent)

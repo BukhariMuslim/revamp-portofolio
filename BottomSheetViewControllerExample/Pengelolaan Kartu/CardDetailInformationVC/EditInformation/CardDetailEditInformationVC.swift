@@ -49,6 +49,7 @@ class CardDetailEditInformationVC: UIViewController, UITextFieldDelegate {
         btn.backgroundColor = .Brimo.Primary.main
         btn.setTitleColor(ConstantsColor.white900, for: .normal)
         btn.setTitle("Simpan", for: .normal)
+        btn.titleLabel?.font = .Brimo.Title.smallSemiBold
         btn.layer.cornerRadius = 28
         return btn
     }()
