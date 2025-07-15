@@ -16,6 +16,13 @@ struct SavingCard {
     let currency: String
 }
 
+enum LIST_CARD_INDEX: Int {
+    case status = 0
+    case onlineTransaction
+    case domesticTransaction
+    case internationalTransaction
+}
+
 class CardManagementVC: UIViewController {
     private lazy var backgroundContainerView: UIImageView = {
         let img = UIImageView()
@@ -43,13 +50,22 @@ class CardManagementVC: UIViewController {
     )
     private let contentView: UIView = UIView()
     private var scrollContainerView: StickyRoundedContainerView!
+    private var switches: [CustomSizedSwitch] = []
     
     public var model: SavingCard!
+    
+    public var blockAction: EventHandler?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupConstraint()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        title = "Detail Kartu"
     }
     
     override func viewDidLayoutSubviews() {
@@ -59,8 +75,6 @@ class CardManagementVC: UIViewController {
     }
     
     private func setupView() {
-        title = "Detail Kartu"
-        
         model = SavingCard(
             name: "Marsela Satya",
             cardName: "BritAma",
@@ -90,30 +104,41 @@ class CardManagementVC: UIViewController {
             )
         ]
         
+        switches = [
+            CustomSizedSwitch(),
+            CustomSizedSwitch(),
+            CustomSizedSwitch(),
+            CustomSizedSwitch()
+        ]
+        
         settingsSectionView.items = [
             CardSettingsItem(
                 icon: UIImage(named: "essentials/bank/single_outline"),
                 text: "Status Kartu",
                 showBottomBorder: true,
-                rightView: CustomSizedSwitch()
+                rightView: switches[0],
+                onTap: showActivateStatusCard
             ),
             CardSettingsItem(
                 icon: UIImage(named: "utilities/globe"),
                 text: "Transaksi Online",
                 showBottomBorder: true,
-                rightView: CustomSizedSwitch()
+                rightView: switches[1],
+                onTap: showActivateOnlineTransaction
             ),
             CardSettingsItem(
                 icon: UIImage(named: "utilities/rp"),
                 text: "Transaksi Dalam Negeri",
                 showBottomBorder: true,
-                rightView: CustomSizedSwitch()
+                rightView: switches[2],
+                onTap: showActivateDomesticTransaction
             ),
             CardSettingsItem(
                 icon: UIImage(named: "essentials/dollar_square_outline"),
                 text: "Transaksi Luar Negeri",
                 showBottomBorder: true,
-                rightView: CustomSizedSwitch()
+                rightView: switches[3],
+                onTap: showActivateInternationalTransaction
             ),
             CardSettingsItem(
                 icon: UIImage(named: "utilities/setting_outline"),
@@ -130,7 +155,8 @@ class CardManagementVC: UIViewController {
             CardSettingsItem(
                 icon: UIImage(named: "utilities/lock"),
                 text: "Blokir kartu permanen",
-                rightView: CustomizedImage(imageName: "arrows/chevron_right")
+                rightView: CustomizedImage(imageName: "arrows/chevron_right"),
+                onTap: showPermanentBlockCard
             )
         ]
         
@@ -185,6 +211,158 @@ class CardManagementVC: UIViewController {
         ).height
         
         scrollContainerView.setHeaderHeight(headerHeight)
+    }
+}
+
+extension CardManagementVC {
+    private func showActivateStatusCard() {
+        let vc: BottomSheetWithTwoBtnVC = BottomSheetWithTwoBtnVC()
+        var title: String = "Aktifkan Status Kartu"
+        var subtitle: String = "Kamu akan mengaktifkan kembali untuk Status Kartu"
+        var agreeBtnTitle: String = "Ya, Aktifkan"
+        let itemIndex: Int = LIST_CARD_INDEX.status.rawValue
+        if switches[itemIndex].isOn {
+            title = "Nonaktifkan Status Kartu"
+            subtitle = "Penonaktifan ini bersifat sementara dan kartu dapat diaktifkan kembali kapan saja."
+            agreeBtnTitle = "Ya, Nonaktifkan"
+        }
+        let buttonContent: BottomSheetTwoButtonContent = BottomSheetTwoButtonContent(
+            image: "illustrations/confirmation",
+            title: title,
+            subtitle: subtitle,
+            agreeBtnTitle: agreeBtnTitle,
+            cancelBtnTitle: "Batalkan",
+            actionButtonTap: { [weak self] in
+                guard let self = self else { return }
+                self.switches[itemIndex].isOn.toggle()
+                if let item = self.settingsSectionView.items[itemIndex] as? CardSettingsItem {
+                    item.rightView = self.switches[itemIndex]
+                    var tempItems = self.settingsSectionView.items
+                    tempItems[itemIndex] = item
+                    self.settingsSectionView.items = tempItems
+                }
+            }
+        )
+        vc.setupContent(item: buttonContent)
+        
+        self.presentBrimonsBottomSheet(viewController: vc)
+    }
+    
+    private func showActivateOnlineTransaction() {
+        let vc: BottomSheetWithTwoBtnVC = BottomSheetWithTwoBtnVC()
+        var title: String = "Aktifkan Transaksi Online"
+        var subtitle: String = "Kamu akan mengaktifkan kembali untuk Transaksi Online pada kartu ini."
+        var agreeBtnTitle: String = "Ya, Aktifkan"
+        let itemIndex: Int = LIST_CARD_INDEX.onlineTransaction.rawValue
+        if switches[itemIndex].isOn {
+            title = "Nonaktifkan Transaksi Online"
+            subtitle = "Penonaktifkan ini bersifat sementara dan dapat diaktifkan kembali untuk melakukan Transaksi Online pada kartu ini."
+            agreeBtnTitle = "Ya, Nonaktifkan"
+        }
+        let buttonContent: BottomSheetTwoButtonContent = BottomSheetTwoButtonContent(
+            image: "illustrations/confirmation",
+            title: title,
+            subtitle: subtitle,
+            agreeBtnTitle: agreeBtnTitle,
+            cancelBtnTitle: "Batalkan",
+            actionButtonTap: { [weak self] in
+                guard let self = self else { return }
+                self.switches[itemIndex].isOn.toggle()
+                if let item = self.settingsSectionView.items[itemIndex] as? CardSettingsItem {
+                    item.rightView = self.switches[itemIndex]
+                    var tempItems = self.settingsSectionView.items
+                    tempItems[itemIndex] = item
+                    self.settingsSectionView.items = tempItems
+                }
+            }
+        )
+        vc.setupContent(item: buttonContent)
+        
+        self.presentBrimonsBottomSheet(viewController: vc)
+    }
+    
+    private func showActivateDomesticTransaction() {
+        let vc: BottomSheetWithTwoBtnVC = BottomSheetWithTwoBtnVC()
+        var title: String = "Aktifkan Transaksi Dalam Negeri"
+        var subtitle: String = "Kamu akan mengaktifkan kembali untuk Transaksi Dalam Negeri pada kartu ini"
+        var agreeBtnTitle: String = "Ya, Aktifkan"
+        let itemIndex: Int = LIST_CARD_INDEX.domesticTransaction.rawValue
+        if switches[itemIndex].isOn {
+            title = "Nonaktifkan Transaksi Dalam Negeri"
+            subtitle = "Penonaktifan ini bersifat sementara dan dapat dibuka kembali untuk Transaksi Dalam Negeri."
+            agreeBtnTitle = "Ya, Nonaktifkan"
+        }
+        let buttonContent: BottomSheetTwoButtonContent = BottomSheetTwoButtonContent(
+            image: "illustrations/confirmation",
+            title: title,
+            subtitle: subtitle,
+            agreeBtnTitle: agreeBtnTitle,
+            cancelBtnTitle: "Batalkan",
+            actionButtonTap: { [weak self] in
+                guard let self = self else { return }
+                self.switches[itemIndex].isOn.toggle()
+                if let item = self.settingsSectionView.items[itemIndex] as? CardSettingsItem {
+                    item.rightView = self.switches[itemIndex]
+                    var tempItems = self.settingsSectionView.items
+                    tempItems[itemIndex] = item
+                    self.settingsSectionView.items = tempItems
+                }
+            }
+        )
+        vc.setupContent(item: buttonContent)
+        
+        self.presentBrimonsBottomSheet(viewController: vc)
+    }
+    
+    private func showActivateInternationalTransaction() {
+        let vc: BottomSheetWithTwoBtnVC = BottomSheetWithTwoBtnVC()
+        var title: String = "Aktifkan Transaksi Luar Negeri"
+        var subtitle: String = "Kamu akan mengaktifkan kembali untuk Transaksi Luar Negeri pada kartu ini"
+        var agreeBtnTitle: String = "Ya, Aktifkan"
+        let itemIndex: Int = LIST_CARD_INDEX.internationalTransaction.rawValue
+        if switches[itemIndex].isOn {
+            title = "Nonaktifkan Transaksi Luar Negeri"
+            subtitle = "Penonaktifan ini bersifat sementara dan dapat dibuka kembali untuk Transaksi Luar Negeri."
+            agreeBtnTitle = "Ya, Nonaktifkan"
+        }
+        let buttonContent: BottomSheetTwoButtonContent = BottomSheetTwoButtonContent(
+            image: "illustrations/confirmation",
+            title: title,
+            subtitle: subtitle,
+            agreeBtnTitle: agreeBtnTitle,
+            cancelBtnTitle: "Batalkan",
+            actionButtonTap: { [weak self] in
+                guard let self = self else { return }
+                self.switches[itemIndex].isOn.toggle()
+                if let item = self.settingsSectionView.items[itemIndex] as? CardSettingsItem {
+                    item.rightView = self.switches[itemIndex]
+                    var tempItems = self.settingsSectionView.items
+                    tempItems[itemIndex] = item
+                    self.settingsSectionView.items = tempItems
+                }
+            }
+        )
+        vc.setupContent(item: buttonContent)
+        
+        self.presentBrimonsBottomSheet(viewController: vc)
+    }
+    
+    private func showPermanentBlockCard() {
+        let vc: BottomSheetWithTwoBtnVC = BottomSheetWithTwoBtnVC()
+        let buttonContent: BottomSheetTwoButtonContent = BottomSheetTwoButtonContent(
+            image: "illustrations/lock",
+            title: "Blokir Kartu Permanen",
+            subtitle: "Setelah diblokir, kartu debit kamu tidak dapat digunakan lagi untuk semua transaksi.",
+            agreeBtnTitle: "Ya, Blokir",
+            cancelBtnTitle: "Batalkan",
+            actionButtonTap: { [weak self] in
+                guard let self = self else { return }
+                self.blockAction?()
+            }
+        )
+        vc.setupContent(item: buttonContent)
+        
+        self.presentBrimonsBottomSheet(viewController: vc)
     }
 }
 

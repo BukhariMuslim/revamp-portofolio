@@ -15,6 +15,7 @@ struct BottomSheetTwoButtonContent {
     var agreeBtnTitle: String?
     var cancelBtnTitle: String?
     var hideCancelBtn: Bool = false
+    var actionButtonTap: EventHandler?
 }
 
 class BottomSheetWithTwoBtnVC: BrimonsBottomSheetVC {
@@ -27,7 +28,7 @@ class BottomSheetWithTwoBtnVC: BrimonsBottomSheetVC {
     
     private let imgView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "warning_bottomshet_ic")
+        iv.image = UIImage(named: "illustrations/warning")
         iv.tintColor = .black
         iv.contentMode = .scaleAspectFit
         return iv
@@ -91,7 +92,8 @@ class BottomSheetWithTwoBtnVC: BrimonsBottomSheetVC {
         return stack
     }()
     
-    var closeBtnTap: (() -> Void)?
+    var closeBtnTap: EventHandler?
+    var actionButtonTap: EventHandler?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,6 +121,7 @@ class BottomSheetWithTwoBtnVC: BrimonsBottomSheetVC {
     }
     
     @objc private func agreeBtnAction(){
+        actionButtonTap?()
         dismissBottomSheet()
     }
     
@@ -166,5 +169,6 @@ class BottomSheetWithTwoBtnVC: BrimonsBottomSheetVC {
         agreeBtn.setTitle(item.agreeBtnTitle, for: .normal)
         cancelBtn.setTitle(item.cancelBtnTitle, for: .normal)
         cancelBtn.isHidden = item.hideCancelBtn
+        actionButtonTap = item.actionButtonTap
     }
 }

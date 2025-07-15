@@ -22,7 +22,7 @@ class CardDetailInformationCell: UITableViewCell {
     private let valueLabel = UILabel()
 
     private let iconImageView: UIImageView = {
-        let iv = UIImageView(image: UIImage(named: "ic_copy")?.withRenderingMode(.alwaysTemplate))
+        let iv = UIImageView(image: UIImage(named: "utilities/copy_outline")?.withRenderingMode(.alwaysTemplate))
         iv.tintColor = .Brimo.Primary.main
         iv.contentMode = .scaleAspectFit
         return iv
@@ -160,6 +160,11 @@ class CardDetailInformationVC: UIViewController, UITableViewDataSource, UITableV
         setupConstraint()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        title = "Informasi Rekening"
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         roundBackgroundView.roundCorners(corners: [.topLeft, .topRight], radius: 24)
@@ -292,7 +297,7 @@ extension CardDetailInformationVC {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
                 let vc = BottomSheetWithTwoBtnVC()
                 vc.setupContent(item: BottomSheetTwoButtonContent(
-                    image: "warning_bottomshet_ic",
+                    image: "illustrations/warning",
                     title: "Nonaktifkan Rekening Finansial?",
                     subtitle: "Kamu tidak dapat melakukan transaksi menggunakan rekening di BRImo jika dinonaktifkan",
                     agreeBtnTitle: "Nonaktifkan",
@@ -336,7 +341,7 @@ extension CardDetailInformationVC {
     private func showRekStatus(){
         let vc = BottomSheetWithTwoBtnVC()
         vc.setupContent(item: BottomSheetTwoButtonContent(
-            image: "warning_bottomshet_ic",
+            image: "illustrations/warning",
             title: "Jadikan Rekening Utama",
             subtitle: "Apakah kamu yakin ingin mengubah rekening ini sebagai rekening utama ?",
             agreeBtnTitle: "Ya, Jadikan Rekening Utama",

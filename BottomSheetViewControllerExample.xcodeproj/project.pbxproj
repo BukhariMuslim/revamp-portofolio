@@ -73,6 +73,7 @@
 		D64458112E1E1008006BF51F /* CardManagementSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64458102E1E1008006BF51F /* CardManagementSettingsView.swift */; };
 		D64458132E1E1CB4006BF51F /* CostumizedSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64458122E1E1CB4006BF51F /* CostumizedSwitch.swift */; };
 		D64458152E1E1CD6006BF51F /* CostumizedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64458142E1E1CD6006BF51F /* CostumizedImage.swift */; };
+		D6A14AD42E25F9F400AAE80E /* BlockedCardManagementVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A14AD32E25F9F400AAE80E /* BlockedCardManagementVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -159,6 +160,7 @@
 		D64458102E1E1008006BF51F /* CardManagementSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagementSettingsView.swift; sourceTree = "<group>"; };
 		D64458122E1E1CB4006BF51F /* CostumizedSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostumizedSwitch.swift; sourceTree = "<group>"; };
 		D64458142E1E1CD6006BF51F /* CostumizedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostumizedImage.swift; sourceTree = "<group>"; };
+		D6A14AD32E25F9F400AAE80E /* BlockedCardManagementVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedCardManagementVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -416,6 +418,7 @@
 			children = (
 				D644580F2E1E02DA006BF51F /* Views */,
 				D64457FC2E1D24B9006BF51F /* CardManagementVC.swift */,
+				D6A14AD32E25F9F400AAE80E /* BlockedCardManagementVC.swift */,
 			);
 			path = CardManagement;
 			sourceTree = "<group>";
@@ -619,6 +622,7 @@
 				87B2B4C12E1A5A9D00F7D6CB /* AccountListTableViewCell.swift in Sources */,
 				87B2B4B82E1A58B300F7D6CB /* BrimoTypographyType.swift in Sources */,
 				8619D25E2A2C751B00AB91A8 /* SceneDelegate.swift in Sources */,
+				D6A14AD42E25F9F400AAE80E /* BlockedCardManagementVC.swift in Sources */,
 				3674B1BD2E1F25FB0065BE1F /* NotifyTransactionView.swift in Sources */,
 				8733248E2E0F813D0040698B /* InitialDepositDetailView.swift in Sources */,
 				873324902E0F82AD0040698B /* BranchOpeningView.swift in Sources */,

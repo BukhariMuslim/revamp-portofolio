@@ -89,6 +89,11 @@ class WhatsAppNotificationConfigVC: UIViewController {
         saveBtn.addTarget(self, action: #selector(saveBtnAction), for: .touchUpInside)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        title = "Atur Notifikasi Whatsapp"
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         roundBackgroundView.roundCorners(corners: [.topLeft, .topRight], radius: 24)

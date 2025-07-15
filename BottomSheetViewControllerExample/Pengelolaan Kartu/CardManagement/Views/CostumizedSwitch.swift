@@ -13,6 +13,12 @@ class CustomSizedSwitch: UIControl {
         get { switchControl.isOn }
         set { switchControl.setOn(newValue, animated: true) }
     }
+    
+    var disableBehavior: Bool = true {
+        didSet {
+            setSwitchBehavior()
+        }
+    }
 
     init(scale: CGFloat = 0.71, isOn: Bool = false) {
         self.switchScale = scale
@@ -35,6 +41,12 @@ class CustomSizedSwitch: UIControl {
         switchControl.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        setSwitchBehavior()
+    }
+    
+    private func setSwitchBehavior() {
+        switchControl.isUserInteractionEnabled = !disableBehavior
     }
 
     @objc private func switchChanged() {

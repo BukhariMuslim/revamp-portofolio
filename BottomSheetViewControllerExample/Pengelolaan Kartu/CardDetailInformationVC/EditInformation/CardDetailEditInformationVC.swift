@@ -74,6 +74,7 @@ class CardDetailEditInformationVC: UIViewController, UITextFieldDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        title = "Edit Nama Alias"
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleKeyboard),

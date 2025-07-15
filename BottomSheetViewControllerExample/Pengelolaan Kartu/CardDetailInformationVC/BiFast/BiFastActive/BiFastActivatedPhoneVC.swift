@@ -55,7 +55,7 @@ class BiFastActivatedPhoneVC: UIViewController {
             [weak self] in
             guard let self else { return }
             let vc = BottomSheetWithTwoBtnVC()
-            vc.setupContent(item: BottomSheetTwoButtonContent(image: "warning_bottomshet_ic", title: "Buka blokir Proxy BI-Fast?", subtitle: "Proxy BI-Fast akan aktif kembali dan dapat digunakan pada saat transfer.", agreeBtnTitle: "Ya, Aktifkan", cancelBtnTitle: "Batalkan"))
+            vc.setupContent(item: BottomSheetTwoButtonContent(image: "illustrations/warning", title: "Buka blokir Proxy BI-Fast?", subtitle: "Proxy BI-Fast akan aktif kembali dan dapat digunakan pada saat transfer.", agreeBtnTitle: "Ya, Aktifkan", cancelBtnTitle: "Batalkan"))
             self.presentBrimonsBottomSheet(viewController: vc)
         }
         
@@ -63,7 +63,7 @@ class BiFastActivatedPhoneVC: UIViewController {
             [weak self] in
             guard let self else { return }
             let vc = BottomSheetWithTwoBtnVC()
-            vc.setupContent(item: BottomSheetTwoButtonContent(image: "warning_bottomshet_ic", title: "Hapus Proxy BI-Fast?", subtitle: "Alias yang dihapus tidak bisa digunakan untuk transfer, tapi bisa dihubungkan lagi ke rekening yang sama atau lainnya.", agreeBtnTitle: "Ya, Hapus", cancelBtnTitle: "Batalkan"))
+            vc.setupContent(item: BottomSheetTwoButtonContent(image: "illustrations/warning", title: "Hapus Proxy BI-Fast?", subtitle: "Alias yang dihapus tidak bisa digunakan untuk transfer, tapi bisa dihubungkan lagi ke rekening yang sama atau lainnya.", agreeBtnTitle: "Ya, Hapus", cancelBtnTitle: "Batalkan"))
             self.presentBrimonsBottomSheet(viewController: vc)
         }
         

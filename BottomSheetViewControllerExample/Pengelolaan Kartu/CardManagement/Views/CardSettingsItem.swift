@@ -52,7 +52,7 @@ class CardSettingsItem: UIView {
     
     private let tapGesture = UITapGestureRecognizer()
     private let showBottomBorder: Bool
-    let rightView: UIView
+    var rightView: UIView
     
     // MARK: - Init
     init(

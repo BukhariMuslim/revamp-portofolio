@@ -43,7 +43,7 @@ class NotifyTransactionManagerVC: UIViewController {
     
     private let notifyWhatsAppTextView: NotifyTransactionView = {
         let view = NotifyTransactionView()
-        view.setupContent(item: NotifyTransactionContent(image: "sms_orange_ic", title: "Whatsapp"))
+        view.setupContent(item: NotifyTransactionContent(image: "sms_orange_ic", title: "SMS"))
         return view
     }()
     
@@ -51,6 +51,11 @@ class NotifyTransactionManagerVC: UIViewController {
         super.viewDidLoad()
         setupView()
         setupConstraint()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        title = "Notifikasi Transaksi"
     }
     
     override func viewDidLayoutSubviews() {

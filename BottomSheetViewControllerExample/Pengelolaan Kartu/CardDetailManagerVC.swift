@@ -25,7 +25,7 @@ struct CardMenuItem {
 final class CardDetailManagerVC: UIViewController {
     
     private let backgroundContainerView: UIImageView = {
-        let img = UIImageView()
+        let img: UIImageView = UIImageView()
         img.image = UIImage(named: "background_blue_secondary")
         return img
     }()
@@ -39,7 +39,9 @@ final class CardDetailManagerVC: UIViewController {
         return view
     }()
     
-    private let listActivityView = AccountCardDetailManagerActivityView()
+    private let listActivityView: AccountCardDetailManagerActivityView = AccountCardDetailManagerActivityView()
+    
+    private var isBlocked: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +66,11 @@ final class CardDetailManagerVC: UIViewController {
         
         let menuItems: [CardMenuItem] = [
             CardMenuItem(title: "Informasi Rekening", image: "category_image", action: showDetailInformation),
-            CardMenuItem(title: "Detail Kartu", image: "category_image", action: showDetailCard),
+            CardMenuItem(
+                title: "Detail Kartu",
+                image: "category_image",
+                action: isBlocked ? showBlockedDetailCard : showDetailCard
+            ),
             CardMenuItem(title: "E-Statement", image: "category_image")
         ]
 
@@ -72,12 +78,21 @@ final class CardDetailManagerVC: UIViewController {
     }
     
     private func showDetailInformation() {
-        let vc = CardDetailInformationVC()
+        let vc: CardDetailInformationVC = CardDetailInformationVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func showBlockedDetailCard() {
+        let vc: BlockedCardManagementVC = BlockedCardManagementVC()
         navigationController?.pushViewController(vc, animated: true)
     }
     
     private func showDetailCard() {
-        let vc = CardManagementVC()
+        let vc: CardManagementVC = CardManagementVC()
+        vc.blockAction = { [weak self] in
+            guard let self = self else { return }
+            self.isBlocked = true
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
     

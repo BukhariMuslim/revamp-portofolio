@@ -22,8 +22,14 @@ class AccountCardManagerHeaderView: UIView {
     }()
 
     private let copyBtn: UIButton = {
-        let btn = UIButton(type: .system)
-        btn.setImage(UIImage(named: "ic_copy"), for: .normal)
+        let btn = UIButton()
+        btn
+            .setImage(
+                UIImage(named: "utilities/copy_outline")?
+                    .withRenderingMode(.alwaysTemplate),
+                for: .normal
+            )
+        btn.tintColor = ConstantsColor.white900
         return btn
     }()
 
