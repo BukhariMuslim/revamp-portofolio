@@ -144,7 +144,8 @@ class CardManagementVC: UIViewController {
                 icon: UIImage(named: "utilities/setting_outline"),
                 text: "Transaksi Ubah Limit",
                 showBottomBorder: true,
-                rightView: CustomizedImage(imageName: "arrows/chevron_right")
+                rightView: CustomizedImage(imageName: "arrows/chevron_right"),
+                onTap: showTransactionLimitSetting
             ),
             CardSettingsItem(
                 icon: UIImage(named: "utilities/card_edit_outline"),
@@ -345,6 +346,20 @@ extension CardManagementVC {
         vc.setupContent(item: buttonContent)
         
         self.presentBrimonsBottomSheet(viewController: vc)
+    }
+    
+    private func showTransactionLimitSetting() {
+        let mockModels: LimitSettingModel = LimitSettingModel(
+            topLeftIcon: "sms_orange_ic",
+            topSubtitleLabel: "Rp15.000.000",
+            bottomSubtitleLabel: "Rp0/Rp15.000.000",
+            isPremiumBadge: Bool.random()
+        )
+        
+        let limitSettingViewController: LimitSettingVC = LimitSettingVC()
+        limitSettingViewController.models = [mockModels, mockModels, mockModels, mockModels]
+        
+        self.navigationController?.pushViewController(limitSettingViewController, animated: true)
     }
     
     private func showPermanentBlockCard() {

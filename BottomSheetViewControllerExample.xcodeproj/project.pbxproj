@@ -64,6 +64,9 @@
 		87B2B4C12E1A5A9D00F7D6CB /* AccountListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B2B4C02E1A5A9D00F7D6CB /* AccountListTableViewCell.swift */; };
 		87E3F8862E0E956300517830 /* BrimonsSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E3F8852E0E954E00517830 /* BrimonsSearchView.swift */; };
 		87E3F89B2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E3F89A2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift */; };
+		A665EBAE2E260AED00F28B78 /* LimitSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EBAD2E260A6600F28B78 /* LimitSettingVC.swift */; };
+		A665EBB32E260B9E00F28B78 /* LimitSettingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EBB22E260B8A00F28B78 /* LimitSettingCellView.swift */; };
+		A665EBB52E260F0F00F28B78 /* LimitSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EBB42E260F0500F28B78 /* LimitSettingModel.swift */; };
 		D64457FD2E1D24B9006BF51F /* CardManagementVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64457FC2E1D24B9006BF51F /* CardManagementVC.swift */; };
 		D64457FF2E1D29E3006BF51F /* MainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64457FE2E1D29E3006BF51F /* MainHelper.swift */; };
 		D64458032E1D2D38006BF51F /* CardManagementHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64458022E1D2D38006BF51F /* CardManagementHeaderView.swift */; };
@@ -151,6 +154,9 @@
 		87E3F8852E0E954E00517830 /* BrimonsSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrimonsSearchView.swift; sourceTree = "<group>"; };
 		87E3F89A2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOpeningBranchSearchVC.swift; sourceTree = "<group>"; };
 		98A4FEAB4C8EEF3551E1F7B3 /* Pods-BottomSheetViewControllerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BottomSheetViewControllerExample.release.xcconfig"; path = "Target Support Files/Pods-BottomSheetViewControllerExample/Pods-BottomSheetViewControllerExample.release.xcconfig"; sourceTree = "<group>"; };
+		A665EBAD2E260A6600F28B78 /* LimitSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitSettingVC.swift; sourceTree = "<group>"; };
+		A665EBB22E260B8A00F28B78 /* LimitSettingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitSettingCellView.swift; sourceTree = "<group>"; };
+		A665EBB42E260F0500F28B78 /* LimitSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitSettingModel.swift; sourceTree = "<group>"; };
 		D64457FC2E1D24B9006BF51F /* CardManagementVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagementVC.swift; sourceTree = "<group>"; };
 		D64457FE2E1D29E3006BF51F /* MainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHelper.swift; sourceTree = "<group>"; };
 		D64458022E1D2D38006BF51F /* CardManagementHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagementHeaderView.swift; sourceTree = "<group>"; };
@@ -211,6 +217,7 @@
 		363EFD522E1BD21B0043BCFF /* CardDetailInformationVC */ = {
 			isa = PBXGroup;
 			children = (
+				A665EBAA2E260A1700F28B78 /* TransactionLimit */,
 				36E7CD022E1F214800FACACF /* NotifyTransactionManagerView */,
 				36432D8C2E1CD28E00055F79 /* BiFast */,
 				36432D872E1CB65D00055F79 /* EditInformation */,
@@ -404,6 +411,40 @@
 			path = BottomSheetWithSearch;
 			sourceTree = "<group>";
 		};
+		A665EBAA2E260A1700F28B78 /* TransactionLimit */ = {
+			isa = PBXGroup;
+			children = (
+				A665EBB12E260B2A00F28B78 /* ViewController */,
+				A665EBB02E260B2400F28B78 /* Model */,
+				A665EBAF2E260B1E00F28B78 /* View */,
+			);
+			path = TransactionLimit;
+			sourceTree = "<group>";
+		};
+		A665EBAF2E260B1E00F28B78 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A665EBB22E260B8A00F28B78 /* LimitSettingCellView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A665EBB02E260B2400F28B78 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A665EBB42E260F0500F28B78 /* LimitSettingModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A665EBB12E260B2A00F28B78 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A665EBAD2E260A6600F28B78 /* LimitSettingVC.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		AC59476EE3457F7A0A87B246 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -579,6 +620,7 @@
 				363EFD542E1BD23B0043BCFF /* CardDetailInformationVC.swift in Sources */,
 				D64458032E1D2D38006BF51F /* CardManagementHeaderView.swift in Sources */,
 				36E7CD042E1F21C500FACACF /* NotifyTransactionManagerVC.swift in Sources */,
+				A665EBAE2E260AED00F28B78 /* LimitSettingVC.swift in Sources */,
 				36432D902E1CD3EB00055F79 /* BiFastCardView.swift in Sources */,
 				3694837C2E1F98310069E46F /* PhoneNumberInfoView.swift in Sources */,
 				87E3F89B2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift in Sources */,
@@ -586,6 +628,7 @@
 				3687FBEB2E1E12DE00BCC6EC /* BIFastCardSuccessFooterView.swift in Sources */,
 				87B2B4BA2E1A58E500F7D6CB /* ConstantsColor.swift in Sources */,
 				8619D2732A2CA0E800AB91A8 /* DemoBottomSheetViewController.swift in Sources */,
+				A665EBB32E260B9E00F28B78 /* LimitSettingCellView.swift in Sources */,
 				8619D2602A2C751B00AB91A8 /* HomeViewController.swift in Sources */,
 				369483872E1FB9C20069E46F /* AccountOpeningCompleteViewController.swift in Sources */,
 				87282D042E15410D006A9B63 /* MainTableViewCell.swift in Sources */,
@@ -617,6 +660,7 @@
 				D644580E2E1DFA64006BF51F /* CardSettingsItem.swift in Sources */,
 				8793F7862E111657008A47D5 /* RecommendedProductCell.swift in Sources */,
 				D64458112E1E1008006BF51F /* CardManagementSettingsView.swift in Sources */,
+				A665EBB52E260F0F00F28B78 /* LimitSettingModel.swift in Sources */,
 				8793F7882E1126EA008A47D5 /* AccountOpeningCompleteHeaderView.swift in Sources */,
 				87E3F8862E0E956300517830 /* BrimonsSearchView.swift in Sources */,
 				87B2B4C12E1A5A9D00F7D6CB /* AccountListTableViewCell.swift in Sources */,
