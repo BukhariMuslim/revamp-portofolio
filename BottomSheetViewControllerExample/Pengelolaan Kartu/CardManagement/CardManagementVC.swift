@@ -367,6 +367,18 @@ extension CardManagementVC {
             maximumLimit: 200_000_000
         )
         
+        let mockTextInput = """
+        1. Nasabah dapat melakukan pengaturan limit transaksi kartu debit secara mandiri melalui aplikasi BRImo.
+        2. Pengaturan ini dapat dilakukan kapan saja, kecuali saat berada dalam masa safety mode. Selama safety mode, limit kartu debit akan tetap berada pada nominal terakhir yang telah ditetapkan hingga masa tersebut berakhir. Setelah safety mode selesai, pengaturan limit dapat dilakukan kembali.
+        3. Melalui pengaturan ini, jumlah limit transaksi kartu debit nasabah akan berubah sesuai dengan nominal yang dipilih oleh nasabah.
+        4. Pengaturan limit transaksi kartu debit ini tidak memengaruhi limit transaksi di aplikasi BRImo.
+        
+        1. Nasabah dapat melakukan pengaturan limit transaksi kartu debit secara mandiri melalui aplikasi BRImo.
+        2. Pengaturan ini dapat dilakukan kapan saja, kecuali saat berada dalam masa safety mode. Selama safety mode, limit kartu debit akan tetap berada pada nominal terakhir yang telah ditetapkan hingga masa tersebut berakhir. Setelah safety mode selesai, pengaturan limit dapat dilakukan kembali. 
+        3. Melalui pengaturan ini, jumlah limit transaksi kartu debit nasabah akan berubah sesuai dengan nominal yang dipilih oleh nasabah.
+        4. Pengaturan limit transaksi kartu debit ini tidak memengaruhi limit transaksi di aplikasi BRImo.
+        """
+        
         let limitSettingViewController: LimitSettingVC = LimitSettingVC()
         limitSettingViewController.models = [mockModels1, mockModels2, mockModels1, mockModels2]
         
@@ -378,15 +390,30 @@ extension CardManagementVC {
             self.showTransactionLimitBottomSheet(data: model)
         }
         
+        limitSettingViewController.didInformation = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            self.showTransactionInfomationDetailBottomSheet(textInput: mockTextInput)
+        }
+        
         self.navigationController?.pushViewController(limitSettingViewController, animated: true)
     }
     
     private func showTransactionLimitBottomSheet(data: LimitSettingModel) {
-        let vc: TransactionLimitBottomSheetVC = TransactionLimitBottomSheetVC()
+        let viewController: TransactionLimitBottomSheetVC = TransactionLimitBottomSheetVC()
         let dataItem = CardLimitDataModel(minimumLimit: data.minimimumLimit, maximumLimit: data.maximumLimit)
         
-        vc.dataModel = dataItem
-        self.presentBrimonsBottomSheet(viewController: vc)
+        viewController.dataModel = dataItem
+        self.presentBrimonsBottomSheet(viewController: viewController)
+    }
+    
+    private func showTransactionInfomationDetailBottomSheet(textInput: String) {
+        let viewController: TransactionLimitInformationDetailBottomSheetVC = TransactionLimitInformationDetailBottomSheetVC()
+        
+        viewController.setupTextView(input: textInput)
+        self.presentBrimonsBottomSheet(viewController: viewController)
     }
     
     private func showPermanentBlockCard() {

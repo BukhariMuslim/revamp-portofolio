@@ -66,13 +66,18 @@ class LimitSettingVC: UIViewController {
     }
     
     private func configureNavbarButton() {
-        navigationController?.navigationBar.tintColor = .systemBlue
+        
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "limit_setting_information_icon"), for: .normal)
+        button.backgroundColor = UIColor.Brimo.White.opacity30
+        button.tintColor = .black
+        button.layer.cornerRadius = 16
+        button.clipsToBounds = true
+        button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+        button.addTarget(self, action: #selector(didTapInfomationButton), for: .touchUpInside)
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .add,
-            target: self,
-            action: #selector(didTapInfomationButton)
-        )
+        let barButton = UIBarButtonItem(customView: button)
+        navigationItem.rightBarButtonItem = barButton
     }
     
     @objc func didTapInfomationButton() {

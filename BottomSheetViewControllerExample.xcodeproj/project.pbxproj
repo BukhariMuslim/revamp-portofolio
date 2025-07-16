@@ -70,6 +70,7 @@
 		A665EBB92E273F9500F28B78 /* TransactionLimitBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EBB82E273F7200F28B78 /* TransactionLimitBottomSheetVC.swift */; };
 		A665EBBB2E27523400F28B78 /* TransactionLimitTextFieldCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EBBA2E27520900F28B78 /* TransactionLimitTextFieldCellView.swift */; };
 		A665EBBD2E27711300F28B78 /* TransactionLimitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EBBC2E27710200F28B78 /* TransactionLimitView.swift */; };
+		A665EBC42E27869300F28B78 /* TransactionLimitInformationDetailBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EBC32E27866800F28B78 /* TransactionLimitInformationDetailBottomSheetVC.swift */; };
 		D64457FD2E1D24B9006BF51F /* CardManagementVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64457FC2E1D24B9006BF51F /* CardManagementVC.swift */; };
 		D64457FF2E1D29E3006BF51F /* MainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64457FE2E1D29E3006BF51F /* MainHelper.swift */; };
 		D64458032E1D2D38006BF51F /* CardManagementHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64458022E1D2D38006BF51F /* CardManagementHeaderView.swift */; };
@@ -163,6 +164,7 @@
 		A665EBB82E273F7200F28B78 /* TransactionLimitBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionLimitBottomSheetVC.swift; sourceTree = "<group>"; };
 		A665EBBA2E27520900F28B78 /* TransactionLimitTextFieldCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionLimitTextFieldCellView.swift; sourceTree = "<group>"; };
 		A665EBBC2E27710200F28B78 /* TransactionLimitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionLimitView.swift; sourceTree = "<group>"; };
+		A665EBC32E27866800F28B78 /* TransactionLimitInformationDetailBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionLimitInformationDetailBottomSheetVC.swift; sourceTree = "<group>"; };
 		D64457FC2E1D24B9006BF51F /* CardManagementVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagementVC.swift; sourceTree = "<group>"; };
 		D64457FE2E1D29E3006BF51F /* MainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHelper.swift; sourceTree = "<group>"; };
 		D64458022E1D2D38006BF51F /* CardManagementHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagementHeaderView.swift; sourceTree = "<group>"; };
@@ -448,6 +450,7 @@
 		A665EBB12E260B2A00F28B78 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				A665EBC32E27866800F28B78 /* TransactionLimitInformationDetailBottomSheetVC.swift */,
 				A665EBB82E273F7200F28B78 /* TransactionLimitBottomSheetVC.swift */,
 				A665EBAD2E260A6600F28B78 /* LimitSettingVC.swift */,
 			);
@@ -641,6 +644,7 @@
 				8619D2732A2CA0E800AB91A8 /* DemoBottomSheetViewController.swift in Sources */,
 				A665EBB32E260B9E00F28B78 /* LimitSettingCellView.swift in Sources */,
 				8619D2602A2C751B00AB91A8 /* HomeViewController.swift in Sources */,
+				A665EBC42E27869300F28B78 /* TransactionLimitInformationDetailBottomSheetVC.swift in Sources */,
 				369483872E1FB9C20069E46F /* AccountOpeningCompleteViewController.swift in Sources */,
 				87282D042E15410D006A9B63 /* MainTableViewCell.swift in Sources */,
 				3687FBF02E1E529E00BCC6EC /* BiFastActivatedEmaillVC.swift in Sources */,

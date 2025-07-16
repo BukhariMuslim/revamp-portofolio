@@ -15,7 +15,7 @@ struct CardLimitDataModel {
 
 class TransactionLimitBottomSheetVC: BrimonsBottomSheetVC {
     
-    var didTapAgreeButton: ((Double) -> Void)?
+    var didTapSaveButton: ((Double) -> Void)?
     
     private lazy var containerView: UIView = {
         let view = UIView()
@@ -135,7 +135,7 @@ class TransactionLimitBottomSheetVC: BrimonsBottomSheetVC {
     }
     
     @objc private func agreeBtnAction(){
-        didTapAgreeButton?(self.sliderValue)
+        didTapSaveButton?(self.sliderValue)
         dismissBottomSheet()
     }
     
