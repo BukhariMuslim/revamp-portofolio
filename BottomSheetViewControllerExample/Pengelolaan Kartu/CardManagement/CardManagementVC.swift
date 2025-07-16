@@ -363,7 +363,7 @@ extension CardManagementVC {
             topSubtitleLabel: "Rp200.000.000",
             bottomSubtitleLabel: "Rp0/Rp200.000.000",
             isPremiumBadge: Bool.random(),
-            minimimumLimit: 10_000,
+            minimimumLimit: 15_000,
             maximumLimit: 200_000_000
         )
         

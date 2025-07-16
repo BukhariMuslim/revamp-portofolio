@@ -74,6 +74,9 @@ class TransactionLimitBottomSheetVC: BrimonsBottomSheetVC {
     }
     
     private func configureClosure() {
+        
+        textField.setInitialValue(dataModel.minimumLimit, dataModel: dataModel)
+        
         textField.onKeyboardHeightChange = {[weak self]  in
             guard let self = self else {
                 return

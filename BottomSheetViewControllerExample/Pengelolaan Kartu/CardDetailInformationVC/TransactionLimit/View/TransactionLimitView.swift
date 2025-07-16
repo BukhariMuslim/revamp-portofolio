@@ -11,7 +11,7 @@ import SnapKit
 final class TransactionLimitView: UIView {
     var onValueChanged: ((Double) -> Void)?
     var onKeyboardHeightChange: (() -> Void)?
-
+    
     private let limitInput = TransactionLimitTextFieldCellView()
     private let errorLabel = UILabel()
     private let slider = UISlider()
@@ -29,7 +29,7 @@ final class TransactionLimitView: UIView {
         return formatter
     }()
     
-    var dataModel: CardLimitDataModel = CardLimitDataModel(minimumLimit: 0, maximumLimit: 0)
+    private var sliderTopConstraint: Constraint?
     private var minLimit: Double = 10_000
     private var maxLimit: Double = 15_000_000
     
@@ -43,29 +43,44 @@ final class TransactionLimitView: UIView {
     
     required init?(coder: NSCoder) { fatalError() }
     
-    func setInitialValue(_ v: Double) {
-        minLimit = dataModel.minimumLimit
-        maxLimit = dataModel.maximumLimit
-        
+    func setInitialValue(_ v: Double, dataModel: CardLimitDataModel) {
+        minLimit = Double(dataModel.minimumLimit)
+        maxLimit = Double(dataModel.maximumLimit)
+
+        slider.minimumValue = Float(minLimit)
+        slider.maximumValue = Float(maxLimit)
+
         let clamped = max(minLimit, min(maxLimit, v))
         limitInput.textField.text = formatter.string(from: clamped as NSNumber)
         slider.setValue(Float(clamped), animated: false)
         updateState(value: clamped)
+
+        // update labels
+        minLabel.text = formatRupiah(Int(minLimit))
+        maxLabel.text = formatRupiah(Int(maxLimit))
+    }
+
+    private func formatRupiah(_ value: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = "."
+        formatter.locale = Locale(identifier: "id_ID")
+        return "Rp" + (formatter.string(from: NSNumber(value: value)) ?? "\(value)")
     }
     
     private func configureUI() {
         backgroundColor = .systemBackground
         errorLabel.font = .systemFont(ofSize: 12)
         errorLabel.textColor = .systemRed
-        errorLabel.text = "Batas maksimal limit adalah Rp15.000.000"
+        errorLabel.text = "Batas maksimal limit adalah Rp\(maxLimit)"
         errorLabel.isHidden = true
         
         slider.minimumValue = Float(minLimit)
         slider.maximumValue = Float(maxLimit)
         
         [minLabel, maxLabel].forEach { $0.font = .systemFont(ofSize: 12) }
-        minLabel.text = "Rp10.000"
-        maxLabel.text = "Rp15.000.000"
+        minLabel.text = formatRupiah(Int(minLimit))
+        maxLabel.text = formatRupiah(Int(maxLimit))
         
         limitInput.textField.text = formatter.string(from: 0)
     }
@@ -85,14 +100,14 @@ final class TransactionLimitView: UIView {
         }
         
         slider.snp.makeConstraints {
-            $0.top.equalTo(errorLabel.snp.bottom).offset(16)
+            sliderTopConstraint = $0.top.equalTo(errorLabel.snp.bottom).offset(16).constraint
             $0.leading.trailing.equalTo(limitInput)
         }
         
         minLabel.snp.makeConstraints {
             $0.top.equalTo(slider.snp.bottom).offset(4)
             $0.leading.equalTo(slider)
-            $0.bottom.equalToSuperview().inset(24)  // bottom padding
+            $0.bottom.equalToSuperview().inset(24)
         }
         
         maxLabel.snp.makeConstraints {
@@ -123,16 +138,35 @@ final class TransactionLimitView: UIView {
         updateState(value: stepped)
     }
     
+    
     private func updateState(value: Double) {
-        let valid = value <= maxLimit && value >= minLimit
-        limitInput.layer.borderWidth = valid ? 0 : 1
-        limitInput.layer.borderColor = valid ? nil : UIColor.systemRed.cgColor
-        errorLabel.isHidden = valid
+        var errorText: String? = nil
         
-        if valid {
+        if value < minLimit {
+            errorText = "Batas minimal limit adalah \(formatRupiah(Int(minLimit)))"
+        } else if value > maxLimit {
+            errorText = "Batas maksimal limit adalah \(formatRupiah(Int(maxLimit)))"
+        }
+
+        if let error = errorText {
+            errorLabel.text = error
+            errorLabel.isHidden = false
+            sliderTopConstraint?.update(offset: 16)
+            limitInput.layer.borderWidth = 1
+            limitInput.layer.borderColor = UIColor.systemRed.cgColor
+        } else {
+            errorLabel.isHidden = true
+            sliderTopConstraint?.update(offset: 0)
+            limitInput.layer.borderWidth = 0
+            limitInput.layer.borderColor = nil
             onValueChanged?(value)
         }
+
+        UIView.animate(withDuration: 0.25) {
+            self.layoutIfNeeded()
+        }
     }
+
 }
 
 extension TransactionLimitView: UITextFieldDelegate {
