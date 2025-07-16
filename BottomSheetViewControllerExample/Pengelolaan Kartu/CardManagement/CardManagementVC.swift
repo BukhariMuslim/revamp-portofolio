@@ -349,17 +349,44 @@ extension CardManagementVC {
     }
     
     private func showTransactionLimitSetting() {
-        let mockModels: LimitSettingModel = LimitSettingModel(
-            topLeftIcon: "sms_orange_ic",
+        let mockModels1: LimitSettingModel = LimitSettingModel(
+            topLeftIcon: "limit_setting_expenses_icon",
             topSubtitleLabel: "Rp15.000.000",
             bottomSubtitleLabel: "Rp0/Rp15.000.000",
-            isPremiumBadge: Bool.random()
+            isPremiumBadge: Bool.random(),
+            minimimumLimit: 10_000,
+            maximumLimit: 15_000_000
+        )
+        
+        let mockModels2: LimitSettingModel = LimitSettingModel(
+            topLeftIcon: "limit_setting_arrow_icon",
+            topSubtitleLabel: "Rp200.000.000",
+            bottomSubtitleLabel: "Rp0/Rp200.000.000",
+            isPremiumBadge: Bool.random(),
+            minimimumLimit: 10_000,
+            maximumLimit: 200_000_000
         )
         
         let limitSettingViewController: LimitSettingVC = LimitSettingVC()
-        limitSettingViewController.models = [mockModels, mockModels, mockModels, mockModels]
+        limitSettingViewController.models = [mockModels1, mockModels2, mockModels1, mockModels2]
+        
+        limitSettingViewController.didTapCard = { [weak self] model in
+            guard let self = self else {
+                return
+            }
+            
+            self.showTransactionLimitBottomSheet(data: model)
+        }
         
         self.navigationController?.pushViewController(limitSettingViewController, animated: true)
+    }
+    
+    private func showTransactionLimitBottomSheet(data: LimitSettingModel) {
+        let vc: TransactionLimitBottomSheetVC = TransactionLimitBottomSheetVC()
+        let dataItem = CardLimitDataModel(minimumLimit: data.minimimumLimit, maximumLimit: data.maximumLimit)
+        
+        vc.dataModel = dataItem
+        self.presentBrimonsBottomSheet(viewController: vc)
     }
     
     private func showPermanentBlockCard() {
