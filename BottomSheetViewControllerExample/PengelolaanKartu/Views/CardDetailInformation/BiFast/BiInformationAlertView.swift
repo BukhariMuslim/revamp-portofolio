@@ -15,7 +15,7 @@ final class BiInformationAlertView: UIView {
 
     private let infoIcon: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "info_ic")
+        iv.image = UIImage(named: "utilities/big/info_circle")
         iv.tintColor = UIColor.systemBlue
         iv.contentMode = .scaleAspectFit
         return iv

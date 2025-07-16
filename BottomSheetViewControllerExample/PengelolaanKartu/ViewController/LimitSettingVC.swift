@@ -68,9 +68,12 @@ class LimitSettingVC: UIViewController {
     private func configureNavbarButton() {
         
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "limit_setting_information_icon"), for: .normal)
-        button.backgroundColor = UIColor.Brimo.White.opacity30
-        button.tintColor = .black
+        button
+            .setImage(
+                UIImage(named: "utilities/big/info_circle")?
+                    .withRenderingMode(.alwaysOriginal),
+                for: .normal
+            )
         button.layer.cornerRadius = 16
         button.clipsToBounds = true
         button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
