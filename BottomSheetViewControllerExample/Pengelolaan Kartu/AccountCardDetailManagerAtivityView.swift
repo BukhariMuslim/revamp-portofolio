@@ -11,7 +11,6 @@ import UIKit
 class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITableViewDelegate {
 
     private let titleLabel = UILabel()
-    private let searchView = BrimonsSearchView()
     
     private let monthContainer = UIView()
     private let monthScrollView = UIScrollView()
@@ -44,8 +43,6 @@ class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITab
         titleLabel.font = .Brimo.Title.smallSemiBold
         titleLabel.textColor = ConstantsColor.black900
 
-        searchView.placeHolderTextField = "Cari transaksi"
-
         monthScrollView.showsHorizontalScrollIndicator = false
         monthStack.axis = .horizontal
         monthStack.spacing = 8
@@ -69,7 +66,6 @@ class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITab
         tableView.backgroundColor = .white
 
         addSubview(titleLabel)
-        addSubview(searchView)
         addSubview(monthContainer)
         monthContainer.addSubview(monthScrollView)
         monthScrollView.addSubview(monthStack)
@@ -81,15 +77,9 @@ class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITab
             $0.top.equalToSuperview()
             $0.leading.equalToSuperview()
         }
-
-        searchView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(16)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(44)
-        }
-
+        
         monthContainer.snp.makeConstraints {
-            $0.top.equalTo(searchView.snp.bottom).offset(16)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(32)
         }

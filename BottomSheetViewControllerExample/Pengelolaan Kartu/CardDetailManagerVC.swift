@@ -65,13 +65,22 @@ final class CardDetailManagerVC: UIViewController {
         roundBackgroundView.addSubview(listActivityView)
         
         let menuItems: [CardMenuItem] = [
-            CardMenuItem(title: "Informasi Rekening", image: "category_image", action: showDetailInformation),
+            CardMenuItem(
+                title: "Informasi Rekening",
+                image: "utilities/informasi_rekening_icon",
+                action: showDetailInformation
+            ),
+            
             CardMenuItem(
                 title: "Detail Kartu",
-                image: "category_image",
+                image: "utilities/detail_kartu_icon",
                 action: isBlocked ? showBlockedDetailCard : showDetailCard
             ),
-            CardMenuItem(title: "E-Statement", image: "category_image")
+            
+            CardMenuItem(
+                title: "E-Statement",
+                image: "utilities/estatement_icon"
+            )
         ]
 
         menuCollectionView.configure(items: menuItems)

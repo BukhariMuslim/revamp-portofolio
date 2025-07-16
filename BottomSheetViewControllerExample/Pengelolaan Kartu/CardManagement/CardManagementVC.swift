@@ -367,6 +367,24 @@ extension CardManagementVC {
             maximumLimit: 200_000_000
         )
         
+        let mockModels3: LimitSettingModel = LimitSettingModel(
+            topLeftIcon: "limit_setting_lifestyle_icon",
+            topSubtitleLabel: "Rp25.000.000",
+            bottomSubtitleLabel: "Rp0/Rp25.000.000",
+            isPremiumBadge: Bool.random(),
+            minimimumLimit: 15_000,
+            maximumLimit: 25_000_000
+        )
+        
+        let mockModels4: LimitSettingModel = LimitSettingModel(
+            topLeftIcon: "limit_setting_wallet_icon",
+            topSubtitleLabel: "Rp100.000.000",
+            bottomSubtitleLabel: "Rp0/Rp100.000.000",
+            isPremiumBadge: Bool.random(),
+            minimimumLimit: 15_000,
+            maximumLimit: 100_000_000
+        )
+        
         let mockTextInput = """
         1. Nasabah dapat melakukan pengaturan limit transaksi kartu debit secara mandiri melalui aplikasi BRImo.
         2. Pengaturan ini dapat dilakukan kapan saja, kecuali saat berada dalam masa safety mode. Selama safety mode, limit kartu debit akan tetap berada pada nominal terakhir yang telah ditetapkan hingga masa tersebut berakhir. Setelah safety mode selesai, pengaturan limit dapat dilakukan kembali.
@@ -380,7 +398,7 @@ extension CardManagementVC {
         """
         
         let limitSettingViewController: LimitSettingVC = LimitSettingVC()
-        limitSettingViewController.models = [mockModels1, mockModels2, mockModels1, mockModels2]
+        limitSettingViewController.models = [mockModels1, mockModels2, mockModels3, mockModels4]
         
         limitSettingViewController.didTapCard = { [weak self] model in
             guard let self = self else {
