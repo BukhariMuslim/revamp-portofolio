@@ -13,8 +13,8 @@ final class RecommendedProductsView: UIView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = .black
+        label.textColor = ConstantsColor.black900
+        label.font = UIFont.Brimo.Title.smallSemiBold
         label.numberOfLines = 0
         label.text = "Product Pilihan Untukmu"
         return label
@@ -57,7 +57,8 @@ final class RecommendedProductsView: UIView {
     private func setupContraint() {
         
         titleLabel.snp.remakeConstraints {
-            $0.top.leading.trailing.equalToSuperview().inset(16)
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(16)
             
         }
         
@@ -82,7 +83,7 @@ extension RecommendedProductsView: UICollectionViewDelegate, UICollectionViewDat
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecommendedProductCell", for: indexPath) as? RecommendedProductCell else { return UICollectionViewCell() }
-        cell.configure(title: "Token Listrik", subtitle: "Beli Token listrik di BRImo, langsung dapat Cashback s.d 100rb!", badge: "Cashback 1004b", image: "info.circle")
+        cell.configure(title: "Token Listrik", subtitle: "Beli Token listrik di BRImo, langsung dapat Cashback s.d 100rb!", badge: "Cashback 100rb", image: "coin_success")
         return cell
     }
 

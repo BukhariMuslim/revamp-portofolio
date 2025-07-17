@@ -410,7 +410,6 @@
 			isa = PBXGroup;
 			children = (
 				A665EC622E28D15400F28B78 /* RiwayatMutasiFilterViewController.swift */,
-				A665EC4D2E289CA100F28B78 /* AktivitasViewController.swift */,
 				A665EC4E2E289CA100F28B78 /* EStatementViewController.swift */,
 				A665EC4F2E289CA100F28B78 /* MutasiViewController.swift */,
 				A665EC502E289CA100F28B78 /* RiwayatViewController.swift */,
@@ -439,6 +438,7 @@
 		A665EC542E289CA100F28B78 /* Aktifitas */ = {
 			isa = PBXGroup;
 			children = (
+				D665E9512E28FE9700A9C8E1 /* ViewController */,
 			);
 			path = Aktifitas;
 			sourceTree = "<group>";
@@ -470,6 +470,14 @@
 				98A4FEAB4C8EEF3551E1F7B3 /* Pods-BottomSheetViewControllerExample.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		D665E9512E28FE9700A9C8E1 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A665EC4D2E289CA100F28B78 /* AktivitasViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		D6B3D0B72E27E8EC00FE51FC /* Utilities */ = {

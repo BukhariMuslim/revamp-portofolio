@@ -34,7 +34,6 @@ final class DetailRekeningVC: UIViewController {
         return image
     }()
 
-    // TODO: - Later should support from api
     var viewModel: DetailRekeningViewModel?
 
     private let doneBtn: UIButton = {
@@ -53,7 +52,9 @@ final class DetailRekeningVC: UIViewController {
         return view
     }()
     
-    init(viewModel: DetailRekeningViewModel? = nil) {
+    init(
+        viewModel: DetailRekeningViewModel? = nil
+    ) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         configureDetailViewData()
@@ -87,6 +88,8 @@ final class DetailRekeningVC: UIViewController {
 
         view.addSubview(backgroundDoneBtnView)
         backgroundDoneBtnView.addSubview(doneBtn)
+        
+        doneBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
         
         scrollView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
@@ -138,19 +141,41 @@ final class DetailRekeningVC: UIViewController {
 
     private func configureDetailViewData() {
         let items: [DepositoKeyValueItemSet] = [
-            .init(key: "No. Referensi", value: "79102630924040", keyValueStyle: .none, showSeparator: false),
-            .init(key: "Jangka Waktu", value: "1 bulan", keyValueStyle: .none, showSeparator: false),
-            .init(key: "Jatuh Tempo", value: "10 Jan 2025", keyValueStyle: .none, showSeparator: false),
-            .init(key: "Suku Bunga", value: "2,25% p.a", keyValueStyle: .keyOnlyAsTitle, showSeparator: false),
-            .init(key: "Jenis Perpanjangan", value: "Perpanjangan Pokok Saja", keyValueStyle: .none, showSeparator: true),
-            .init(key: "Rekening Pencairan", value: "", keyValueStyle: .keyOnlyAsTitle, showSeparator: false),
-            .init(key: "No Rekening", value: "4423 2321 8821 129", keyValueStyle: .none, showSeparator: false),
-            .init(key: "Nama Pemilik", value: "Antonious Julio", keyValueStyle: .none, showSeparator: true)
+            .init(
+                key: "No. Referensi",
+                value: viewModel?.reference ?? "",
+                keyValueStyle: .none,
+                showSeparator: false
+            ),
+            .init(
+                key: "Nominal",
+                value: viewModel?.amount ?? "",
+                keyValueStyle: .none,
+                showSeparator: false
+            ),
+            .init(
+                key: "Biaya Admin",
+                value: viewModel?.additionalAmount ?? "Rp -",
+                keyValueStyle: .none,
+                showSeparator: false
+            ),
+            .init(
+                key: "Nomor E-Wallet",
+                value: viewModel?.remark ?? "",
+                keyValueStyle: .none,
+                showSeparator: false
+            ),
+            .init(
+                key: "Jenis E-Wallet",
+                value: viewModel?.transactionType ?? "",
+                keyValueStyle: .none,
+                showSeparator: false
+            )
         ]
 
         depositDetailView = KeyValueComponentView(
             items: items,
-            title: "Lihat Detail",
+            title: "Detail Transaksi",
             isToggleable: true,
             compactVisibleRows: 3,
             addBRIDescription: true,
@@ -159,5 +184,11 @@ final class DetailRekeningVC: UIViewController {
         )
         
         depositDetailView.backgroundColor = ConstantsColor.white900
+    }
+    
+    @objc
+    private func back() {
+        navigationController?.popViewController(animated: true)
+        navigationController?.navigationBar.isHidden = false
     }
 }

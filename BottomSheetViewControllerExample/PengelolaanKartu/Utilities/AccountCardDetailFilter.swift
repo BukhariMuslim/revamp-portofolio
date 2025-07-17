@@ -16,12 +16,13 @@ class AccountCardDetailFilter: UIView {
     private let monthStack: UIStackView = UIStackView()
     private let fixedMonthIcon: UIImageView = UIImageView()
     
-    private let dateLabel: UILabel = UILabel()
-    
     private var monthLabels: [UILabel] = []
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    private var sectionTitle: String = ""
+    
+    init(title: String = "Riwayat Qitta") {
+        super.init(frame: .zero)
+        sectionTitle = title
         setupLayout()
         setupConstraint()
         setupMonthChips()
@@ -33,7 +34,7 @@ class AccountCardDetailFilter: UIView {
     }
     
     private func setupLayout() {
-        titleLabel.text = "Riwayat Qitta"
+        titleLabel.text = sectionTitle
         titleLabel.font = .Brimo.Title.smallSemiBold
         titleLabel.textColor = .Brimo.Black.main
         titleLabel.isUserInteractionEnabled = false
@@ -44,13 +45,8 @@ class AccountCardDetailFilter: UIView {
         monthStack.alignment = .center
 
         fixedMonthIcon.image = UIImage(named: "utilities/big/filter")
-
-        dateLabel.text = "14 Juni 2025"
-        dateLabel.font = .Brimo.Body.mediumRegular
-        dateLabel.textColor = .Brimo.Black.x500
-        dateLabel.isUserInteractionEnabled = false
         
-        addSubviews(titleLabel, monthContainer, dateLabel)
+        addSubviews(titleLabel, monthContainer)
         monthContainer.addSubviews(monthScrollView, fixedMonthIcon)
         monthScrollView.addSubview(monthStack)
     }
@@ -67,6 +63,7 @@ class AccountCardDetailFilter: UIView {
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(32)
+            $0.bottom.equalToSuperview().inset(16)
         }
 
         monthScrollView.snp.makeConstraints {
@@ -85,13 +82,6 @@ class AccountCardDetailFilter: UIView {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-4)
             $0.width.height.equalTo(32)
-        }
-
-        dateLabel.snp.makeConstraints {
-            $0.top.equalTo(monthContainer.snp.bottom).offset(20)
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().inset(16)
-            $0.bottom.equalToSuperview().inset(16)
         }
     }
     
@@ -164,5 +154,10 @@ class AccountCardDetailFilter: UIView {
             targetOffsetX = max(0, min(targetOffsetX, monthScrollView.contentSize.width - monthScrollView.bounds.width))
             monthScrollView.setContentOffset(CGPoint(x: targetOffsetX, y: 0), animated: true)
         }
+    }
+    
+    func updateTitle(_ title: String) {
+        titleLabel.text = title
+        titleLabel.sizeToFit()
     }
 }

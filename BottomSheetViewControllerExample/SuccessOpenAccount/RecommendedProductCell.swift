@@ -8,14 +8,11 @@ import UIKit
 import Foundation
 import SnapKit
 
-
 final class RecommendedProductCell: UICollectionViewCell {
-    
     // MARK: - UI Components
-    
     private let topImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(systemName: "photo")
+        iv.image = UIImage(named: "illustrations/token_listrik")
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.layer.cornerRadius = 8
@@ -24,9 +21,9 @@ final class RecommendedProductCell: UICollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Produk Unggulan"
-        label.font = .boldSystemFont(ofSize: 14)
-        label.textColor = .white
+        label.text = "Token Listrik"
+        label.textColor = ConstantsColor.black900
+        label.font = UIFont.Brimo.Body.largeSemiBold
         return label
     }()
     
@@ -40,17 +37,17 @@ final class RecommendedProductCell: UICollectionViewCell {
     
     private let badgeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Promo"
-        label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.textColor = .white
+        label.text = "Cashback 100rb"
+        label.textColor = UIColor(hex: "#E84040")
+        label.font = UIFont.Brimo.Body.smallSemiBold
         return label
     }()
     
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Nikmati berbagai keuntungan dan fitur menarik dari produk ini."
-        label.font = .systemFont(ofSize: 12)
-        label.textColor = .white
+        label.text = "Beli token listrik di Qitta, langsung dapet Cashback s.d. 100rb!"
+        label.textColor = ConstantsColor.black900
+        label.font = UIFont.Brimo.Body.mediumRegular
         label.numberOfLines = 2
         label.textAlignment = .left
         return label
@@ -59,14 +56,12 @@ final class RecommendedProductCell: UICollectionViewCell {
     private let actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Pilih Produk", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 14)
-        button.layer.cornerRadius = 8
+        button.setTitleColor(UIColor(hex: "#0054F3"), for: .normal)
+        button.titleLabel?.font = UIFont.Brimo.Body.mediumSemiBold
         return button
     }()
     
     // MARK: - Init
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -81,7 +76,6 @@ final class RecommendedProductCell: UICollectionViewCell {
     }
     
     // MARK: - Setup Views
-    
     private func setupViews() {
         contentView.addSubview(topImageView)
         contentView.addSubview(titleLabel)
@@ -91,11 +85,10 @@ final class RecommendedProductCell: UICollectionViewCell {
         contentView.addSubview(subtitleLabel)
         contentView.addSubview(actionButton)
         
-        contentView.backgroundColor = .red
+        contentView.backgroundColor = .white
     }
     
     // MARK: - Constraints
-    
     private func setupConstraints() {
         topImageView.snp.makeConstraints {
             $0.leading.top.equalToSuperview().inset(16)
@@ -131,11 +124,10 @@ final class RecommendedProductCell: UICollectionViewCell {
     }
     
     // MARK: - Configure
-    
     func configure(title: String, subtitle: String, badge: String, image: String) {
         titleLabel.text = title
         subtitleLabel.text = subtitle
         badgeLabel.text = badge
-        topImageView.image = UIImage(systemName: image)
+        topImageView.image = UIImage(named: image)
     }
 }

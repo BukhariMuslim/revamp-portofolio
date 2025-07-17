@@ -36,10 +36,12 @@ class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITab
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let contentHeight = tableView.contentSize.height
-        if lastTableContentHeight != contentHeight {
-            lastTableContentHeight = contentHeight
-            tableHeightConstraint?.update(offset: contentHeight + 16)
+        if !isShowBorder {
+            let contentHeight = tableView.contentSize.height
+            if lastTableContentHeight != contentHeight {
+                lastTableContentHeight = contentHeight
+                tableHeightConstraint?.update(offset: contentHeight + 16)
+            }
         }
     }
 
@@ -51,7 +53,7 @@ class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITab
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
-        tableView.isScrollEnabled = false
+        tableView.isScrollEnabled = isShowBorder
         tableView.showsVerticalScrollIndicator = false
         tableView.register(TransactionTableViewCell.self, forCellReuseIdentifier: "TransactionTableViewCell")
         tableView.rowHeight = UITableView.automaticDimension
@@ -62,11 +64,13 @@ class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITab
         addSubview(tableView)
 
         tableView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(120)
+            $0.top.equalToSuperview().offset(isShowBorder ? 0 : 100)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().inset(16)
             $0.bottom.equalToSuperview()
-            tableHeightConstraint = $0.height.equalTo(1).constraint
+            if !isShowBorder {
+                tableHeightConstraint = $0.height.equalTo(1).constraint
+            }
         }
     }
 

@@ -13,16 +13,18 @@ final class AccountSuccessOpenInfoView: UIView {
     
     private let backgroundContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = ConstantsColor.primary100
         view.layer.cornerRadius = 16
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor(hex: "#0054F3").cgColor
         view.clipsToBounds = true
         return view
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18)
-        label.textColor = .black
+        label.textColor = ConstantsColor.black900
+        label.font = UIFont.Brimo.Body.mediumSemiBold
         label.numberOfLines = 0
         label.text = "Atur dan lihat detail tabungan kamu di halaman Portofolio Saya"
         return label
@@ -33,7 +35,7 @@ final class AccountSuccessOpenInfoView: UIView {
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 4
-        imageView.image = UIImage(systemName: "info.circle")
+        imageView.image = UIImage(named: "info_ic")
         return imageView
     }()
     
@@ -43,7 +45,7 @@ final class AccountSuccessOpenInfoView: UIView {
         setupViews()
         setupContraint()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }

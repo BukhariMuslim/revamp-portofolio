@@ -51,4 +51,8 @@ extension UIView {
             self.layer.addSublayer(borderLayer)
         }
     }
+    
+    func cornerRadius(_ size: CGFloat) {
+        self.layer.cornerRadius = size
+    }
 }

@@ -9,6 +9,11 @@ import UIKit
 import SnapKit
 
 final class RiwayatViewController: UIViewController {
+    private enum Tab: Int {
+        case mutasi = 0
+        case aktivitas = 1
+        case estatement = 2
+    }
     
     private let backgroundContainerView: UIImageView = {
         let img = UIImageView()
@@ -29,9 +34,11 @@ final class RiwayatViewController: UIViewController {
     }()
     
     private lazy var tabStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [aktivitasButton, mutasiButton, eStatementButton])
+        let spacer: UIView = UIView()
+        spacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        let stack: UIStackView = UIStackView(arrangedSubviews: [mutasiButton, aktivitasButton, eStatementButton, spacer])
         stack.axis = .horizontal
-        stack.distribution = .fill
+        stack.distribution = .equalSpacing
         stack.alignment = .leading
         stack.spacing = 16
         return stack
@@ -80,6 +87,7 @@ final class RiwayatViewController: UIViewController {
         return view
     }()
     
+    private var buttons: [UIButton]!
     
     private let contentContainer = UIView()
     
@@ -87,10 +95,15 @@ final class RiwayatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        buttons = [
+            mutasiButton,
+            aktivitasButton,
+            eStatementButton
+        ]
         setupView()
         setupConstraint()
         setupActions()
-        switchToTab(index: 1)
+        switchToTab(index: .mutasi)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,52 +122,51 @@ final class RiwayatViewController: UIViewController {
         
         view.addSubviews(backgroundContainerView, roundBackgroundView)
         roundBackgroundView.addSubviews(tabContainerView, contentContainer)
-        tabContainerView.addSubviews(tabStackView, activeIndicator, separatorView)
+        tabContainerView.addSubviews(tabStackView, separatorView, activeIndicator)
     }
     
     private func setupConstraint() {
-        backgroundContainerView.snp.remakeConstraints {
+        backgroundContainerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
-        roundBackgroundView.snp.remakeConstraints {
+
+        roundBackgroundView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(16)
             $0.leading.trailing.bottom.equalToSuperview()
         }
-        
-        tabContainerView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(8)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(60)
+
+        tabContainerView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(8)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(60)
         }
-        
-        tabStackView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.lessThanOrEqualToSuperview().offset(-16)
+
+        tabStackView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.equalToSuperview().offset(16)
         }
-        
-        [aktivitasButton, mutasiButton, eStatementButton].forEach { button in
-            button.contentEdgeInsets = UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16)
+
+        buttons.forEach { button in
+            button.contentEdgeInsets = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
             button.clipsToBounds = true
         }
-        
-        activeIndicator.snp.makeConstraints { make in
-            make.height.equalTo(3)
-            make.bottom.equalToSuperview()
-            make.width.equalTo(50)
-            make.leading.equalToSuperview().offset(16)
+
+        activeIndicator.snp.makeConstraints {
+            $0.height.equalTo(3)
+            $0.bottom.equalToSuperview()
+            $0.width.equalTo(50)
+            $0.leading.equalToSuperview().offset(16)
         }
-        
-        contentContainer.snp.makeConstraints { make in
-            make.top.equalTo(tabContainerView.snp.bottom)
-            make.leading.trailing.bottom.equalToSuperview()
+
+        separatorView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(1)
         }
-        
-        separatorView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalToSuperview()
-            make.height.equalTo(1)
+
+        contentContainer.snp.makeConstraints {
+            $0.top.equalTo(tabContainerView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
     
@@ -164,26 +176,24 @@ final class RiwayatViewController: UIViewController {
         eStatementButton.addTarget(self, action: #selector(eStatementTapped), for: .touchUpInside)
     }
     
-    @objc private func aktivitasTapped() {
-        switchToTab(index: 0)
+    @objc private func mutasiTapped() {
+        switchToTab(index: Tab.mutasi)
     }
     
-    @objc private func mutasiTapped() {
-        switchToTab(index: 1)
+    @objc private func aktivitasTapped() {
+        switchToTab(index: Tab.aktivitas)
     }
     
     @objc private func eStatementTapped() {
-        switchToTab(index: 2)
+        switchToTab(index: Tab.estatement)
     }
     
-    private func switchToTab(index: Int) {
-        currentSelectedIndex = index
+    private func switchToTab(index: Tab) {
+        currentSelectedIndex = index.rawValue
         
         let childVC: UIViewController
         switch index {
-        case 0:
-            childVC = AktivitasViewController()
-        case 1:
+        case .mutasi:
             // TODO: Santos - Remove Mock and Replace With Actual Data
             let mockData = RiwayatMutasiMockData().loadSampleData()
             let mutasiVC = MutasiViewController()
@@ -200,10 +210,10 @@ final class RiwayatViewController: UIViewController {
             mutasiVC.configureData(data: mockData)
             
             childVC = mutasiVC
-        case 2:
+        case .aktivitas:
+            childVC = AktivitasViewController()
+        case .estatement:
             childVC = EStatementViewController()
-        default:
-            return
         }
         
         for view in contentContainer.subviews {
@@ -222,12 +232,11 @@ final class RiwayatViewController: UIViewController {
         }
         
         childVC.didMove(toParent: self)
-        highlightTab(index: index)
+        highlightTab(index: index.rawValue)
         updateActiveIndicator()
     }
     
     private func highlightTab(index: Int) {
-        let buttons = [aktivitasButton, mutasiButton, eStatementButton]
         for (i, btn) in buttons.enumerated() {
             btn.isSelected = (i == index)
             if i == index {
@@ -240,8 +249,6 @@ final class RiwayatViewController: UIViewController {
     
     private func updateActiveIndicator() {
         guard currentSelectedIndex < 3 else { return }
-        
-        let buttons = [aktivitasButton, mutasiButton, eStatementButton]
         let selectedButton = buttons[currentSelectedIndex]
         
         tabStackView.layoutIfNeeded()
