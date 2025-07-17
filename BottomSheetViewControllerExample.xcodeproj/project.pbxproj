@@ -60,6 +60,10 @@
 		A665EC682E28D58300F28B78 /* RiwayatMutasiFilterTransactionTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC672E28D57000F28B78 /* RiwayatMutasiFilterTransactionTypeCell.swift */; };
 		A665EC6A2E28E36900F28B78 /* ReusableBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC692E28E36100F28B78 /* ReusableBottomSheetViewController.swift */; };
 		D64457FF2E1D29E3006BF51F /* MainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64457FE2E1D29E3006BF51F /* MainHelper.swift */; };
+		D665E94B2E28FACC00A9C8E1 /* DetailRekeningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D665E94A2E28FACC00A9C8E1 /* DetailRekeningViewModel.swift */; };
+		D665E94C2E28FACC00A9C8E1 /* ActivityHistoryItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D665E9492E28FACC00A9C8E1 /* ActivityHistoryItemViewModel.swift */; };
+		D665E94E2E28FB4100A9C8E1 /* DetailRekeningVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D665E94D2E28FB4100A9C8E1 /* DetailRekeningVC.swift */; };
+		D665E9502E28FB7D00A9C8E1 /* SafeAreaHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = D665E94F2E28FB7D00A9C8E1 /* SafeAreaHeight.swift */; };
 		D6B3D0E22E27E8EC00FE51FC /* CostumizedSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B3D0DD2E27E8EC00FE51FC /* CostumizedSwitch.swift */; };
 		D6B3D0E32E27E8EC00FE51FC /* WhatsAppNotificationConfigVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B3D0BB2E27E8EC00FE51FC /* WhatsAppNotificationConfigVC.swift */; };
 		D6B3D0E42E27E8EC00FE51FC /* BiFastActivatedEmaillVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B3D0BF2E27E8EC00FE51FC /* BiFastActivatedEmaillVC.swift */; };
@@ -171,6 +175,10 @@
 		A665EC672E28D57000F28B78 /* RiwayatMutasiFilterTransactionTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiFilterTransactionTypeCell.swift; sourceTree = "<group>"; };
 		A665EC692E28E36100F28B78 /* ReusableBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableBottomSheetViewController.swift; sourceTree = "<group>"; };
 		D64457FE2E1D29E3006BF51F /* MainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHelper.swift; sourceTree = "<group>"; };
+		D665E9492E28FACC00A9C8E1 /* ActivityHistoryItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityHistoryItemViewModel.swift; sourceTree = "<group>"; };
+		D665E94A2E28FACC00A9C8E1 /* DetailRekeningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRekeningViewModel.swift; sourceTree = "<group>"; };
+		D665E94D2E28FB4100A9C8E1 /* DetailRekeningVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRekeningVC.swift; sourceTree = "<group>"; };
+		D665E94F2E28FB7D00A9C8E1 /* SafeAreaHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaHeight.swift; sourceTree = "<group>"; };
 		D6B3D0B02E27E8EC00FE51FC /* StickyRoundedContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyRoundedContainerView.swift; sourceTree = "<group>"; };
 		D6B3D0B42E27E8EC00FE51FC /* AccountCardDetailManagerActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardDetailManagerActivityView.swift; sourceTree = "<group>"; };
 		D6B3D0B52E27E8EC00FE51FC /* AccountCardManagerCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardManagerCategoryView.swift; sourceTree = "<group>"; };
@@ -238,6 +246,7 @@
 				36432D852E1CB50000055F79 /* InputField.swift */,
 				D64457FE2E1D29E3006BF51F /* MainHelper.swift */,
 				3687FBEC2E1E3D0F00BCC6EC /* BottomSheetWithTwoBtnVC.swift */,
+				D665E94F2E28FB7D00A9C8E1 /* SafeAreaHeight.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -480,6 +489,7 @@
 		D6B3D0C52E27E8EC00FE51FC /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D665E94D2E28FB4100A9C8E1 /* DetailRekeningVC.swift */,
 				D6B3D0B82E27E8EC00FE51FC /* LimitSettingVC.swift */,
 				D6B3D0B92E27E8EC00FE51FC /* TransactionLimitBottomSheetVC.swift */,
 				D6B3D0BA2E27E8EC00FE51FC /* TransactionLimitInformationDetailBottomSheetVC.swift */,
@@ -607,6 +617,8 @@
 		D6B3D1122E28ACBC00FE51FC /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				D665E9492E28FACC00A9C8E1 /* ActivityHistoryItemViewModel.swift */,
+				D665E94A2E28FACC00A9C8E1 /* DetailRekeningViewModel.swift */,
 				D6B3D1132E28ACC300FE51FC /* ActivityHistoryViewModel.swift */,
 			);
 			path = ViewModels;
@@ -770,6 +782,7 @@
 				D6B3D0F62E27E8EC00FE51FC /* CardSettingsItem.swift in Sources */,
 				D6B3D0F72E27E8EC00FE51FC /* BiFastSetupVC.swift in Sources */,
 				D6B3D0F82E27E8EC00FE51FC /* LimitSettingModel.swift in Sources */,
+				D665E9502E28FB7D00A9C8E1 /* SafeAreaHeight.swift in Sources */,
 				D6B3D0F92E27E8EC00FE51FC /* AccountCardManagerCategoryView.swift in Sources */,
 				D6B3D0FA2E27E8EC00FE51FC /* CostumizedImage.swift in Sources */,
 				D6B3D0FB2E27E8EC00FE51FC /* CardAccountDetailInfoView.swift in Sources */,
@@ -815,6 +828,9 @@
 				87B2B4C12E1A5A9D00F7D6CB /* AccountListTableViewCell.swift in Sources */,
 				87B2B4B82E1A58B300F7D6CB /* BrimoTypographyType.swift in Sources */,
 				8619D25E2A2C751B00AB91A8 /* SceneDelegate.swift in Sources */,
+				D665E94B2E28FACC00A9C8E1 /* DetailRekeningViewModel.swift in Sources */,
+				D665E94E2E28FB4100A9C8E1 /* DetailRekeningVC.swift in Sources */,
+				D665E94C2E28FACC00A9C8E1 /* ActivityHistoryItemViewModel.swift in Sources */,
 				8733248E2E0F813D0040698B /* InitialDepositDetailView.swift in Sources */,
 				873324902E0F82AD0040698B /* BranchOpeningView.swift in Sources */,
 			);

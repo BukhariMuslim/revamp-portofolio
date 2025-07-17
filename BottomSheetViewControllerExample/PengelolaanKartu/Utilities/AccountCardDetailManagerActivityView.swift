@@ -10,14 +10,18 @@ import UIKit
 import SnapKit
 
 class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITableViewDelegate {
+    typealias DetailActivitySelectedHandler = (_ viewController: UIViewController) -> Void
+    
     private let tableView = UITableView()
     
-    private var transactions: [ActivityHistoryViewModel] = []
+    private var transactions: [ActivityHistoryItemViewModel] = []
     
     private var lastTableContentHeight: CGFloat = 0
     private var tableHeightConstraint: Constraint?
     
     private var isShowBorder: Bool = false
+    
+    var onItemSelected: DetailActivitySelectedHandler?
 
     init(isShowBorder: Bool = false) {
         super.init(frame: .zero)
@@ -68,68 +72,85 @@ class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITab
 
     private func setupDummyTransactions() {
         transactions = [
-            ActivityHistoryViewModel(
-                icon: "qrcode",
-                title: "Pembayaran QRIS",
-                subtitle: "Alfamart Gatot Subroto - 12232319320921832",
-                time: "12:30:21 AM",
-                amount: "-Rp20.000,00",
-                status: "success",
-                isCredit: false
+            ActivityHistoryItemViewModel(
+                iconName: "icon_e_wallet",
+                iconPath: "https://brimo.bri.co.id/erangel/assets/activity/icon_e_wallet.png",
+                title: "E Wallet",
+                subTitle: "Gopay Customer - 08515688732",
+                referenceNumber: "872870709362",
+                date: "16 Jul 2025 09:42",
+                amount: "Rp16.000",
+                status: "process"
             ),
-            ActivityHistoryViewModel(
-                icon: "arrow.left.arrow.right",
-                title: "Transfer Dana",
-                subtitle: "Dari BCA - Wijayakusuma\n102499920012",
-                time: "12:00:21 AM",
-                amount: "+Rp250.000,00",
-                status: "failed",
-                isCredit: false
+            ActivityHistoryItemViewModel(
+                iconName: "icon_e_wallet",
+                iconPath: "https://brimo.bri.co.id/erangel/assets/activity/icon_e_wallet.png",
+                title: "E Wallet",
+                subTitle: "Gopay Customer - 085156436280",
+                referenceNumber: "872870708192",
+                date: "15 Jul 2025 22:46",
+                amount: "Rp36.000",
+                status: "success"
             ),
-            ActivityHistoryViewModel(
-                icon: "arrow.left.arrow.right",
-                title: "Transfer Dana",
-                subtitle: "Dari BCA - Wijayakusuma\n102499920012",
-                time: "12:00:21 AM",
-                amount: "+Rp250.000,00",
-                status: "pending",
-                isCredit: false
+            ActivityHistoryItemViewModel(
+                iconName: "icon_e_wallet",
+                iconPath: "https://brimo.bri.co.id/erangel/assets/activity/icon_e_wallet.png",
+                title: "E Wallet",
+                subTitle: "Gopay Customer - 085716770019",
+                referenceNumber: "8728701239302",
+                date: "15 Jul 2025 19:19",
+                amount: "Rp31.000",
+                status: "success"
             ),
-            ActivityHistoryViewModel(
-                icon: "arrow.left.arrow.right",
-                title: "Transfer Dana",
-                subtitle: "Dari BCA - Wijayakusuma\n102499920012",
-                time: "12:00:21 AM",
-                amount: "+Rp250.000,00",
-                status: "process",
-                isCredit: false
+            ActivityHistoryItemViewModel(
+                iconName: "icon_transfer",
+                iconPath: "https://brimo.bri.co.id/erangel/assets/activity/icon_transfer.png",
+                title: "Transfer",
+                subTitle: "BANK JAGO - 104761009676",
+                referenceNumber: "8728700192393",
+                date: "15 Jul 2025 08:51",
+                amount: "Rp102.500",
+                status: "success"
             ),
-            ActivityHistoryViewModel(
-                icon: "arrow.left.arrow.right",
-                title: "Transfer Dana",
-                subtitle: "Dari BCA - Wijayakusuma\n102499920012",
-                time: "12:00:21 AM",
-                amount: "+Rp250.000,00",
-                status: "success",
-                isCredit: false
+            ActivityHistoryItemViewModel(
+                iconName: "icon_transfer",
+                iconPath: "https://brimo.bri.co.id/erangel/assets/activity/icon_transfer.png",
+                title: "Transfer",
+                subTitle: "BANK JAGO - 104761009676",
+                referenceNumber: "8728700019292",
+                date: "15 Jul 2025 08:50",
+                amount: "Rp102.500",
+                status: "failed"
             ),
-            ActivityHistoryViewModel(
-                icon: "arrow.left.arrow.right",
-                title: "Transfer Dana",
-                subtitle: "Dari BCA - Wijayakusuma\n102499920012",
-                time: "12:00:21 AM",
-                amount: "+Rp250.000,00",
-                status: "success",
-                isCredit: false
+            ActivityHistoryItemViewModel(
+                iconName: "icon_pembelian_qris",
+                iconPath: "https://brimo.bri.co.id/erangel/assets/activity/icon_pembelian_qris.png",
+                title: "Pembelian QRIS",
+                subTitle: "V LAUNDRY - 000885003014227",
+                referenceNumber: "8728700018190",
+                date: "13 Jul 2025 20:33",
+                amount: "Rp52.000",
+                status: "success"
             ),
-            ActivityHistoryViewModel(
-                icon: "arrow.left.arrow.right",
-                title: "Transfer Dana",
-                subtitle: "Dari BCA - Wijayakusuma\n102499920012",
-                time: "12:00:21 AM",
-                amount: "+Rp250.000,00",
-                status: "failed",
-                isCredit: false
+            ActivityHistoryItemViewModel(
+                iconName: "icon_transfer",
+                iconPath: "https://brimo.bri.co.id/erangel/assets/activity/icon_transfer.png",
+                title: "Transfer",
+                subTitle: "BANK JAGO - 104761009676",
+                referenceNumber: "8728700017110",
+                date: "13 Jul 2025 18:12",
+                amount: "Rp57.200",
+                status: "pending"
+            ),
+            ActivityHistoryItemViewModel(
+                iconName: "icon_transfer",
+                iconPath: "https://brimo.bri.co.id/erangel/assets/activity/icon_transfer.png",
+                title: "Transfer",
+                subTitle: "BANK JAGO - 104761009936",
+                referenceNumber: "8728700016102",
+                date: "13 Jul 2025 15:11",
+                amount: "Rp30.520",
+                status: "success"
             )
         ]
     }
@@ -140,13 +161,38 @@ class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITab
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath) as? TransactionTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: String(describing: TransactionTableViewCell.self),
+            for: indexPath
+        ) as? TransactionTableViewCell else {
             return UITableViewCell()
         }
 
         let item = transactions[indexPath.row]
         cell.configure(item: item, isShowBorder: isShowBorder && (transactions.count - 1) != indexPath.row)
         return cell
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
+        let item = transactions[indexPath.row]
+        let detailViewModel: DetailRekeningViewModel = DetailRekeningViewModel(
+            amount: item.amount,
+            date: item.date,
+            remark: item.subTitle,
+            reference: item.referenceNumber,
+            transactionType: item.title,
+            destinationAccount: item.subTitle,
+            destinationAccountNumber: item.subTitle,
+            additionalAmount: ""
+        )
+        let detailVC: DetailRekeningVC = DetailRekeningVC(
+            viewModel: detailViewModel
+        )
+        
+        onItemSelected?(detailVC)
     }
 }
 

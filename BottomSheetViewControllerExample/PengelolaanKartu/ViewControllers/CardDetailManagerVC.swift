@@ -60,24 +60,25 @@ final class CardDetailManagerVC: UIViewController {
         let menuItems: [CardMenuItem] = [
             CardMenuItem(
                 title: "Informasi Rekening",
-                image: "utilities/informasi_rekening_icon",
+                image: "menu/deposito",
                 action: showDetailInformation
             ),
             
             CardMenuItem(
                 title: "Detail Kartu",
-                image: "utilities/detail_kartu_icon",
+                image: "menu/credit_card",
                 action: isBlocked ? showBlockedDetailCard : showDetailCard
             ),
             
             CardMenuItem(
                 title: "E-Statement",
-                image: "utilities/estatement_icon"
+                image: "menu/pasca_bayar"
             )
         ]
 
         menuCollectionView.configure(items: menuItems)
 
+        listActivityView.onItemSelected = listActivityItemSelected
         contentView.addSubviews(listActivityView)
         
         headerView.addSubviews(headerContent, menuCollectionView)
@@ -98,6 +99,10 @@ final class CardDetailManagerVC: UIViewController {
         
         view.backgroundColor = ConstantsColor.white900
         view.addSubviews(backgroundContainerView, scrollContainerView)
+    }
+    
+    private func listActivityItemSelected(_ viewController: UIViewController) {
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func showDetailInformation() {

@@ -101,17 +101,38 @@ class TransactionTableViewCell: UITableViewCell {
         }
     }
 
-    func configure(item: ActivityHistoryViewModel, isShowBorder: Bool = false) {
-        iconView.image = UIImage(systemName: item.icon)
+    func configure(item: ActivityHistoryItemViewModel, isShowBorder: Bool = false) {
+        var iconImage: UIImage? = UIImage()
+        switch item.iconName {
+        case ActivityIconType.qris.rawValue:
+            iconImage = UIImage(named: "menu/qr")
+
+        case ActivityIconType.transfer.rawValue:
+            iconImage = UIImage(named: "menu/transfer")
+
+        case ActivityIconType.transfer.rawValue:
+            iconImage = UIImage(named: "menu/briva")
+        
+        case ActivityIconType.ewalet.rawValue:
+            iconImage = UIImage(named: "menu/ewallet")
+
+        default:
+            break
+        }
+        iconView.image = iconImage
         titleLabel.text = item.title
-        subtitleLabel.setText("\(item.subtitle)\n\(item.time)", lineHeight: 18)
-        amountLabel
-            .setAmountLabel(
-                amountText: item.amount,
-                mainFont: .Brimo.Body.largeSemiBold,
-                decimalFont: .Brimo.Body.smallSemiBold
-            )
-        amountLabel.textColor = item.isCredit ? .systemGreen : .black
+        let subtitleText = [item.subTitle, item.date].joined(separator: "\n")
+        subtitleLabel.setText(subtitleText, lineHeight: 18)
+        if isShowBorder {
+            amountLabel
+                .setAmountLabel(
+                    amountText: item.amount,
+                    mainFont: .Brimo.Body.largeSemiBold,
+                    decimalFont: .Brimo.Body.smallSemiBold
+                )
+        } else {
+            amountLabel.text = item.amount
+        }
         
         if isShowBorder {
             bottomBorderView.snp.updateConstraints {
@@ -155,6 +176,13 @@ class TransactionTableViewCell: UITableViewCell {
         statusLabel.textColor = statusLabelColor
         statusView.backgroundColor = statusViewBackgroundColor
     }
+}
+
+enum ActivityIconType: String {
+    case qris = "icon_pembelian_qris"
+    case transfer = "icon_transfer"
+    case briva = "icon_briva"
+    case ewalet = "icon_e_wallet"
 }
 
 enum ActivityItemStatus: String {
