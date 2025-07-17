@@ -92,10 +92,12 @@ final class AccountOpeningCompleteHeaderView: UIView {
     }
 
     // MARK: - Public Configuration
-    func configure(title: String, date: String, image: UIImage?, amount: String) {
+    func configure(title: String?, date: String?, image: UIImage? = nil, imageString: String?, amount: String?) {
         titleLabel.text = title
         dateLabel.text = date
-        imageView.image = image
+        if let image = image {
+            imageView.image = image
+        }
         amountLabel.text = amount
     }
 }

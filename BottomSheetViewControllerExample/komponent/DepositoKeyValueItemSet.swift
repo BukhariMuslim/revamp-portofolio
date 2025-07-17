@@ -15,7 +15,7 @@ struct DepositoKeyValueItemSet {
     let showSeparator: Bool
 }
 
-enum DepositoKeyValueStyle {
+enum DepositoKeyValueStyle: String {
     case keyOnlyAsTitle
     case valueRed
     case valueGreen
@@ -98,7 +98,7 @@ class KeyValueComponentView: UIView {
             stackView.addArrangedSubview(titleLabel)
         }
         
-        for (index, item) in items.enumerated() {
+        for (_, item) in items.enumerated() {
             let row = createRow(item: item)
             allItemViews.append(row)
             

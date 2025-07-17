@@ -183,14 +183,52 @@ class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITab
     ) {
         let item = transactions[indexPath.row]
         let detailViewModel: DetailRekeningViewModel = DetailRekeningViewModel(
-            amount: item.amount,
-            date: item.date,
-            remark: item.subTitle,
-            reference: item.referenceNumber,
-            transactionType: item.title,
-            destinationAccount: item.subTitle,
-            destinationAccountNumber: item.subTitle,
-            additionalAmount: ""
+            amountDataView: [
+                .init(name: "Nominal", style: "", value: item.amount),
+                .init(name: "Biaya Admin", style: "", value: "Rp0")
+            ],
+            billingDetail: .init(
+                description: "0230 0113 7093 501",
+                iconName: "",
+                iconPath: "",
+                listType: "name",
+                receiptAvatar: "",
+                subtitle: "BANK BRI",
+                title: "ADIXXXXXXXXXXXXXXLTI"
+            ),
+            closeButtonString: "Halaman Utama",
+            dataViewTransaction: [
+                .init(name: "Jenis Transaksi", style: "", value: "Transfer Bank BRI"),
+                .init(name: "Catatan", style: "", value: "-")
+            ],
+            dateTransaction: item.date,
+            footer: "",
+            footerHtml: "<html><body style=\"margin:0;padding:-16px;color:#777777;font-family:avenir\"><table><tr><td colspan=\"3\" align=\"left\" valign=\"top\" style=\"color:#777777;font-size:14px\" width=\"260\"><strong>INFORMASI:</strong></td></tr><tr><td colspan=\"3\" align=\"left\" valign=\"top\" width=\"260\"><div style=\"color:#777777;font-size:12px;line-height:18px;margin-left:-1px\"><br>Biaya Termasuk PPN (Apabila Dikenakan/Apabila Ada)<br>PT. Bank Rakyat Indonesia (Persero) Tbk.<br>Kantor Pusat BRI - Jakarta Pusat<br>NPWP : 01.001.608.7-093.000</div></td></tr></table></body></html>",
+            headerDataView: [
+                .init(name: "No. Ref", style: "", value: "323534297666")
+            ],
+            helpFlag: false,
+            immediatelyFlag: true,
+            onProcess: false,
+            referenceNumber: "323534297666",
+            rowDataShow: 0,
+            share: true,
+            shareButtonString: "Bagikan Bukti Transaksi",
+            sourceAccountDataView: .init(
+                description: "0230 **** **** 308",
+                iconName: "",
+                iconPath: "",
+                listType: "name",
+                receiptAvatar: "",
+                subtitle: "BANK BRI",
+                title: "Infinite"
+            ),
+            title: "Transaksi Berhasil",
+            titleImage: "receipt_00_revamp",
+            totalDataView: [
+                .init(name: "Total Transaksi", style: "", value: item.amount)
+            ],
+            voucherDataView: []
         )
         let detailVC: DetailRekeningVC = DetailRekeningVC(
             viewModel: detailViewModel
