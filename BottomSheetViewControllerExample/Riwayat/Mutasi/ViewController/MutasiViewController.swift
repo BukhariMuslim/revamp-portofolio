@@ -20,8 +20,7 @@ class MutasiViewController: UIViewController {
     private let filterIcon: UIImageView = {
         let imageView = UIImageView()
         imageView.isUserInteractionEnabled = true
-        imageView.image = UIImage(systemName: "line.horizontal.3.decrease")
-        imageView.tintColor = UIColor(red: 0.6, green: 0.6, blue: 0.67, alpha: 1.0)
+        imageView.image = UIImage(named: "utilities/riwayat_mutasi_filter)icon")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -71,7 +70,7 @@ class MutasiViewController: UIViewController {
     private var allMutasiData: [RiwayatMutasiModel] = []
     private var selectedMonthIndex: Int? = nil
     
-    private let months = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
+    private let months = ["X", "Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,6 +150,7 @@ class MutasiViewController: UIViewController {
     
     private func createMonthButton(title: String, index: Int) -> UIButton {
         let button = UIButton()
+        let width = index == 0 ? 32 : 53
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = .Brimo.Body.smallRegular
         button.setTitleColor(.Brimo.Black.main, for: .normal)
@@ -161,7 +161,7 @@ class MutasiViewController: UIViewController {
         button.addTarget(self, action: #selector(monthButtonTapped(_:)), for: .touchUpInside)
         
         button.snp.makeConstraints { make in
-            make.width.equalTo(50)
+            make.width.equalTo(width)
             make.height.equalTo(32)
         }
         
@@ -172,6 +172,8 @@ class MutasiViewController: UIViewController {
         let tappedIndex = sender.tag
         
         if selectedMonthIndex == tappedIndex {
+            selectedMonthIndex = nil
+        } else if tappedIndex == 0 {
             selectedMonthIndex = nil
         } else {
             selectedMonthIndex = tappedIndex
@@ -189,7 +191,7 @@ class MutasiViewController: UIViewController {
                 if isSelected {
                     button.backgroundColor = ConstantsColor.primary100
                 } else {
-                    button.backgroundColor = .clear
+                    button.backgroundColor = ConstantsColor.black100
                 }
             }
         }
@@ -197,7 +199,7 @@ class MutasiViewController: UIViewController {
     
     private func filterDataByMonth() {
         if let selectedIndex = selectedMonthIndex {
-            let selectedMonth = selectedIndex + 1
+            let selectedMonth = selectedIndex
             
             mutasiData = allMutasiData.filter { model in
                 let calendar = Calendar.current

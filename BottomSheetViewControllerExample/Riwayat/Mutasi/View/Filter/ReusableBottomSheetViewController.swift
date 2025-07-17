@@ -1,0 +1,172 @@
+//
+//  ReusableBottomSheetViewController.swift
+//  BottomSheetViewControllerExample
+//
+//  Created by sia santos on 17/07/25.
+//
+
+import UIKit
+import SnapKit
+
+class ReusableBottomSheetViewController: BrimonsBottomSheetVC {
+    
+    // MARK: - Properties
+    private let containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.Brimo.White.main
+        return view
+    }()
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = UIFont.Brimo.Title.mediumSemiBold
+        label.textColor = UIColor.Brimo.Black.main
+        return label
+    }()
+    
+    private let closeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.tintColor = UIColor.Brimo.Black.main
+        return button
+    }()
+    
+    private let contentContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.Brimo.White.main
+        return view
+    }()
+    
+    private let actionButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor.Brimo.Primary.main
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = UIFont.Brimo.Title.mediumSemiBold
+        button.setTitleColor(UIColor.Brimo.White.main, for: .normal)
+        return button
+    }()
+    
+    // Public properties
+    var titleText: String = "Title" {
+        didSet {
+            titleLabel.text = titleText
+        }
+    }
+    
+    var buttonTitle: String = "Simpan" {
+        didSet {
+            actionButton.setTitle(buttonTitle, for: .normal)
+        }
+    }
+    
+    var contentView: UIView? {
+        didSet {
+            setupContentView()
+        }
+    }
+    
+    var onActionButtonTapped: (() -> Void)?
+    var onCloseButtonTapped: (() -> Void)?
+    
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+        setupActions()
+    }
+    
+    // MARK: - Setup Methods
+    private func setupViews() {
+        // Create main content container
+        containerView.addSubviews(
+            titleLabel,
+            closeButton,
+            contentContainerView,
+            actionButton
+        )
+        
+        // Set content using parent's method
+        setContent(content: containerView)
+        
+        // Setup constraints
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.centerX.equalToSuperview()
+            make.leading.greaterThanOrEqualToSuperview().offset(60)
+            make.trailing.lessThanOrEqualToSuperview().offset(-60)
+        }
+        
+        closeButton.snp.makeConstraints { make in
+            make.centerY.equalTo(titleLabel)
+            make.trailing.equalToSuperview().offset(-20)
+            make.width.height.equalTo(24)
+        }
+        
+        contentContainerView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(24)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(actionButton.snp.top).offset(-20)
+        }
+        
+        actionButton.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(50)
+            make.bottom.equalTo(containerView.safeAreaLayoutGuide.snp.bottom).offset(-20)
+        }
+        
+        // Set initial values
+        titleLabel.text = titleText
+        actionButton.setTitle(buttonTitle, for: .normal)
+    }
+    
+    private func setupContentView() {
+        // Remove any existing content view
+        contentContainerView.subviews.forEach { $0.removeFromSuperview() }
+        
+        // Add new content view if provided
+        guard let contentView = contentView else { return }
+        
+        contentContainerView.addSubview(contentView)
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    private func setupActions() {
+        actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+    }
+    
+    // MARK: - Actions
+    @objc private func actionButtonTapped() {
+        onActionButtonTapped?()
+    }
+    
+    @objc private func closeButtonTapped() {
+        if let onClose = onCloseButtonTapped {
+            onClose()
+        } else {
+            dismissBottomSheet()
+        }
+    }
+}
+
+// MARK: - Convenience Initializer
+extension ReusableBottomSheetViewController {
+    static func create(
+        title: String,
+        buttonTitle: String = "Simpan",
+        contentView: UIView,
+        onActionTapped: (() -> Void)? = nil,
+        onCloseTapped: (() -> Void)? = nil
+    ) -> ReusableBottomSheetViewController {
+        let controller = ReusableBottomSheetViewController()
+        controller.titleText = title
+        controller.buttonTitle = buttonTitle
+        controller.contentView = contentView
+        controller.onActionButtonTapped = onActionTapped
+        controller.onCloseButtonTapped = onCloseTapped
+        return controller
+    }
+}

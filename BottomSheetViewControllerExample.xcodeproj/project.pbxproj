@@ -58,6 +58,7 @@
 		A665EC632E28D16000F28B78 /* RiwayatMutasiFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC622E28D15400F28B78 /* RiwayatMutasiFilterViewController.swift */; };
 		A665EC652E28D48800F28B78 /* RiwayatMutasiFilterSectionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC642E28D47100F28B78 /* RiwayatMutasiFilterSectionCellView.swift */; };
 		A665EC682E28D58300F28B78 /* RiwayatMutasiFilterTransactionTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC672E28D57000F28B78 /* RiwayatMutasiFilterTransactionTypeCell.swift */; };
+		A665EC6A2E28E36900F28B78 /* ReusableBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC692E28E36100F28B78 /* ReusableBottomSheetViewController.swift */; };
 		D64457FF2E1D29E3006BF51F /* MainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64457FE2E1D29E3006BF51F /* MainHelper.swift */; };
 		D6B3D0E22E27E8EC00FE51FC /* CostumizedSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B3D0DD2E27E8EC00FE51FC /* CostumizedSwitch.swift */; };
 		D6B3D0E32E27E8EC00FE51FC /* WhatsAppNotificationConfigVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B3D0BB2E27E8EC00FE51FC /* WhatsAppNotificationConfigVC.swift */; };
@@ -168,6 +169,7 @@
 		A665EC622E28D15400F28B78 /* RiwayatMutasiFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiFilterViewController.swift; sourceTree = "<group>"; };
 		A665EC642E28D47100F28B78 /* RiwayatMutasiFilterSectionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiFilterSectionCellView.swift; sourceTree = "<group>"; };
 		A665EC672E28D57000F28B78 /* RiwayatMutasiFilterTransactionTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiFilterTransactionTypeCell.swift; sourceTree = "<group>"; };
+		A665EC692E28E36100F28B78 /* ReusableBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableBottomSheetViewController.swift; sourceTree = "<group>"; };
 		D64457FE2E1D29E3006BF51F /* MainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHelper.swift; sourceTree = "<group>"; };
 		D6B3D0B02E27E8EC00FE51FC /* StickyRoundedContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyRoundedContainerView.swift; sourceTree = "<group>"; };
 		D6B3D0B42E27E8EC00FE51FC /* AccountCardDetailManagerActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardDetailManagerActivityView.swift; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 			isa = PBXGroup;
 			children = (
 				A665EC662E28D56300F28B78 /* Filter */,
+				A665EC602E28BEF300F28B78 /* EmptyStateCellView.swift */,
 				A665EC5C2E28A12800F28B78 /* RiwayatMutasiDateHeaderView.swift */,
 				A665EC4B2E289CA100F28B78 /* RiwayatMutasiCellView.swift */,
 			);
@@ -398,7 +401,6 @@
 			isa = PBXGroup;
 			children = (
 				A665EC622E28D15400F28B78 /* RiwayatMutasiFilterViewController.swift */,
-				A665EC602E28BEF300F28B78 /* EmptyStateCellView.swift */,
 				A665EC4D2E289CA100F28B78 /* AktivitasViewController.swift */,
 				A665EC4E2E289CA100F28B78 /* EStatementViewController.swift */,
 				A665EC4F2E289CA100F28B78 /* MutasiViewController.swift */,
@@ -445,6 +447,7 @@
 		A665EC662E28D56300F28B78 /* Filter */ = {
 			isa = PBXGroup;
 			children = (
+				A665EC692E28E36100F28B78 /* ReusableBottomSheetViewController.swift */,
 				A665EC672E28D57000F28B78 /* RiwayatMutasiFilterTransactionTypeCell.swift */,
 				A665EC642E28D47100F28B78 /* RiwayatMutasiFilterSectionCellView.swift */,
 			);
@@ -784,6 +787,7 @@
 				D6B3D1092E27E8EC00FE51FC /* BIFastCardActiveView.swift in Sources */,
 				8726DE4F2E19207500EE4B73 /* DepositoKeyValueItemSet.swift in Sources */,
 				A665EC5D2E28A14A00F28B78 /* RiwayatMutasiDateHeaderView.swift in Sources */,
+				A665EC6A2E28E36900F28B78 /* ReusableBottomSheetViewController.swift in Sources */,
 				D6B3D1112E28ACA200FE51FC /* TransactionTableViewCell.swift in Sources */,
 				3687FBED2E1E3D0F00BCC6EC /* BottomSheetWithTwoBtnVC.swift in Sources */,
 				8793F7952E11453B008A47D5 /* CustomNumberKeyboard.swift in Sources */,

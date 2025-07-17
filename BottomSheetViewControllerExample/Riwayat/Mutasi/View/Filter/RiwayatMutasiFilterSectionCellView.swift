@@ -38,7 +38,7 @@ class RiwayatMutasiFilterSectionCellView: UIView {
         return label
     }()
     
-    private let valueLabel: UILabel = {
+    let valueLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.Brimo.Title.smallSemiBold
         label.textColor = UIColor.Brimo.Black.main
@@ -109,9 +109,27 @@ class RiwayatMutasiFilterSectionCellView: UIView {
         valueLabel.text = data.value
         iconImageView.image = data.icon
         iconImageView.tintColor = data.iconTintColor
+        
+        updateLayoutForValue(data.value)
     }
     
     func updateValue(_ value: String) {
         valueLabel.text = value
+        updateLayoutForValue(value)
+    }
+    
+    private func updateLayoutForValue(_ value: String) {
+        let isEmpty = value.isEmpty
+        valueLabel.isHidden = isEmpty
+        
+        // Update title label constraints based on whether value is empty
+        titleLabel.snp.remakeConstraints { make in
+            if isEmpty {
+                make.centerY.equalToSuperview()
+            } else {
+                make.top.equalToSuperview().offset(16)
+            }
+            make.leading.equalToSuperview().offset(16)
+        }
     }
 }

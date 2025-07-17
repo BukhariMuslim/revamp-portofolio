@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class RiwayatMutasiFilterViewController: UIViewController {
+final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
     
     private let backgroundContainerView: UIImageView = {
         let img = UIImageView()
@@ -52,8 +52,8 @@ final class RiwayatMutasiFilterViewController: UIViewController {
     // Filter data
     private var selectedStartDate = Date()
     private var selectedEndDate = Date()
-    private var selectedAccount = "6013 3455 0999 120"
-    private var selectedTransactionType: TransactionType = .income
+    private var selectedAccount = "Semua Rekening"
+    private var selectedTransactionType: TransactionType = .all
     
     var onFilterApplied: ((Date, Date, String, TransactionType) -> Void)?
     
@@ -177,10 +177,9 @@ final class RiwayatMutasiFilterViewController: UIViewController {
         // Configure date range section
         let dateRangeData = RiwayatMutasiFilterSectionCellData(
             title: "Pilih Rentang Waktu",
-            value: formatDateRange(start: selectedStartDate, end: selectedEndDate),
+            value: "",
             systemIconName: "calendar"
         )
-        
         dateRangeSection.configure(with: dateRangeData)
         
         // Configure account section
@@ -193,6 +192,7 @@ final class RiwayatMutasiFilterViewController: UIViewController {
         
         // Configure transaction type section
         transactionTypeSection.setSelectedType(selectedTransactionType)
+        applyButton.isEnabled = false
     }
     
     private func formatDateRange(start: Date, end: Date) -> String {
@@ -220,14 +220,32 @@ final class RiwayatMutasiFilterViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    private func showDateRangePicker() {
-        // TODO: Implement date range picker
-        print("Show date range picker")
+    private func showAccountSelector() {
+        let dateRangePicker: ReusableBottomSheetViewController = ReusableBottomSheetViewController.create(
+            title: "Sumber Rekening",
+            contentView: UIView()
+        )
+        
+        self.presentBrimonsBottomSheet(viewController: dateRangePicker)
     }
     
-    private func showAccountSelector() {
-        // TODO: Implement account selector
-        print("Show account selector")
+    private func showDateRangePicker() {
+        let dateRangePicker: ReusableBottomSheetViewController = ReusableBottomSheetViewController.create(
+            title: "Pilih Tanggal",
+            contentView: UIView()
+        )
+        
+        self.presentBrimonsBottomSheet(viewController: dateRangePicker)
+    }
+    
+    private func dismissDateRangePicker() {
+        guard let dateRangePicker = view.viewWithTag(999) else { return }
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            dateRangePicker.alpha = 0
+        }) { _ in
+            dateRangePicker.removeFromSuperview()
+        }
     }
 }
 
