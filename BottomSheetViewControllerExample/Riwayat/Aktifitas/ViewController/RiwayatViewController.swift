@@ -73,6 +73,13 @@ final class RiwayatViewController: UIViewController {
         view.layer.cornerRadius = 1.5
         return view
     }()
+        
+    private let separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 0.94, green: 0.94, blue: 0.96, alpha: 1.0)
+        return view
+    }()
+    
     
     private let contentContainer = UIView()
     
@@ -102,7 +109,7 @@ final class RiwayatViewController: UIViewController {
         
         view.addSubviews(backgroundContainerView, roundBackgroundView)
         roundBackgroundView.addSubviews(tabContainerView, contentContainer)
-        tabContainerView.addSubviews(tabStackView, activeIndicator)
+        tabContainerView.addSubviews(tabStackView, activeIndicator, separatorView)
     }
     
     private func setupConstraint() {
@@ -142,6 +149,12 @@ final class RiwayatViewController: UIViewController {
         contentContainer.snp.makeConstraints { make in
             make.top.equalTo(tabContainerView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        separatorView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(1)
         }
     }
     

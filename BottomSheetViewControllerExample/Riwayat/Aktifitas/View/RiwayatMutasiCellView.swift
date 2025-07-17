@@ -89,7 +89,7 @@ class RiwayatMutasiCellView: UICollectionViewCell {
         }
         
         priceLabel.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-20)
+            make.trailing.equalToSuperview().offset(-16)
             make.top.equalToSuperview().offset(16)
             make.width.greaterThanOrEqualTo(120)
         }
@@ -101,7 +101,7 @@ class RiwayatMutasiCellView: UICollectionViewCell {
         }
         
         transactionIDLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
+            make.leading.equalToSuperview().offset(16)
             make.top.equalToSuperview().offset(16)
             make.trailing.lessThanOrEqualTo(priceLabel.snp.leading).offset(-16)
         }
@@ -113,7 +113,7 @@ class RiwayatMutasiCellView: UICollectionViewCell {
         }
         
         separatorView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalToSuperview()
             make.height.equalTo(1)
         }

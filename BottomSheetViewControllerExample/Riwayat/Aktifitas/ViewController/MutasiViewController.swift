@@ -144,9 +144,9 @@ class MutasiViewController: UIViewController {
     private func createMonthButton(title: String, index: Int) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        button.setTitleColor(UIColor(red: 0.6, green: 0.6, blue: 0.67, alpha: 1.0), for: .normal)
-        button.setTitleColor(.white, for: .selected)
+        button.titleLabel?.font = .Brimo.Body.smallRegular
+        button.setTitleColor(.Brimo.Black.main, for: .normal)
+        button.setTitleColor(.Brimo.Primary.main, for: .selected)
         button.backgroundColor = .clear
         button.layer.cornerRadius = 16
         button.tag = index
@@ -179,7 +179,7 @@ class MutasiViewController: UIViewController {
                 let isSelected = (selectedIndex == index)
                 button.isSelected = isSelected
                 if isSelected {
-                    button.backgroundColor = UIColor(red: 0.15, green: 0.39, blue: 0.92, alpha: 1.0)
+                    button.backgroundColor = ConstantsColor.primary100
                 } else {
                     button.backgroundColor = .clear
                 }
