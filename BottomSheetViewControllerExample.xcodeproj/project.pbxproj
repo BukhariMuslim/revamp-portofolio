@@ -46,6 +46,12 @@
 		87B2B4C12E1A5A9D00F7D6CB /* AccountListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B2B4C02E1A5A9D00F7D6CB /* AccountListTableViewCell.swift */; };
 		87E3F8862E0E956300517830 /* BrimonsSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E3F8852E0E954E00517830 /* BrimonsSearchView.swift */; };
 		87E3F89B2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E3F89A2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift */; };
+		A665EC562E289CA100F28B78 /* MutasiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC4F2E289CA100F28B78 /* MutasiViewController.swift */; };
+		A665EC572E289CA100F28B78 /* RiwayatAktifitasCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC4B2E289CA100F28B78 /* RiwayatAktifitasCellView.swift */; };
+		A665EC582E289CA100F28B78 /* AktivitasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC4D2E289CA100F28B78 /* AktivitasViewController.swift */; };
+		A665EC592E289CA100F28B78 /* RiwayatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC502E289CA100F28B78 /* RiwayatViewController.swift */; };
+		A665EC5A2E289CA100F28B78 /* EStatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC4E2E289CA100F28B78 /* EStatementViewController.swift */; };
+		A665EC5B2E289CA100F28B78 /* RiwayatMutasiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC492E289CA100F28B78 /* RiwayatMutasiModel.swift */; };
 		D64457FF2E1D29E3006BF51F /* MainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64457FE2E1D29E3006BF51F /* MainHelper.swift */; };
 		D64A06412E27B69500CFD8DD /* AccountCardManagerCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64A06102E27B69400CFD8DD /* AccountCardManagerCategoryView.swift */; };
 		D64A06432E27B69500CFD8DD /* CardManagementSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64A06392E27B69400CFD8DD /* CardManagementSettingsView.swift */; };
@@ -140,6 +146,12 @@
 		87E3F8852E0E954E00517830 /* BrimonsSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrimonsSearchView.swift; sourceTree = "<group>"; };
 		87E3F89A2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOpeningBranchSearchVC.swift; sourceTree = "<group>"; };
 		98A4FEAB4C8EEF3551E1F7B3 /* Pods-BottomSheetViewControllerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BottomSheetViewControllerExample.release.xcconfig"; path = "Target Support Files/Pods-BottomSheetViewControllerExample/Pods-BottomSheetViewControllerExample.release.xcconfig"; sourceTree = "<group>"; };
+		A665EC492E289CA100F28B78 /* RiwayatMutasiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiModel.swift; sourceTree = "<group>"; };
+		A665EC4B2E289CA100F28B78 /* RiwayatAktifitasCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatAktifitasCellView.swift; sourceTree = "<group>"; };
+		A665EC4D2E289CA100F28B78 /* AktivitasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktivitasViewController.swift; sourceTree = "<group>"; };
+		A665EC4E2E289CA100F28B78 /* EStatementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EStatementViewController.swift; sourceTree = "<group>"; };
+		A665EC4F2E289CA100F28B78 /* MutasiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutasiViewController.swift; sourceTree = "<group>"; };
+		A665EC502E289CA100F28B78 /* RiwayatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatViewController.swift; sourceTree = "<group>"; };
 		D64457FE2E1D29E3006BF51F /* MainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHelper.swift; sourceTree = "<group>"; };
 		D64A060F2E27B69400CFD8DD /* AccountCardDetailManagerAtivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardDetailManagerAtivityView.swift; sourceTree = "<group>"; };
 		D64A06102E27B69400CFD8DD /* AccountCardManagerCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardManagerCategoryView.swift; sourceTree = "<group>"; };
@@ -237,6 +249,7 @@
 		8619D25A2A2C751B00AB91A8 /* BottomSheetViewControllerExample */ = {
 			isa = PBXGroup;
 			children = (
+				A665EC552E289CA100F28B78 /* Riwayat */,
 				8619D25B2A2C751B00AB91A8 /* AppDelegate.swift */,
 				8619D2642A2C751C00AB91A8 /* Assets.xcassets */,
 				8619D26F2A2C763200AB91A8 /* BottomSheetViewController */,
@@ -333,6 +346,75 @@
 				87E3F89A2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift */,
 			);
 			path = BottomSheetWithSearch;
+			sourceTree = "<group>";
+		};
+		A665EC482E289CA100F28B78 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		A665EC4A2E289CA100F28B78 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A665EC492E289CA100F28B78 /* RiwayatMutasiModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A665EC4C2E289CA100F28B78 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A665EC4B2E289CA100F28B78 /* RiwayatAktifitasCellView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A665EC512E289CA100F28B78 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A665EC4D2E289CA100F28B78 /* AktivitasViewController.swift */,
+				A665EC4E2E289CA100F28B78 /* EStatementViewController.swift */,
+				A665EC4F2E289CA100F28B78 /* MutasiViewController.swift */,
+				A665EC502E289CA100F28B78 /* RiwayatViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		A665EC522E289CA100F28B78 /* Aktifitas */ = {
+			isa = PBXGroup;
+			children = (
+				A665EC482E289CA100F28B78 /* Helper */,
+				A665EC4A2E289CA100F28B78 /* Model */,
+				A665EC4C2E289CA100F28B78 /* View */,
+				A665EC512E289CA100F28B78 /* ViewController */,
+			);
+			path = Aktifitas;
+			sourceTree = "<group>";
+		};
+		A665EC532E289CA100F28B78 /* e-Statemeng */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "e-Statemeng";
+			sourceTree = "<group>";
+		};
+		A665EC542E289CA100F28B78 /* Mutasi */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mutasi;
+			sourceTree = "<group>";
+		};
+		A665EC552E289CA100F28B78 /* Riwayat */ = {
+			isa = PBXGroup;
+			children = (
+				A665EC522E289CA100F28B78 /* Aktifitas */,
+				A665EC532E289CA100F28B78 /* e-Statemeng */,
+				A665EC542E289CA100F28B78 /* Mutasi */,
+			);
+			path = Riwayat;
 			sourceTree = "<group>";
 		};
 		AC59476EE3457F7A0A87B246 /* Pods */ = {
@@ -659,6 +741,12 @@
 				D64A06612E27B69500CFD8DD /* CardDetailManagerVC.swift in Sources */,
 				D64A06622E27B69500CFD8DD /* BiFastSetupVC.swift in Sources */,
 				D64A06632E27B69500CFD8DD /* AccountCardDetailManagerAtivityView.swift in Sources */,
+				A665EC562E289CA100F28B78 /* MutasiViewController.swift in Sources */,
+				A665EC572E289CA100F28B78 /* RiwayatAktifitasCellView.swift in Sources */,
+				A665EC582E289CA100F28B78 /* AktivitasViewController.swift in Sources */,
+				A665EC592E289CA100F28B78 /* RiwayatViewController.swift in Sources */,
+				A665EC5A2E289CA100F28B78 /* EStatementViewController.swift in Sources */,
+				A665EC5B2E289CA100F28B78 /* RiwayatMutasiModel.swift in Sources */,
 				D64A06662E27B69500CFD8DD /* TransactionLimitTextFieldCellView.swift in Sources */,
 				D64A06672E27B69500CFD8DD /* BiFastActivatedEmaillVC.swift in Sources */,
 				D64A06682E27B69500CFD8DD /* CardDetailEditInformationVC.swift in Sources */,

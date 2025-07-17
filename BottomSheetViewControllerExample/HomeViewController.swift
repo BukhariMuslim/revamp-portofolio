@@ -85,7 +85,18 @@ class HomeViewController: UIViewController {
         button.heightAnchor.constraint(equalToConstant: 54).isActive = true
         return button
     }()
-
+    
+    private lazy var riwayat: UIButton = {
+        let button = UIButton()
+        button.setTitle("Riwayat", for: .normal)
+        button.backgroundColor = .systemBlue
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 8
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 54).isActive = true
+        return button
+    }()
+    
     private lazy var longTextSwitch: UISwitch = {
         let view = UISwitch()
         return view
@@ -144,6 +155,7 @@ class HomeViewController: UIViewController {
         stackView.addArrangedSubview(showPinBtn)
         stackView.addArrangedSubview(expandedBtn)
         stackView.addArrangedSubview(setoranAwal)
+        stackView.addArrangedSubview(riwayat)
     
         hasImageOptionStackView.addArrangedSubview(hasImageSwitch)
         hasImageOptionStackView.addArrangedSubview(hasImageLabel)
@@ -162,6 +174,7 @@ class HomeViewController: UIViewController {
         expandedBtn.addTarget(self, action: #selector(expandableText), for: .touchUpInside)
         showPinBtn.addTarget(self, action: #selector(showPinView), for: .touchUpInside)
         setoranAwal.addTarget(self, action: #selector(showSetoranAwal), for: .touchUpInside)
+        riwayat.addTarget(self, action: #selector(showRiwayatPage), for: .touchUpInside)
     }
 
     @objc private func handleLongTextSwitch() {
@@ -194,6 +207,11 @@ class HomeViewController: UIViewController {
     
     @objc private func showPinView(){
         let vc = AccountOpeningPinViewVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func showRiwayatPage(){
+        let vc = RiwayatViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
