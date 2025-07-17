@@ -1,3 +1,10 @@
+//
+//  RiwayatViewController.swift
+//  BottomSheetViewControllerExample
+//
+//  Created by sia santos on 17/07/25.
+//
+
 import UIKit
 import SnapKit
 
@@ -164,7 +171,12 @@ final class RiwayatViewController: UIViewController {
         case 0:
             childVC = AktivitasViewController()
         case 1:
-            childVC = MutasiViewController()
+            // TODO: Santos - Remove Mock and Replace With Actual Data
+            let mockData = RiwayatMutasiMockData().loadSampleData()
+            let mutasiVC = MutasiViewController()
+            mutasiVC.configureData(data: mockData)
+            
+            childVC = mutasiVC
         case 2:
             childVC = EStatementViewController()
         default:

@@ -47,11 +47,14 @@
 		87E3F8862E0E956300517830 /* BrimonsSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E3F8852E0E954E00517830 /* BrimonsSearchView.swift */; };
 		87E3F89B2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E3F89A2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift */; };
 		A665EC562E289CA100F28B78 /* MutasiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC4F2E289CA100F28B78 /* MutasiViewController.swift */; };
-		A665EC572E289CA100F28B78 /* RiwayatAktifitasCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC4B2E289CA100F28B78 /* RiwayatAktifitasCellView.swift */; };
+		A665EC572E289CA100F28B78 /* RiwayatMutasiCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC4B2E289CA100F28B78 /* RiwayatMutasiCellView.swift */; };
 		A665EC582E289CA100F28B78 /* AktivitasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC4D2E289CA100F28B78 /* AktivitasViewController.swift */; };
 		A665EC592E289CA100F28B78 /* RiwayatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC502E289CA100F28B78 /* RiwayatViewController.swift */; };
 		A665EC5A2E289CA100F28B78 /* EStatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC4E2E289CA100F28B78 /* EStatementViewController.swift */; };
 		A665EC5B2E289CA100F28B78 /* RiwayatMutasiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC492E289CA100F28B78 /* RiwayatMutasiModel.swift */; };
+		A665EC5D2E28A14A00F28B78 /* RiwayatMutasiDateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC5C2E28A12800F28B78 /* RiwayatMutasiDateHeaderView.swift */; };
+		A665EC5F2E28ABDB00F28B78 /* RiwayatMutasiMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC5E2E28ABD200F28B78 /* RiwayatMutasiMockData.swift */; };
+		A665EC612E28BEF800F28B78 /* EmptyStateCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC602E28BEF300F28B78 /* EmptyStateCellView.swift */; };
 		D64457FF2E1D29E3006BF51F /* MainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64457FE2E1D29E3006BF51F /* MainHelper.swift */; };
 		D64A06412E27B69500CFD8DD /* AccountCardManagerCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64A06102E27B69400CFD8DD /* AccountCardManagerCategoryView.swift */; };
 		D64A06432E27B69500CFD8DD /* CardManagementSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64A06392E27B69400CFD8DD /* CardManagementSettingsView.swift */; };
@@ -147,11 +150,14 @@
 		87E3F89A2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOpeningBranchSearchVC.swift; sourceTree = "<group>"; };
 		98A4FEAB4C8EEF3551E1F7B3 /* Pods-BottomSheetViewControllerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BottomSheetViewControllerExample.release.xcconfig"; path = "Target Support Files/Pods-BottomSheetViewControllerExample/Pods-BottomSheetViewControllerExample.release.xcconfig"; sourceTree = "<group>"; };
 		A665EC492E289CA100F28B78 /* RiwayatMutasiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiModel.swift; sourceTree = "<group>"; };
-		A665EC4B2E289CA100F28B78 /* RiwayatAktifitasCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatAktifitasCellView.swift; sourceTree = "<group>"; };
+		A665EC4B2E289CA100F28B78 /* RiwayatMutasiCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiCellView.swift; sourceTree = "<group>"; };
 		A665EC4D2E289CA100F28B78 /* AktivitasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktivitasViewController.swift; sourceTree = "<group>"; };
 		A665EC4E2E289CA100F28B78 /* EStatementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EStatementViewController.swift; sourceTree = "<group>"; };
 		A665EC4F2E289CA100F28B78 /* MutasiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutasiViewController.swift; sourceTree = "<group>"; };
 		A665EC502E289CA100F28B78 /* RiwayatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatViewController.swift; sourceTree = "<group>"; };
+		A665EC5C2E28A12800F28B78 /* RiwayatMutasiDateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiDateHeaderView.swift; sourceTree = "<group>"; };
+		A665EC5E2E28ABD200F28B78 /* RiwayatMutasiMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiMockData.swift; sourceTree = "<group>"; };
+		A665EC602E28BEF300F28B78 /* EmptyStateCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateCellView.swift; sourceTree = "<group>"; };
 		D64457FE2E1D29E3006BF51F /* MainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHelper.swift; sourceTree = "<group>"; };
 		D64A060F2E27B69400CFD8DD /* AccountCardDetailManagerAtivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardDetailManagerAtivityView.swift; sourceTree = "<group>"; };
 		D64A06102E27B69400CFD8DD /* AccountCardManagerCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardManagerCategoryView.swift; sourceTree = "<group>"; };
@@ -351,6 +357,7 @@
 		A665EC482E289CA100F28B78 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				A665EC5E2E28ABD200F28B78 /* RiwayatMutasiMockData.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -366,7 +373,8 @@
 		A665EC4C2E289CA100F28B78 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A665EC4B2E289CA100F28B78 /* RiwayatAktifitasCellView.swift */,
+				A665EC5C2E28A12800F28B78 /* RiwayatMutasiDateHeaderView.swift */,
+				A665EC4B2E289CA100F28B78 /* RiwayatMutasiCellView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -374,6 +382,7 @@
 		A665EC512E289CA100F28B78 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				A665EC602E28BEF300F28B78 /* EmptyStateCellView.swift */,
 				A665EC4D2E289CA100F28B78 /* AktivitasViewController.swift */,
 				A665EC4E2E289CA100F28B78 /* EStatementViewController.swift */,
 				A665EC4F2E289CA100F28B78 /* MutasiViewController.swift */,
@@ -697,7 +706,9 @@
 				8733248C2E0F81320040698B /* FundingSourceSectionView.swift in Sources */,
 				8793F7972E114595008A47D5 /* SetoranAwalViewController.swift in Sources */,
 				87B2B4BC2E1A590B00F7D6CB /* Brimo.swift in Sources */,
+				A665EC5F2E28ABDB00F28B78 /* RiwayatMutasiMockData.swift in Sources */,
 				8726DE4F2E19207500EE4B73 /* DepositoKeyValueItemSet.swift in Sources */,
+				A665EC5D2E28A14A00F28B78 /* RiwayatMutasiDateHeaderView.swift in Sources */,
 				3687FBED2E1E3D0F00BCC6EC /* BottomSheetWithTwoBtnVC.swift in Sources */,
 				8793F7952E11453B008A47D5 /* CustomNumberKeyboard.swift in Sources */,
 				36432D862E1CB50000055F79 /* InputField.swift in Sources */,
@@ -735,6 +746,7 @@
 				D64A065B2E27B69500CFD8DD /* BiFastCardView.swift in Sources */,
 				D64A065C2E27B69500CFD8DD /* BiFastActivatedPhoneVC.swift in Sources */,
 				D64A065D2E27B69500CFD8DD /* CostumizedImage.swift in Sources */,
+				A665EC612E28BEF800F28B78 /* EmptyStateCellView.swift in Sources */,
 				D64A065E2E27B69500CFD8DD /* CostumizedSwitch.swift in Sources */,
 				D64A065F2E27B69500CFD8DD /* TransactionLimitInformationDetailBottomSheetVC.swift in Sources */,
 				D64A06602E27B69500CFD8DD /* CardAccountDetailInfoView.swift in Sources */,
@@ -742,7 +754,7 @@
 				D64A06622E27B69500CFD8DD /* BiFastSetupVC.swift in Sources */,
 				D64A06632E27B69500CFD8DD /* AccountCardDetailManagerAtivityView.swift in Sources */,
 				A665EC562E289CA100F28B78 /* MutasiViewController.swift in Sources */,
-				A665EC572E289CA100F28B78 /* RiwayatAktifitasCellView.swift in Sources */,
+				A665EC572E289CA100F28B78 /* RiwayatMutasiCellView.swift in Sources */,
 				A665EC582E289CA100F28B78 /* AktivitasViewController.swift in Sources */,
 				A665EC592E289CA100F28B78 /* RiwayatViewController.swift in Sources */,
 				A665EC5A2E289CA100F28B78 /* EStatementViewController.swift in Sources */,
