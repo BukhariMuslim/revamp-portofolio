@@ -9,6 +9,8 @@ import UIKit
 
 class MutasiViewController: UIViewController {
     
+    var onTapFilter: (() -> Void)?
+
     private let filterView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -17,6 +19,7 @@ class MutasiViewController: UIViewController {
     
     private let filterIcon: UIImageView = {
         let imageView = UIImageView()
+        imageView.isUserInteractionEnabled = true
         imageView.image = UIImage(systemName: "line.horizontal.3.decrease")
         imageView.tintColor = UIColor(red: 0.6, green: 0.6, blue: 0.67, alpha: 1.0)
         imageView.contentMode = .scaleAspectFit
@@ -83,10 +86,15 @@ class MutasiViewController: UIViewController {
         view.addSubview(filterView)
         view.addSubview(collectionView)
         view.addSubview(emptyStateView)
-        
+        filterIcon.addTapGesture(target: self, action: #selector(didtapFilter))
+
         filterView.addSubview(filterIcon)
         filterView.addSubview(monthFilterScrollView)
         monthFilterScrollView.addSubview(monthFilterStackView)
+    }
+    
+    @objc func didtapFilter() {
+        onTapFilter?()
     }
     
     private func configureEmptyState() {

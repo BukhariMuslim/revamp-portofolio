@@ -83,7 +83,7 @@ final class RiwayatViewController: UIViewController {
     
     private let contentContainer = UIView()
     
-    private var currentSelectedIndex = 1 // Mutasi selected by default
+    private var currentSelectedIndex = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -187,6 +187,16 @@ final class RiwayatViewController: UIViewController {
             // TODO: Santos - Remove Mock and Replace With Actual Data
             let mockData = RiwayatMutasiMockData().loadSampleData()
             let mutasiVC = MutasiViewController()
+            
+            mutasiVC.onTapFilter = {[weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+                let filterVC = RiwayatMutasiFilterViewController()
+                navigationController?.pushViewController(filterVC, animated: true)
+            }
+            
             mutasiVC.configureData(data: mockData)
             
             childVC = mutasiVC

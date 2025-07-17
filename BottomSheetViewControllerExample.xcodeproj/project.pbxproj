@@ -55,6 +55,9 @@
 		A665EC5D2E28A14A00F28B78 /* RiwayatMutasiDateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC5C2E28A12800F28B78 /* RiwayatMutasiDateHeaderView.swift */; };
 		A665EC5F2E28ABDB00F28B78 /* RiwayatMutasiMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC5E2E28ABD200F28B78 /* RiwayatMutasiMockData.swift */; };
 		A665EC612E28BEF800F28B78 /* EmptyStateCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC602E28BEF300F28B78 /* EmptyStateCellView.swift */; };
+		A665EC632E28D16000F28B78 /* RiwayatMutasiFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC622E28D15400F28B78 /* RiwayatMutasiFilterViewController.swift */; };
+		A665EC652E28D48800F28B78 /* RiwayatMutasiFilterSectionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC642E28D47100F28B78 /* RiwayatMutasiFilterSectionCellView.swift */; };
+		A665EC682E28D58300F28B78 /* RiwayatMutasiFilterTransactionTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC672E28D57000F28B78 /* RiwayatMutasiFilterTransactionTypeCell.swift */; };
 		D64457FF2E1D29E3006BF51F /* MainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64457FE2E1D29E3006BF51F /* MainHelper.swift */; };
 		D6B3D0E22E27E8EC00FE51FC /* CostumizedSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B3D0DD2E27E8EC00FE51FC /* CostumizedSwitch.swift */; };
 		D6B3D0E32E27E8EC00FE51FC /* WhatsAppNotificationConfigVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B3D0BB2E27E8EC00FE51FC /* WhatsAppNotificationConfigVC.swift */; };
@@ -162,6 +165,9 @@
 		A665EC5C2E28A12800F28B78 /* RiwayatMutasiDateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiDateHeaderView.swift; sourceTree = "<group>"; };
 		A665EC5E2E28ABD200F28B78 /* RiwayatMutasiMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiMockData.swift; sourceTree = "<group>"; };
 		A665EC602E28BEF300F28B78 /* EmptyStateCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateCellView.swift; sourceTree = "<group>"; };
+		A665EC622E28D15400F28B78 /* RiwayatMutasiFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiFilterViewController.swift; sourceTree = "<group>"; };
+		A665EC642E28D47100F28B78 /* RiwayatMutasiFilterSectionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiFilterSectionCellView.swift; sourceTree = "<group>"; };
+		A665EC672E28D57000F28B78 /* RiwayatMutasiFilterTransactionTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiFilterTransactionTypeCell.swift; sourceTree = "<group>"; };
 		D64457FE2E1D29E3006BF51F /* MainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHelper.swift; sourceTree = "<group>"; };
 		D6B3D0B02E27E8EC00FE51FC /* StickyRoundedContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyRoundedContainerView.swift; sourceTree = "<group>"; };
 		D6B3D0B42E27E8EC00FE51FC /* AccountCardDetailManagerActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardDetailManagerActivityView.swift; sourceTree = "<group>"; };
@@ -381,6 +387,7 @@
 		A665EC4C2E289CA100F28B78 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A665EC662E28D56300F28B78 /* Filter */,
 				A665EC5C2E28A12800F28B78 /* RiwayatMutasiDateHeaderView.swift */,
 				A665EC4B2E289CA100F28B78 /* RiwayatMutasiCellView.swift */,
 			);
@@ -390,6 +397,7 @@
 		A665EC512E289CA100F28B78 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				A665EC622E28D15400F28B78 /* RiwayatMutasiFilterViewController.swift */,
 				A665EC602E28BEF300F28B78 /* EmptyStateCellView.swift */,
 				A665EC4D2E289CA100F28B78 /* AktivitasViewController.swift */,
 				A665EC4E2E289CA100F28B78 /* EStatementViewController.swift */,
@@ -399,7 +407,7 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		A665EC522E289CA100F28B78 /* Aktifitas */ = {
+		A665EC522E289CA100F28B78 /* Mutasi */ = {
 			isa = PBXGroup;
 			children = (
 				A665EC482E289CA100F28B78 /* Helper */,
@@ -407,7 +415,7 @@
 				A665EC4C2E289CA100F28B78 /* View */,
 				A665EC512E289CA100F28B78 /* ViewController */,
 			);
-			path = Aktifitas;
+			path = Mutasi;
 			sourceTree = "<group>";
 		};
 		A665EC532E289CA100F28B78 /* e-Statemeng */ = {
@@ -417,21 +425,30 @@
 			path = "e-Statemeng";
 			sourceTree = "<group>";
 		};
-		A665EC542E289CA100F28B78 /* Mutasi */ = {
+		A665EC542E289CA100F28B78 /* Aktifitas */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Mutasi;
+			path = Aktifitas;
 			sourceTree = "<group>";
 		};
 		A665EC552E289CA100F28B78 /* Riwayat */ = {
 			isa = PBXGroup;
 			children = (
-				A665EC522E289CA100F28B78 /* Aktifitas */,
+				A665EC522E289CA100F28B78 /* Mutasi */,
 				A665EC532E289CA100F28B78 /* e-Statemeng */,
-				A665EC542E289CA100F28B78 /* Mutasi */,
+				A665EC542E289CA100F28B78 /* Aktifitas */,
 			);
 			path = Riwayat;
+			sourceTree = "<group>";
+		};
+		A665EC662E28D56300F28B78 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				A665EC672E28D57000F28B78 /* RiwayatMutasiFilterTransactionTypeCell.swift */,
+				A665EC642E28D47100F28B78 /* RiwayatMutasiFilterSectionCellView.swift */,
+			);
+			path = Filter;
 			sourceTree = "<group>";
 		};
 		AC59476EE3457F7A0A87B246 /* Pods */ = {
@@ -721,6 +738,7 @@
 				87B2B4BA2E1A58E500F7D6CB /* ConstantsColor.swift in Sources */,
 				8619D2732A2CA0E800AB91A8 /* DemoBottomSheetViewController.swift in Sources */,
 				8619D2602A2C751B00AB91A8 /* HomeViewController.swift in Sources */,
+				A665EC682E28D58300F28B78 /* RiwayatMutasiFilterTransactionTypeCell.swift in Sources */,
 				369483872E1FB9C20069E46F /* AccountOpeningCompleteViewController.swift in Sources */,
 				87282D042E15410D006A9B63 /* MainTableViewCell.swift in Sources */,
 				8733248C2E0F81320040698B /* FundingSourceSectionView.swift in Sources */,
@@ -739,6 +757,7 @@
 				D6B3D0EA2E27E8EC00FE51FC /* BIFastCardSuccessFooterView.swift in Sources */,
 				D6B3D0EB2E27E8EC00FE51FC /* CardDetailManagerVC.swift in Sources */,
 				D6B3D0ED2E27E8EC00FE51FC /* AccountCardDetailManagerActivityView.swift in Sources */,
+				A665EC652E28D48800F28B78 /* RiwayatMutasiFilterSectionCellView.swift in Sources */,
 				D6B3D0F02E27E8EC00FE51FC /* CardManagementVC.swift in Sources */,
 				D6B3D0F12E27E8EC00FE51FC /* NotifyTransactionView.swift in Sources */,
 				D6B3D0F22E27E8EC00FE51FC /* LimitSettingCellView.swift in Sources */,
@@ -773,52 +792,19 @@
 				8793F78D2E11306E008A47D5 /* BrimoNsReusablePinProtocol.swift in Sources */,
 				8793F7842E1114FA008A47D5 /* RecommendedProductsView.swift in Sources */,
 				8619D2712A2C764300AB91A8 /* BrimonsBottomSheetVC.swift in Sources */,
+				A665EC632E28D16000F28B78 /* RiwayatMutasiFilterViewController.swift in Sources */,
 				8619D25C2A2C751B00AB91A8 /* AppDelegate.swift in Sources */,
 				36432D8B2E1CBF3900055F79 /* FormFieldInformationView.swift in Sources */,
 				8793F78F2E1130AA008A47D5 /* AccountOpeningPinViewVM.swift in Sources */,
 				363EFD482E1B82000043BCFF /* Helper.swift in Sources */,
 				8793F7862E111657008A47D5 /* RecommendedProductCell.swift in Sources */,
-				D64A06412E27B69500CFD8DD /* AccountCardManagerCategoryView.swift in Sources */,
-				D64A06432E27B69500CFD8DD /* CardManagementSettingsView.swift in Sources */,
-				D64A06452E27B69500CFD8DD /* WhatsAppNotificationConfigVC.swift in Sources */,
-				D64A06462E27B69500CFD8DD /* LimitSettingModel.swift in Sources */,
-				D64A06472E27B69500CFD8DD /* CardSettingsItem.swift in Sources */,
-				D64A06482E27B69500CFD8DD /* BlockedCardManagementVC.swift in Sources */,
-				D64A06492E27B69500CFD8DD /* BIFastCardSuccessFooterView.swift in Sources */,
-				D64A064A2E27B69500CFD8DD /* TransactionLimitBottomSheetVC.swift in Sources */,
-				D64A064B2E27B69500CFD8DD /* LimitSettingCellView.swift in Sources */,
-				D64A064C2E27B69500CFD8DD /* BIFastCardActiveView.swift in Sources */,
-				D64A064D2E27B69500CFD8DD /* StickyRoundedContainerView.swift in Sources */,
-				D64A064F2E27B69500CFD8DD /* AccountCardManagerHeaderView.swift in Sources */,
-				D64A06502E27B69500CFD8DD /* LimitSettingVC.swift in Sources */,
-				D64A06522E27B69500CFD8DD /* CardInfoItem.swift in Sources */,
-				D64A06532E27B69500CFD8DD /* CardManagementVC.swift in Sources */,
-				D64A06542E27B69500CFD8DD /* NotifyTransactionManagerVC.swift in Sources */,
-				D64A06552E27B69500CFD8DD /* CardManagementHeaderView.swift in Sources */,
-				D64A06562E27B69500CFD8DD /* TransactionLimitView.swift in Sources */,
-				D64A06572E27B69500CFD8DD /* NotifyTransactionView.swift in Sources */,
-				D64A06582E27B69500CFD8DD /* CardDetailInformationVC.swift in Sources */,
-				D64A06592E27B69500CFD8DD /* BiInformationAlertView.swift in Sources */,
-				D64A065A2E27B69500CFD8DD /* PhoneNumberInfoView.swift in Sources */,
-				D64A065B2E27B69500CFD8DD /* BiFastCardView.swift in Sources */,
-				D64A065C2E27B69500CFD8DD /* BiFastActivatedPhoneVC.swift in Sources */,
-				D64A065D2E27B69500CFD8DD /* CostumizedImage.swift in Sources */,
 				A665EC612E28BEF800F28B78 /* EmptyStateCellView.swift in Sources */,
-				D64A065E2E27B69500CFD8DD /* CostumizedSwitch.swift in Sources */,
-				D64A065F2E27B69500CFD8DD /* TransactionLimitInformationDetailBottomSheetVC.swift in Sources */,
-				D64A06602E27B69500CFD8DD /* CardAccountDetailInfoView.swift in Sources */,
-				D64A06612E27B69500CFD8DD /* CardDetailManagerVC.swift in Sources */,
-				D64A06622E27B69500CFD8DD /* BiFastSetupVC.swift in Sources */,
-				D64A06632E27B69500CFD8DD /* AccountCardDetailManagerAtivityView.swift in Sources */,
 				A665EC562E289CA100F28B78 /* MutasiViewController.swift in Sources */,
 				A665EC572E289CA100F28B78 /* RiwayatMutasiCellView.swift in Sources */,
 				A665EC582E289CA100F28B78 /* AktivitasViewController.swift in Sources */,
 				A665EC592E289CA100F28B78 /* RiwayatViewController.swift in Sources */,
 				A665EC5A2E289CA100F28B78 /* EStatementViewController.swift in Sources */,
 				A665EC5B2E289CA100F28B78 /* RiwayatMutasiModel.swift in Sources */,
-				D64A06662E27B69500CFD8DD /* TransactionLimitTextFieldCellView.swift in Sources */,
-				D64A06672E27B69500CFD8DD /* BiFastActivatedEmaillVC.swift in Sources */,
-				D64A06682E27B69500CFD8DD /* CardDetailEditInformationVC.swift in Sources */,
 				8793F7882E1126EA008A47D5 /* AccountOpeningCompleteHeaderView.swift in Sources */,
 				87E3F8862E0E956300517830 /* BrimonsSearchView.swift in Sources */,
 				D6B3D1142E28ACC300FE51FC /* ActivityHistoryViewModel.swift in Sources */,
