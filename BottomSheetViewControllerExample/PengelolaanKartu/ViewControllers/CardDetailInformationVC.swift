@@ -17,7 +17,6 @@ struct CardDetailItem {
 }
 
 class CardDetailInformationCell: UITableViewCell {
-
     private let titleLabel = UILabel()
     private let valueLabel = UILabel()
 

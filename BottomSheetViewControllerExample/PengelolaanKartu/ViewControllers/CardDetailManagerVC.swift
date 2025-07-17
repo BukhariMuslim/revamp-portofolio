@@ -21,25 +21,22 @@ struct CardMenuItem {
     }
 }
 
-
 final class CardDetailManagerVC: UIViewController {
-    
     private let backgroundContainerView: UIImageView = {
         let img: UIImageView = UIImageView()
         img.image = UIImage(named: "background_blue_secondary")
         return img
     }()
     
-    private let headerView = AccountCardManagerHeaderView()
-    private let menuCollectionView = AccountCardManagerCategoryView()
-    
-    private lazy var roundBackgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = ConstantsColor.white900
-        return view
-    }()
+    private let headerView: UIView = UIView()
+    private let headerContent: AccountCardManagerHeaderView = AccountCardManagerHeaderView()
+
+    private let menuCollectionView: AccountCardManagerCategoryView = AccountCardManagerCategoryView()
     
     private let listActivityView: AccountCardDetailManagerActivityView = AccountCardDetailManagerActivityView()
+    
+    private let contentView: UIView = UIView()
+    private var scrollContainerView: StickyRoundedContainerView!
     
     private var isBlocked: Bool = false
     
@@ -56,14 +53,10 @@ final class CardDetailManagerVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        roundBackgroundView.roundCorners(corners: [.topLeft, .topRight], radius: 24)
+        updateScrollHeaderHeight()
     }
     
     private func setupView(){
-        view.backgroundColor = ConstantsColor.white900
-        view.addSubviews(backgroundContainerView, headerView, menuCollectionView, roundBackgroundView)
-        roundBackgroundView.addSubview(listActivityView)
-        
         let menuItems: [CardMenuItem] = [
             CardMenuItem(
                 title: "Informasi Rekening",
@@ -84,6 +77,27 @@ final class CardDetailManagerVC: UIViewController {
         ]
 
         menuCollectionView.configure(items: menuItems)
+
+        contentView.addSubviews(listActivityView)
+        
+        headerView.addSubviews(headerContent, menuCollectionView)
+        
+        scrollContainerView = StickyRoundedContainerView(
+            headerView: headerView,
+            contentView: contentView,
+            isStickyEnabled: true,
+            compositeHeaderBuilder: { container in
+                let filterView: AccountCardDetailFilter = AccountCardDetailFilter()
+                container.addSubview(filterView)
+                
+                filterView.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
+                }
+            }
+        )
+        
+        view.backgroundColor = ConstantsColor.white900
+        view.addSubviews(backgroundContainerView, scrollContainerView)
     }
     
     private func showDetailInformation() {
@@ -107,29 +121,42 @@ final class CardDetailManagerVC: UIViewController {
     
     private func setupConstraint(){
         backgroundContainerView.snp.remakeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.trailing.leading.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-
-        headerView.snp.remakeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+        
+        scrollContainerView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        headerContent.snp.remakeConstraints {
+            $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
         }
         
         menuCollectionView.snp.remakeConstraints {
-            $0.top.equalTo(headerView.snp.bottom).offset(30)
-            $0.leading.trailing.equalToSuperview().inset(16)
-        }
-
-        roundBackgroundView.snp.remakeConstraints {
-            $0.top.equalTo(menuCollectionView.snp.bottom).offset(24)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(headerContent.snp.bottom).offset(30)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.bottom.equalToSuperview().inset(24)
         }
         
         listActivityView.snp.remakeConstraints {
-            $0.top.equalTo(roundBackgroundView.snp.top).offset(24)
-            $0.leading.trailing.equalToSuperview().inset(16)
-            $0.bottom.equalToSuperview()
+            $0.top.equalToSuperview().offset(-8)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(16)
         }
     }
 
+    private func updateScrollHeaderHeight() {
+        headerView.layoutIfNeeded()
+        
+        let headerHeight = headerView.systemLayoutSizeFitting(
+            CGSize(width: view.bounds.width, height: UIView.layoutFittingCompressedSize.height)
+        ).height
+        
+        scrollContainerView.setHeaderHeight(headerHeight)
+    }
 }

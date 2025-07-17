@@ -101,7 +101,7 @@ final class BiInformationAlertView: UIView {
         borderColor: UIColor? = nil
     ) {
         // Icon image
-        let imageName = (icon?.isEmpty == false ? icon : nil) ?? "info_ic"
+        _ = (icon?.isEmpty == false ? icon : nil) ?? "utilities/big/info_circle"
 
         // Title
         infoLabel.text = titleText?.isEmpty == false ? titleText : ""

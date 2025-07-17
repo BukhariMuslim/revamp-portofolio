@@ -45,7 +45,6 @@ class AccountOpeningDepositConfirmationVC: UIViewController {
     }()
 
     // MARK: - Lifecycle
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -68,7 +67,6 @@ class AccountOpeningDepositConfirmationVC: UIViewController {
     }
 
     // MARK: - Setup Methods
-
     private func setupView() {
         title = "Konfirmasi Setoran"
         view.backgroundColor = .white

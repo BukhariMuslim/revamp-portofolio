@@ -103,11 +103,11 @@ class AccountCardManagerCategoryView: UIView {
     func configure(items: [CardMenuItem]) {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
-        for (index, item) in items.enumerated() {
+        for (_, item) in items.enumerated() {
             let view = AccountCardManagerCard(title: item.title, image: item.image, action: item.action)
             stackView.addArrangedSubview(view)
         }
-        // Adjust distribution
+        
         if items.count <= 2 {
             stackView.distribution = .equalSpacing
         } else {

@@ -74,7 +74,6 @@ class LimitSettingVC: UIViewController {
                     .withRenderingMode(.alwaysOriginal),
                 for: .normal
             )
-        button.layer.cornerRadius = 16
         button.clipsToBounds = true
         button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
         button.addTarget(self, action: #selector(didTapInfomationButton), for: .touchUpInside)
