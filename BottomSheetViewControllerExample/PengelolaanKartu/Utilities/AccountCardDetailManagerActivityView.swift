@@ -17,10 +17,11 @@ class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITab
     private var lastTableContentHeight: CGFloat = 0
     private var tableHeightConstraint: Constraint?
     
-    var isShowBorder: Bool = true
+    private var isShowBorder: Bool = false
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(isShowBorder: Bool = false) {
+        super.init(frame: .zero)
+        self.isShowBorder = isShowBorder
         clipsToBounds = true
         setupLayout()
         setupDummyTransactions()
@@ -144,7 +145,7 @@ class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITab
         }
 
         let item = transactions[indexPath.row]
-        cell.configure(item: item, isShowBorder: isShowBorder)
+        cell.configure(item: item, isShowBorder: isShowBorder && (transactions.count - 1) != indexPath.row)
         return cell
     }
 }
