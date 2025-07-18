@@ -83,7 +83,7 @@ extension RecommendedProductsView: UICollectionViewDelegate, UICollectionViewDat
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecommendedProductCell", for: indexPath) as? RecommendedProductCell else { return UICollectionViewCell() }
-        cell.configure(title: "Token Listrik", subtitle: "Beli Token listrik di BRImo, langsung dapat Cashback s.d 100rb!", badge: "Cashback 100rb", image: "coin_success")
+        cell.configure(title: "Token Listrik", subtitle: "Beli Token listrik di BRImo, langsung dapat Cashback s.d 100rb!", badge: "Cashback 100rb", image: "illustrations/token_listrik")
         return cell
     }
 

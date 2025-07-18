@@ -23,13 +23,13 @@ final class RecommendedProductCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "Token Listrik"
         label.textColor = ConstantsColor.black900
-        label.font = UIFont.Brimo.Body.largeSemiBold
+        label.font = .Brimo.Body.largeSemiBold
         return label
     }()
     
     private let badgeContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white.withAlphaComponent(0.2)
+        view.backgroundColor = .Brimo.Red.x100
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
         return view
@@ -38,8 +38,8 @@ final class RecommendedProductCell: UICollectionViewCell {
     private let badgeLabel: UILabel = {
         let label = UILabel()
         label.text = "Cashback 100rb"
-        label.textColor = UIColor(hex: "#E84040")
-        label.font = UIFont.Brimo.Body.smallSemiBold
+        label.textColor = .Brimo.Red.main
+        label.font = .Brimo.Body.smallSemiBold
         return label
     }()
     
@@ -56,7 +56,7 @@ final class RecommendedProductCell: UICollectionViewCell {
     private let actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Pilih Produk", for: .normal)
-        button.setTitleColor(UIColor(hex: "#0054F3"), for: .normal)
+        button.setTitleColor(.Brimo.Primary.main, for: .normal)
         button.titleLabel?.font = UIFont.Brimo.Body.mediumSemiBold
         return button
     }()
