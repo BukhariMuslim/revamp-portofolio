@@ -10,7 +10,6 @@ import SnapKit
 
 class ReusableBottomSheetViewController: BrimonsBottomSheetVC {
     
-    // MARK: - Properties
     private let containerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.Brimo.White.main
@@ -47,7 +46,6 @@ class ReusableBottomSheetViewController: BrimonsBottomSheetVC {
         return button
     }()
     
-    // Public properties
     var titleText: String = "Title" {
         didSet {
             titleLabel.text = titleText
@@ -69,16 +67,13 @@ class ReusableBottomSheetViewController: BrimonsBottomSheetVC {
     var onActionButtonTapped: (() -> Void)?
     var onCloseButtonTapped: (() -> Void)?
     
-    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupActions()
     }
     
-    // MARK: - Setup Methods
     private func setupViews() {
-        // Create main content container
         containerView.addSubviews(
             titleLabel,
             closeButton,
@@ -86,10 +81,8 @@ class ReusableBottomSheetViewController: BrimonsBottomSheetVC {
             actionButton
         )
         
-        // Set content using parent's method
         setContent(content: containerView)
         
-        // Setup constraints
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.centerX.equalToSuperview()
@@ -115,16 +108,12 @@ class ReusableBottomSheetViewController: BrimonsBottomSheetVC {
             make.bottom.equalTo(containerView.safeAreaLayoutGuide.snp.bottom).offset(-20)
         }
         
-        // Set initial values
         titleLabel.text = titleText
         actionButton.setTitle(buttonTitle, for: .normal)
     }
     
     private func setupContentView() {
-        // Remove any existing content view
         contentContainerView.subviews.forEach { $0.removeFromSuperview() }
-        
-        // Add new content view if provided
         guard let contentView = contentView else { return }
         
         contentContainerView.addSubview(contentView)
@@ -138,7 +127,6 @@ class ReusableBottomSheetViewController: BrimonsBottomSheetVC {
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
     }
     
-    // MARK: - Actions
     @objc private func actionButtonTapped() {
         onActionButtonTapped?()
     }
@@ -152,7 +140,6 @@ class ReusableBottomSheetViewController: BrimonsBottomSheetVC {
     }
 }
 
-// MARK: - Convenience Initializer
 extension ReusableBottomSheetViewController {
     static func create(
         title: String,

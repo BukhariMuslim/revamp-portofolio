@@ -78,7 +78,6 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
     
     private func setupNavigationBar() {
         
-        // Reset button
         let resetButton = UIBarButtonItem(
             title: "Reset",
             style: .plain,
@@ -87,8 +86,6 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
         )
         resetButton.tintColor = UIColor.Brimo.White.main
         navigationItem.rightBarButtonItem = resetButton
-        
-        // Back button color
         navigationController?.navigationBar.tintColor = UIColor.Brimo.White.main
     }
     
@@ -156,7 +153,7 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
     private func setupActions() {
         
         dateRangeSection.onTapped = { [weak self] in
-            self?.showDateRangePicker()
+            self?.showDateRangePickerUpdated()
         }
         
         accountSection.onTapped = { [weak self] in
@@ -172,9 +169,8 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
     
     private func setupInitialData() {
         selectedEndDate = Date()
-        selectedStartDate = Calendar.current.date(byAdding: .day, value: -30, to: selectedEndDate) ?? Date()
+        selectedStartDate = Calendar.current.date(byAdding: .day, value: -1, to: selectedEndDate) ?? Date()
         
-        // Configure date range section
         let dateRangeData = RiwayatMutasiFilterSectionCellData(
             title: "Pilih Rentang Waktu",
             value: "",
@@ -182,7 +178,6 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
         )
         dateRangeSection.configure(with: dateRangeData)
         
-        // Configure account section
         let accountData = RiwayatMutasiFilterSectionCellData(
             title: "Sumber Rekening",
             value: selectedAccount,
@@ -190,9 +185,17 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
         )
         accountSection.configure(with: accountData)
         
-        // Configure transaction type section
         transactionTypeSection.setSelectedType(selectedTransactionType)
-        applyButton.isEnabled = false
+        shouldDisableApplyButton(isEnable: false)
+    }
+    
+    private func shouldDisableApplyButton(isEnable: Bool) {
+        let titleColor = isEnable ? .white : ConstantsColor.black500
+        let backgroundColor = isEnable ? UIColor.Brimo.Primary.main : ConstantsColor.black300
+
+        applyButton.backgroundColor = backgroundColor
+        applyButton.setTitleColor(titleColor, for: .normal)
+        applyButton.isEnabled = isEnable
     }
     
     private func formatDateRange(start: Date, end: Date) -> String {
@@ -204,10 +207,12 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
         yearFormatter.dateFormat = "yyyy"
         
         let startDateString = formatter.string(from: start)
-        let endDateString = formatter.string(from: end)
-        let year = yearFormatter.string(from: end)
+        let yearStartDate = yearFormatter.string(from: start)
         
-        return "\(startDateString) - \(endDateString) \(year)"
+        let endDateString = formatter.string(from: end)
+        let yearEndDate = yearFormatter.string(from: end)
+        
+        return "\(startDateString) \(yearStartDate) - \(endDateString) \(yearEndDate)"
     }
     
     @objc private func resetButtonTapped() {
@@ -228,16 +233,7 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
         
         self.presentBrimonsBottomSheet(viewController: dateRangePicker)
     }
-    
-    private func showDateRangePicker() {
-        let dateRangePicker: ReusableBottomSheetViewController = ReusableBottomSheetViewController.create(
-            title: "Pilih Tanggal",
-            contentView: UIView()
-        )
-        
-        self.presentBrimonsBottomSheet(viewController: dateRangePicker)
-    }
-    
+
     private func dismissDateRangePicker() {
         guard let dateRangePicker = view.viewWithTag(999) else { return }
         
@@ -256,5 +252,44 @@ extension RiwayatMutasiFilterViewController {
         let controller = RiwayatMutasiFilterViewController()
         controller.onFilterApplied = onFilterApplied
         return controller
+    }
+}
+
+extension RiwayatMutasiFilterViewController {
+    
+    func showDateRangePickerUpdated() {
+        let calendarView = CostumCalendarDatePickerView()
+        calendarView.setDateRange(startDate: selectedStartDate, endDate: selectedEndDate)
+        
+        calendarView.onDateRangeSelected = { [weak self] startDate, endDate in
+            guard let self = self else { return }
+            
+            self.selectedStartDate = startDate
+            self.selectedEndDate = endDate
+            
+            let dateRangeText = self.formatDateRange(start: startDate, end: endDate)
+            let dateRangeData = RiwayatMutasiFilterSectionCellData(
+                title: "Pilih Rentang Waktu",
+                value: dateRangeText,
+                systemIconName: "calendar"
+            )
+            
+            self.dateRangeSection.configure(with: dateRangeData)
+            self.shouldDisableApplyButton(isEnable: true)
+        }
+        
+        let dateRangePicker = ReusableBottomSheetViewController.create(
+            title: "Pilih Tanggal",
+            buttonTitle: "Simpan",
+            contentView: calendarView,
+            onActionTapped: { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                self.dismiss(animated: false)
+            }
+        )
+        
+        self.presentBrimonsBottomSheet(viewController: dateRangePicker)
     }
 }

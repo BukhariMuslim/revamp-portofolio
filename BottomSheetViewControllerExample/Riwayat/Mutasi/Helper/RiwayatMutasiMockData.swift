@@ -78,10 +78,64 @@ class RiwayatMutasiMockData {
                     description: "Monthly Salary",
                     price: "+Rp5.000.000,00",
                     time: timeFormatter.date(from: "09:00:00")!
+                ),
+                RiwayatMutasiItemModel(
+                    transactionID: "Admin Fee",
+                    description: nil,
+                    price: "-Rp5.500,00",
+                    time: timeFormatter.date(from: "12:30:21")!
+                ),
+                RiwayatMutasiItemModel(
+                    transactionID: "Admin Fee",
+                    description: nil,
+                    price: "-Rp5.500,00",
+                    time: timeFormatter.date(from: "12:30:21")!
                 )
             ]
         )
         
-        return [june14Data, june13Data, mayData, aprilData]
+        let january = RiwayatMutasiModel(
+            tanggalMutasi: formatter.date(from: "2025-01-20 00:00:00")!,
+            riwayatMutasiItemModel: [
+                RiwayatMutasiItemModel(
+                    transactionID: "Salary",
+                    description: "Monthly Salary",
+                    price: "+Rp5.000.000,00",
+                    time: timeFormatter.date(from: "09:00:00")!
+                )
+            ]
+        )
+        
+        let january2 = RiwayatMutasiModel(
+            tanggalMutasi: formatter.date(from: "2025-01-02 00:00:00")!,
+            riwayatMutasiItemModel: [
+                RiwayatMutasiItemModel(
+                    transactionID: "Salary",
+                    description: "Monthly Salary",
+                    price: "+Rp5.000.000,00",
+                    time: timeFormatter.date(from: "09:00:00")!
+                ),
+                RiwayatMutasiItemModel(
+                    transactionID: "Salary",
+                    description: "Monthly Salary",
+                    price: "+Rp5.000.000,00",
+                    time: timeFormatter.date(from: "10:00:00")!
+                )
+            ]
+        )
+        
+        let febuari = RiwayatMutasiModel(
+            tanggalMutasi: formatter.date(from: "2025-02-20 00:00:00")!,
+            riwayatMutasiItemModel: [
+                RiwayatMutasiItemModel(
+                    transactionID: "Salary",
+                    description: "Monthly Salary",
+                    price: "+Rp5.000.000,00",
+                    time: timeFormatter.date(from: "09:00:00")!
+                )
+            ]
+        )
+        
+        return [june14Data, june13Data, mayData, aprilData, january, january2, febuari]
     }
 }

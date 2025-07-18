@@ -110,8 +110,6 @@ final class RiwayaMutasiFilterContainerView: UIView {
     }
 }
 
-// MARK: – UICollectionView DataSource & Delegate
-
 extension RiwayaMutasiFilterContainerView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ cv: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return months.count
@@ -160,8 +158,8 @@ private final class MonthCell: UICollectionViewCell {
             contentView.backgroundColor = UIColor.Brimo.Primary.x100
             label.textColor = UIColor.Brimo.Primary.main
         } else {
-            contentView.backgroundColor = ConstantsColor.black100     // neutral bg :contentReference[oaicite:2]{index=2}
-            label.textColor = UIColor.Brimo.Black.x700               // neutral text
+            contentView.backgroundColor = ConstantsColor.black100
+            label.textColor = UIColor.Brimo.Black.x700
         }
     }
 }

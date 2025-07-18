@@ -196,6 +196,10 @@ final class RiwayatViewController: UIViewController {
         case .mutasi:
             // TODO: Santos - Remove Mock and Replace With Actual Data
             let mockData = RiwayatMutasiMockData().loadSampleData()
+            let sortedData = mockData.sorted {
+                $0.tanggalMutasi < $1.tanggalMutasi
+            }
+            
             let mutasiVC = MutasiViewController()
             
             mutasiVC.onTapFilter = {[weak self] in
@@ -204,10 +208,15 @@ final class RiwayatViewController: UIViewController {
                 }
                 
                 let filterVC = RiwayatMutasiFilterViewController()
+                
+                filterVC.onFilterApplied = {[weak self] (selectedStartDate, selectedEndDate, selectedAccount, selectedTransactionType) in
+                    
+                }
+                
                 navigationController?.pushViewController(filterVC, animated: true)
             }
             
-            mutasiVC.configureData(data: mockData)
+            mutasiVC.configureData(data: sortedData)
             
             childVC = mutasiVC
         case .aktivitas:
