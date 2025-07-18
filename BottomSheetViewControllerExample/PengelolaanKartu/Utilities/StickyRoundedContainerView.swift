@@ -89,9 +89,11 @@ final class StickyRoundedContainerView: UIView {
             make.height.equalTo(0)
         }
 
-        contentWrapper.snp.makeConstraints { make in
+        contentWrapper.snp.makeConstraints { [weak self] make in
+            guard let self = self else { return }
             make.top.equalTo(spacerView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
+            make.height.greaterThanOrEqualTo(self.snp.height).offset(-24)
         }
 
         contentView.snp.makeConstraints { make in
