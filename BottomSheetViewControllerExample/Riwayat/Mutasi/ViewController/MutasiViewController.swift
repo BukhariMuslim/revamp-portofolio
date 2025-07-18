@@ -103,13 +103,19 @@ class MutasiViewController: UIViewController {
         filterDataByMonth()
     }
     
-    private func filterDataByMonth() {
+    func filterDataByMonth(selectedMonth: Int = 0) {
         if let selectedIndex = selectedMonthIndex {
             let selectedMonth = selectedIndex + 1
             
             mutasiData = allMutasiData.filter { model in
                 let calendar = Calendar.current
                 let month = calendar.component(.month, from: model.tanggalMutasi)
+                return month == selectedMonth
+            }
+        } else if selectedMonth > 0  {
+            mutasiData = allMutasiData.filter { model in
+                let calendar = Calendar.current
+                let month = calendar.component(.month, from: model.tanggalMutasi + Double(selectedMonth))
                 return month == selectedMonth
             }
         } else {
@@ -121,6 +127,54 @@ class MutasiViewController: UIViewController {
         collectionView.isHidden = isEmpty
         
         collectionView.reloadData()
+    }
+    
+    func filterDataBy(startDate: Date, endDate: Date, transactionType: TransactionType = .all) {
+        
+        let filteredByMonthsData = filterByMonthYear(data: allMutasiData, start: startDate, end: endDate)
+        mutasiData = filteredByMonthsData
+        
+        let isEmpty = mutasiData.isEmpty
+        emptyStateView.isHidden = !isEmpty
+        collectionView.isHidden = isEmpty
+        
+        collectionView.reloadData()
+    }
+    
+    func filterByMonthYear(
+        data: [RiwayatMutasiModel],
+        start: Date,
+        end: Date,
+        calendar: Calendar = .current
+    ) -> [RiwayatMutasiModel] {
+        
+        // 1) Extract year & month from your bounds
+        let startComp = calendar.dateComponents([.year, .month], from: start)
+        let endComp = calendar.dateComponents([.year, .month], from: end)
+        guard
+            let startYear = startComp.year,
+            let startMonth = startComp.month,
+            let endYear = endComp.year,
+            let endMonth = endComp.month
+        else {
+            return []
+        }
+        
+        // Convert to a comparable “month index”
+        let startIndex = startYear * 12 + (startMonth - 1)
+        let endIndex = endYear * 12 + (endMonth - 1)
+        
+        return data.filter { model in
+            let comp = calendar.dateComponents([.year, .month], from: model.tanggalMutasi)
+            guard
+                let y = comp.year,
+                let m = comp.month
+            else {
+                return false
+            }
+            let modelIndex = y * 12 + (m - 1)
+            return modelIndex >= startIndex && modelIndex <= endIndex
+        }
     }
     
     func configureData(data: [RiwayatMutasiModel]) {

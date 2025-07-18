@@ -127,8 +127,8 @@ extension TransactionTypeCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let type = transactionTypes[indexPath.item]
-        let width = type.title.width(withConstrainedHeight: 40, font: UIFont.Brimo.Title.smallRegular) + 32 // Add padding
-        return CGSize(width: max(width, 80), height: 40) // Minimum width of 80
+        let width = type.title.width(withConstrainedHeight: 40, font: UIFont.Brimo.Title.smallRegular) + 32
+        return CGSize(width: max(width, 80), height: 40)
     }
 }
 

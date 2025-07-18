@@ -122,7 +122,6 @@ class RiwayatMutasiFilterSectionCellView: UIView {
         let isEmpty = value.isEmpty
         valueLabel.isHidden = isEmpty
         
-        // Update title label constraints based on whether value is empty
         titleLabel.snp.remakeConstraints { make in
             if isEmpty {
                 make.centerY.equalToSuperview()

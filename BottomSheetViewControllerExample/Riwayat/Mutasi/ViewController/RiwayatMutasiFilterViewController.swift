@@ -49,7 +49,6 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
         return button
     }()
     
-    // Filter data
     private var selectedStartDate = Date()
     private var selectedEndDate = Date()
     private var selectedAccount = "Semua Rekening"
@@ -200,7 +199,7 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
     
     private func formatDateRange(start: Date, end: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "d MMM"
+        formatter.dateFormat = "dd MMMM"
         formatter.locale = Locale(identifier: "id_ID")
         
         let yearFormatter = DateFormatter()

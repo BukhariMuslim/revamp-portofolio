@@ -379,7 +379,7 @@ extension CostumCalendarDatePickerView: UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.width - 48) / 7 // 48 = 6 * 8 spacing
+        let width = (collectionView.frame.width - 48) / 7
         return CGSize(width: width, height: 40)
     }
     

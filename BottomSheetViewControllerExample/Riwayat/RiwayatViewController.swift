@@ -211,6 +211,7 @@ final class RiwayatViewController: UIViewController {
                 
                 filterVC.onFilterApplied = {[weak self] (selectedStartDate, selectedEndDate, selectedAccount, selectedTransactionType) in
                     
+                    mutasiVC.filterDataBy(startDate: selectedStartDate, endDate: selectedEndDate)
                 }
                 
                 navigationController?.pushViewController(filterVC, animated: true)
