@@ -414,7 +414,6 @@ extension BrimoNsEStatementListViewController: UITableViewDelegate, UITableViewD
         }else{
             return nil
         }
-
         return view
     }
 
@@ -423,10 +422,8 @@ extension BrimoNsEStatementListViewController: UITableViewDelegate, UITableViewD
     }
 
     func downloadEStatement() {
-        print("Presenting bottom sheet")
         let bottomSheet = EStatementDownloadSheet()
         bottomSheet.onExportSelected = { [weak self] exportType in
-            print("Export type selected:", exportType)
             switch exportType {
             case .pdf:
                 self?.handlePDFExport()
@@ -435,14 +432,61 @@ extension BrimoNsEStatementListViewController: UITableViewDelegate, UITableViewD
             }
         }
         self.presentBrimonsBottomSheet(viewController: bottomSheet)
-
     }
 
     func handlePDFExport() {
-        print("should preview in PDF")
+        DispatchQueue.main.async {
+            self.loading(true)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.downloadAndPreviewCSV(withUrlString: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", fileName: "eStatement_pdf", fileExtension: "pdf")
+        }
     }
 
     func handleCSVExport() {
-        print("should preview in CSV")
+        DispatchQueue.main.async {
+            self.loading(true)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.downloadAndPreviewCSV(withUrlString: "https://download.microsoft.com/download/5/B/2/5B2108F8-112B-4913-A761-38AFF2FD8598/Sample%20CSV%20file%20for%20importing%20contacts.csv", fileName: "eStatement", fileExtension: "csv")
+        }
+    }
+
+    func downloadAndPreviewCSV(withUrlString: String, fileName: String, fileExtension: String) {
+        guard let remoteURL = URL(string: withUrlString) else {
+            print("Invalid URL")
+            return
+        }
+
+        let task = URLSession.shared.downloadTask(with: remoteURL) { localURL, response, error in
+            if let localURL = localURL {
+                let fileManager = FileManager.default
+                let destinationURL = fileManager.temporaryDirectory.appendingPathComponent("\(fileName).\(fileExtension)")
+
+                try? fileManager.removeItem(at: destinationURL)
+                do {
+                    try fileManager.moveItem(at: localURL, to: destinationURL)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                        self.loading(false)
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        if fileExtension == "csv" {
+                            let previewVC = EStatementCSVQuickLookVC()
+                            previewVC.previewFile(url: destinationURL)
+                            self.present(previewVC, animated: true)
+                        } else if fileExtension == "pdf" {
+                            let previewVC = EStatementQuickLookVC()
+                            previewVC.previewFile(url: destinationURL)
+                            self.present(previewVC, animated: true)
+                        }
+                    }
+                } catch {
+                    print("File move error: \(error)")
+                }
+            } else if let error = error {
+                print("Download error: \(error)")
+            }
+        }
+        task.resume()
     }
 }

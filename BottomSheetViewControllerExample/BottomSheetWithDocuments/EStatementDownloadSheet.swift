@@ -103,7 +103,7 @@ class EStatementDownloadSheet: BrimonsBottomSheetVC {
             $0.top.equalTo(csvOptionView.snp.bottom).offset(12)
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(1)
-            $0.bottom.equalToSuperview().inset(24)
+            $0.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(24)
         }
     }
 
@@ -121,8 +121,8 @@ class EStatementDownloadSheet: BrimonsBottomSheetVC {
 
     @objc
     private func didTapCSV() {
-        onExportSelected?(.csv)
         dismissBottomSheet()
+        onExportSelected?(.csv)
     }
 
     @objc
