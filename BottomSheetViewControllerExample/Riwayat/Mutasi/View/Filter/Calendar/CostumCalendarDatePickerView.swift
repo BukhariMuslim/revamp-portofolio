@@ -142,7 +142,7 @@ class CostumCalendarDatePickerView: UIView {
         
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
-        calendarCollectionView.register(CalendarDayCell.self, forCellWithReuseIdentifier: "CalendarDayCell")
+        calendarCollectionView.register(CostumCalendarCellView.self, forCellWithReuseIdentifier: "CostumCalendarCellView")
         
         addSubviews(
             monthYearLabel,
@@ -320,37 +320,40 @@ extension CostumCalendarDatePickerView: UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ cv: UICollectionView, cellForItemAt idx: IndexPath) -> UICollectionViewCell {
-      let cell = cv.dequeueReusableCell(withReuseIdentifier: "CalendarDayCell", for: idx) as! CalendarDayCell
-      let date = days[idx.item]
-      
-      let isDisabled: Bool = {
-          guard let d = date else {
-              return true
-          }
-        return d < minDate || d > maxDate
-      }()
-      
-      cell.isUserInteractionEnabled = !isDisabled
-      
-      let isSelected = isDateSelected(date)
-      let isInRange = isDateInRange(date)
-      let isStart = isStartDate(date)
-      let isEnd = isEndDate(date)
-      cell.configure(
-        date: date,
-        isSelected: isSelected,
-        isInRange: isInRange,
-        isStart: isStart,
-        isEnd: isEnd,
-        isDisabled: isDisabled
-      )
-      return cell
+        guard let cell = cv.dequeueReusableCell(withReuseIdentifier: "CostumCalendarCellView", for: idx) as? CostumCalendarCellView else {
+            return UICollectionViewCell()
+        }
+        
+        let date = days[idx.item]
+        
+        let isDisabled: Bool = {
+            guard let d = date else {
+                return true
+            }
+            return d < minDate || d > maxDate
+        }()
+        
+        cell.isUserInteractionEnabled = !isDisabled
+        
+        let isSelected = isDateSelected(date)
+        let isInRange = isDateInRange(date)
+        let isStart = isStartDate(date)
+        let isEnd = isEndDate(date)
+        cell.configure(
+            date: date,
+            isSelected: isSelected,
+            isInRange: isInRange,
+            isStart: isStart,
+            isEnd: isEnd,
+            isDisabled: isDisabled
+        )
+        return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let date = days[indexPath.item],
-               date >= minDate,
-               date <= maxDate else {
+              date >= minDate,
+              date <= maxDate else {
             return
         }
         
@@ -412,77 +415,5 @@ extension CostumCalendarDatePickerView: UICollectionViewDataSource, UICollection
     private func isEndDate(_ date: Date?) -> Bool {
         guard let date = date, let end = selectedEndDate else { return false }
         return Calendar.current.isDate(date, inSameDayAs: end)
-    }
-}
-
-class CalendarDayCell: UICollectionViewCell {
-    
-    private let dayLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = UIFont.Brimo.Body.largeRegular
-        return label
-    }()
-    
-    private let backgroundColorView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 20
-        return view
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupViews() {
-        contentView.addSubview(backgroundColorView)
-        contentView.addSubview(dayLabel)
-        
-        backgroundColorView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.width.height.equalTo(40)
-        }
-        
-        dayLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
-    }
-    
-    func configure(
-        date: Date?,
-        isSelected: Bool,
-        isInRange: Bool,
-        isStart: Bool,
-        isEnd: Bool,
-        isDisabled: Bool
-    ) {
-        guard let date = date else {
-            dayLabel.text = ""
-            backgroundColorView.backgroundColor = .clear
-            return
-        }
-        
-        let calendar = Calendar.current
-        let day = calendar.component(.day, from: date)
-        dayLabel.text = "\(day)"
-        
-        if isSelected {
-            backgroundColorView.backgroundColor = UIColor.Brimo.Primary.main
-            dayLabel.textColor = UIColor.Brimo.White.main
-            dayLabel.font = UIFont.Brimo.Body.largeSemiBold
-        } else if isInRange {
-            backgroundColorView.backgroundColor = UIColor.Brimo.Primary.x100
-            dayLabel.textColor = UIColor.Brimo.Primary.main
-            dayLabel.font = UIFont.Brimo.Body.largeRegular
-        } else {
-            backgroundColorView.backgroundColor = .clear
-            dayLabel.textColor = isDisabled ? ConstantsColor.black500 : UIColor.Brimo.Black.main
-            dayLabel.font = UIFont.Brimo.Body.largeRegular
-        }
     }
 }
