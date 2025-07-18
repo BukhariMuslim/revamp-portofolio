@@ -10,37 +10,6 @@ import UIKit
 class MutasiViewController: UIViewController {
     
     var onTapFilter: (() -> Void)?
-
-    private let filterView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        return view
-    }()
-    
-    private let filterIcon: UIImageView = {
-        let imageView = UIImageView()
-        imageView.isUserInteractionEnabled = true
-        imageView.image = UIImage(named: "utilities/riwayat_mutasi_filter)icon")
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    private lazy var monthFilterScrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.backgroundColor = .white
-        return scrollView
-    }()
-    
-    private lazy var monthFilterStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.distribution = .fill
-        stack.spacing = 12
-        stack.alignment = .center
-        stack.backgroundColor = .white
-        return stack
-    }()
     
     private lazy var emptyStateView: EmptyStateCellView = {
         let emptyView = EmptyStateCellView()
@@ -66,17 +35,15 @@ class MutasiViewController: UIViewController {
         return cv
     }()
     
+    private let filterView: RiwayaMutasiFilterContainerView = RiwayaMutasiFilterContainerView()
     private var mutasiData: [RiwayatMutasiModel] = []
     private var allMutasiData: [RiwayatMutasiModel] = []
     private var selectedMonthIndex: Int? = nil
-    
-    private let months = ["X", "Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupConstraints()
-        setupMonthFilter()
         configureEmptyState()
     }
     
@@ -85,11 +52,19 @@ class MutasiViewController: UIViewController {
         view.addSubview(filterView)
         view.addSubview(collectionView)
         view.addSubview(emptyStateView)
-        filterIcon.addTapGesture(target: self, action: #selector(didtapFilter))
-
-        filterView.addSubview(filterIcon)
-        filterView.addSubview(monthFilterScrollView)
-        monthFilterScrollView.addSubview(monthFilterStackView)
+        
+        filterView.onFilterTap = { [weak self] in
+            self?.onTapFilter?()
+        }
+        
+        filterView.didSelectMonth = { [weak self] index in
+            self?.selectedMonthIndex = index
+            self?.filterDataByMonth()
+        }
+        
+        filterView.onClearTap = { [weak self] in
+            self?.filterDataByMonth()
+        }
     }
     
     @objc func didtapFilter() {
@@ -105,27 +80,10 @@ class MutasiViewController: UIViewController {
     }
     
     private func setupConstraints() {
+        
         filterView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(60)
-        }
-        
-        filterIcon.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(20)
-        }
-        
-        monthFilterScrollView.snp.makeConstraints { make in
-            make.leading.equalTo(filterIcon.snp.trailing).offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-            make.centerY.equalToSuperview()
-            make.height.equalTo(32)
-        }
-        
-        monthFilterStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-            make.height.equalToSuperview()
         }
         
         collectionView.snp.makeConstraints { make in
@@ -139,67 +97,15 @@ class MutasiViewController: UIViewController {
         }
     }
     
-    private func setupMonthFilter() {
-        for (index, month) in months.enumerated() {
-            let button = createMonthButton(title: month, index: index)
-            monthFilterStackView.addArrangedSubview(button)
-        }
-        
-        updateMonthSelection(selectedIndex: nil)
-    }
-    
-    private func createMonthButton(title: String, index: Int) -> UIButton {
-        let button = UIButton()
-        let width = index == 0 ? 32 : 53
-        button.setTitle(title, for: .normal)
-        button.titleLabel?.font = .Brimo.Body.smallRegular
-        button.setTitleColor(.Brimo.Black.main, for: .normal)
-        button.setTitleColor(.Brimo.Primary.main, for: .selected)
-        button.backgroundColor = .clear
-        button.layer.cornerRadius = 16
-        button.tag = index
-        button.addTarget(self, action: #selector(monthButtonTapped(_:)), for: .touchUpInside)
-        
-        button.snp.makeConstraints { make in
-            make.width.equalTo(width)
-            make.height.equalTo(32)
-        }
-        
-        return button
-    }
-    
     @objc private func monthButtonTapped(_ sender: UIButton) {
         let tappedIndex = sender.tag
-        
-        if selectedMonthIndex == tappedIndex {
-            selectedMonthIndex = nil
-        } else if tappedIndex == 0 {
-            selectedMonthIndex = nil
-        } else {
-            selectedMonthIndex = tappedIndex
-        }
-        
-        updateMonthSelection(selectedIndex: selectedMonthIndex)
+        selectedMonthIndex = selectedMonthIndex == tappedIndex ? nil : tappedIndex
         filterDataByMonth()
-    }
-    
-    private func updateMonthSelection(selectedIndex: Int?) {
-        for (index, view) in monthFilterStackView.arrangedSubviews.enumerated() {
-            if let button = view as? UIButton {
-                let isSelected = (selectedIndex == index)
-                button.isSelected = isSelected
-                if isSelected {
-                    button.backgroundColor = ConstantsColor.primary100
-                } else {
-                    button.backgroundColor = ConstantsColor.black100
-                }
-            }
-        }
     }
     
     private func filterDataByMonth() {
         if let selectedIndex = selectedMonthIndex {
-            let selectedMonth = selectedIndex
+            let selectedMonth = selectedIndex + 1
             
             mutasiData = allMutasiData.filter { model in
                 let calendar = Calendar.current

@@ -59,6 +59,7 @@
 		A665EC652E28D48800F28B78 /* RiwayatMutasiFilterSectionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC642E28D47100F28B78 /* RiwayatMutasiFilterSectionCellView.swift */; };
 		A665EC682E28D58300F28B78 /* RiwayatMutasiFilterTransactionTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC672E28D57000F28B78 /* RiwayatMutasiFilterTransactionTypeCell.swift */; };
 		A665EC6A2E28E36900F28B78 /* ReusableBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC692E28E36100F28B78 /* ReusableBottomSheetViewController.swift */; };
+		A665EC6C2E29E05F00F28B78 /* RiwayaMutasiFilterContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC6B2E29E04A00F28B78 /* RiwayaMutasiFilterContainerView.swift */; };
 		D64457FF2E1D29E3006BF51F /* MainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64457FE2E1D29E3006BF51F /* MainHelper.swift */; };
 		D665E94B2E28FACC00A9C8E1 /* DetailRekeningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D665E94A2E28FACC00A9C8E1 /* DetailRekeningViewModel.swift */; };
 		D665E94C2E28FACC00A9C8E1 /* ActivityHistoryItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D665E9492E28FACC00A9C8E1 /* ActivityHistoryItemViewModel.swift */; };
@@ -174,6 +175,7 @@
 		A665EC642E28D47100F28B78 /* RiwayatMutasiFilterSectionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiFilterSectionCellView.swift; sourceTree = "<group>"; };
 		A665EC672E28D57000F28B78 /* RiwayatMutasiFilterTransactionTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiFilterTransactionTypeCell.swift; sourceTree = "<group>"; };
 		A665EC692E28E36100F28B78 /* ReusableBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableBottomSheetViewController.swift; sourceTree = "<group>"; };
+		A665EC6B2E29E04A00F28B78 /* RiwayaMutasiFilterContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayaMutasiFilterContainerView.swift; sourceTree = "<group>"; };
 		D64457FE2E1D29E3006BF51F /* MainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHelper.swift; sourceTree = "<group>"; };
 		D665E9492E28FACC00A9C8E1 /* ActivityHistoryItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityHistoryItemViewModel.swift; sourceTree = "<group>"; };
 		D665E94A2E28FACC00A9C8E1 /* DetailRekeningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRekeningViewModel.swift; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 		A665EC662E28D56300F28B78 /* Filter */ = {
 			isa = PBXGroup;
 			children = (
+				A665EC6B2E29E04A00F28B78 /* RiwayaMutasiFilterContainerView.swift */,
 				A665EC692E28E36100F28B78 /* ReusableBottomSheetViewController.swift */,
 				A665EC672E28D57000F28B78 /* RiwayatMutasiFilterTransactionTypeCell.swift */,
 				A665EC642E28D47100F28B78 /* RiwayatMutasiFilterSectionCellView.swift */,
@@ -782,6 +785,7 @@
 				D6B3D0ED2E27E8EC00FE51FC /* AccountCardDetailManagerActivityView.swift in Sources */,
 				A665EC652E28D48800F28B78 /* RiwayatMutasiFilterSectionCellView.swift in Sources */,
 				D6B3D0F02E27E8EC00FE51FC /* CardManagementVC.swift in Sources */,
+				A665EC6C2E29E05F00F28B78 /* RiwayaMutasiFilterContainerView.swift in Sources */,
 				D6B3D0F12E27E8EC00FE51FC /* NotifyTransactionView.swift in Sources */,
 				D6B3D0F22E27E8EC00FE51FC /* LimitSettingCellView.swift in Sources */,
 				D6B3D0F32E27E8EC00FE51FC /* NotifyTransactionManagerVC.swift in Sources */,
