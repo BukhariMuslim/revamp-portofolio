@@ -45,4 +45,6 @@ struct ConstantsColor {
     static let primary100Color = Color(primary100)
     static let blue500Color = Color(blue500)
     static let black500Color = Color(black500)
+
+    static let neutralLight10 = UIColor(hex: "F8F9F9")
 }

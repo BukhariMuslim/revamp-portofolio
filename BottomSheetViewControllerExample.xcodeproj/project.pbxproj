@@ -12,6 +12,14 @@
 		36432D8B2E1CBF3900055F79 /* FormFieldInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36432D8A2E1CBF3900055F79 /* FormFieldInformationView.swift */; };
 		3687FBED2E1E3D0F00BCC6EC /* BottomSheetWithTwoBtnVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3687FBEC2E1E3D0F00BCC6EC /* BottomSheetWithTwoBtnVC.swift */; };
 		369483872E1FB9C20069E46F /* AccountOpeningCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369483822E1FB9C20069E46F /* AccountOpeningCompleteViewController.swift */; };
+		59CD6FA72E29C955002EEF1C /* BrimoNsEStatementListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CD6FA62E29C955002EEF1C /* BrimoNsEStatementListViewController.swift */; };
+		59CD6FA92E29CCC4002EEF1C /* CustomSingleCardComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CD6FA82E29CCA9002EEF1C /* CustomSingleCardComponentView.swift */; };
+		59CD6FAB2E2A1E6E002EEF1C /* EStatementOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CD6FAA2E2A1E6B002EEF1C /* EStatementOptionView.swift */; };
+		59CD6FAE2E2A1F1D002EEF1C /* EStatementDownloadSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CD6FAD2E2A1F1B002EEF1C /* EStatementDownloadSheet.swift */; };
+		59CD6FB02E2A2054002EEF1C /* EStatementMonthCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CD6FAF2E2A2053002EEF1C /* EStatementMonthCell.swift */; };
+		59CD6FB22E2A2092002EEF1C /* EStatementSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CD6FB12E2A2090002EEF1C /* EStatementSegmentView.swift */; };
+		59CD6FB42E2A20B5002EEF1C /* EStatementEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CD6FB32E2A20B3002EEF1C /* EStatementEmptyCell.swift */; };
+		59CD6FB62E2A20D9002EEF1C /* EStatementDateRangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CD6FB52E2A20D7002EEF1C /* EStatementDateRangeCell.swift */; };
 		80992495A6EE83CB0D199D80 /* Pods_BottomSheetViewControllerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FBE2FA2E838D49EA8B73D2 /* Pods_BottomSheetViewControllerExample.framework */; };
 		8619D25C2A2C751B00AB91A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8619D25B2A2C751B00AB91A8 /* AppDelegate.swift */; };
 		8619D25E2A2C751B00AB91A8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8619D25D2A2C751B00AB91A8 /* SceneDelegate.swift */; };
@@ -131,6 +139,14 @@
 		3687FBEC2E1E3D0F00BCC6EC /* BottomSheetWithTwoBtnVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetWithTwoBtnVC.swift; sourceTree = "<group>"; };
 		369483822E1FB9C20069E46F /* AccountOpeningCompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOpeningCompleteViewController.swift; sourceTree = "<group>"; };
 		4293F4D43D94AD655BC8BE2B /* Pods-BottomSheetViewControllerExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BottomSheetViewControllerExample.debug.xcconfig"; path = "Target Support Files/Pods-BottomSheetViewControllerExample/Pods-BottomSheetViewControllerExample.debug.xcconfig"; sourceTree = "<group>"; };
+		59CD6FA62E29C955002EEF1C /* BrimoNsEStatementListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrimoNsEStatementListViewController.swift; sourceTree = "<group>"; };
+		59CD6FA82E29CCA9002EEF1C /* CustomSingleCardComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSingleCardComponentView.swift; sourceTree = "<group>"; };
+		59CD6FAA2E2A1E6B002EEF1C /* EStatementOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EStatementOptionView.swift; sourceTree = "<group>"; };
+		59CD6FAD2E2A1F1B002EEF1C /* EStatementDownloadSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EStatementDownloadSheet.swift; sourceTree = "<group>"; };
+		59CD6FAF2E2A2053002EEF1C /* EStatementMonthCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EStatementMonthCell.swift; sourceTree = "<group>"; };
+		59CD6FB12E2A2090002EEF1C /* EStatementSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EStatementSegmentView.swift; sourceTree = "<group>"; };
+		59CD6FB32E2A20B3002EEF1C /* EStatementEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EStatementEmptyCell.swift; sourceTree = "<group>"; };
+		59CD6FB52E2A20D7002EEF1C /* EStatementDateRangeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EStatementDateRangeCell.swift; sourceTree = "<group>"; };
 		8619D2582A2C751B00AB91A8 /* BottomSheetViewControllerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BottomSheetViewControllerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8619D25B2A2C751B00AB91A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8619D25D2A2C751B00AB91A8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -271,6 +287,14 @@
 			path = ConfirmationView;
 			sourceTree = "<group>";
 		};
+		59CD6FAC2E2A1EFD002EEF1C /* BottomSheetWithDocuments */ = {
+			isa = PBXGroup;
+			children = (
+				59CD6FAD2E2A1F1B002EEF1C /* EStatementDownloadSheet.swift */,
+			);
+			path = BottomSheetWithDocuments;
+			sourceTree = "<group>";
+		};
 		8619D24F2A2C751B00AB91A8 = {
 			isa = PBXGroup;
 			children = (
@@ -292,6 +316,7 @@
 		8619D25A2A2C751B00AB91A8 /* BottomSheetViewControllerExample */ = {
 			isa = PBXGroup;
 			children = (
+				59CD6FAC2E2A1EFD002EEF1C /* BottomSheetWithDocuments */,
 				A665EC552E289CA100F28B78 /* Riwayat */,
 				8619D25B2A2C751B00AB91A8 /* AppDelegate.swift */,
 				8619D2642A2C751C00AB91A8 /* Assets.xcassets */,
@@ -331,6 +356,7 @@
 		8726DE4D2E19206C00EE4B73 /* komponent */ = {
 			isa = PBXGroup;
 			children = (
+				59CD6FA82E29CCA9002EEF1C /* CustomSingleCardComponentView.swift */,
 				87B2B4BB2E1A590B00F7D6CB /* Brimo.swift */,
 				87B2B4B92E1A58E500F7D6CB /* ConstantsColor.swift */,
 				87B2B4B72E1A58B300F7D6CB /* BrimoTypographyType.swift */,
@@ -498,6 +524,11 @@
 		D6B3D0B72E27E8EC00FE51FC /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				59CD6FB52E2A20D7002EEF1C /* EStatementDateRangeCell.swift */,
+				59CD6FB32E2A20B3002EEF1C /* EStatementEmptyCell.swift */,
+				59CD6FB12E2A2090002EEF1C /* EStatementSegmentView.swift */,
+				59CD6FAF2E2A2053002EEF1C /* EStatementMonthCell.swift */,
+				59CD6FAA2E2A1E6B002EEF1C /* EStatementOptionView.swift */,
 				D6B3D10C2E28002C00FE51FC /* AccountCardDetailFilter.swift */,
 				D6B3D0B42E27E8EC00FE51FC /* AccountCardDetailManagerActivityView.swift */,
 				D6B3D0B52E27E8EC00FE51FC /* AccountCardManagerCategoryView.swift */,
@@ -521,6 +552,7 @@
 				D6B3D0C22E27E8EC00FE51FC /* CardDetailInformationVC.swift */,
 				D6B3D0C32E27E8EC00FE51FC /* CardDetailManagerVC.swift */,
 				D6B3D0C12E27E8EC00FE51FC /* CardManagementVC.swift */,
+				59CD6FA62E29C955002EEF1C /* BrimoNsEStatementListViewController.swift */,
 				D665E94D2E28FB4100A9C8E1 /* DetailRekeningVC.swift */,
 				D6B3D0B82E27E8EC00FE51FC /* LimitSettingVC.swift */,
 				D6B3D0C42E27E8EC00FE51FC /* NotifyTransactionManagerVC.swift */,
@@ -775,6 +807,7 @@
 				8793F7802E111067008A47D5 /* AccountSuccessOpenInfoView.swift in Sources */,
 				8793F78B2E112F91008A47D5 /* BrimoNsPinReusableView.swift in Sources */,
 				8793F7912E1132FF008A47D5 /* AccountOpeningPinViewVC.swift in Sources */,
+				59CD6FB62E2A20D9002EEF1C /* EStatementDateRangeCell.swift in Sources */,
 				87E3F89B2E0E9A3C00517830 /* AccountOpeningBranchSearchVC.swift in Sources */,
 				87B2B4BA2E1A58E500F7D6CB /* ConstantsColor.swift in Sources */,
 				A665EC712E29FD9700F28B78 /* CostumCalendarCellView.swift in Sources */,
@@ -799,11 +832,13 @@
 				D6B3D0E92E27E8EC00FE51FC /* CardManagementSettingsView.swift in Sources */,
 				D6B3D0EA2E27E8EC00FE51FC /* BIFastCardSuccessFooterView.swift in Sources */,
 				D6B3D0EB2E27E8EC00FE51FC /* CardDetailManagerVC.swift in Sources */,
+				59CD6FAB2E2A1E6E002EEF1C /* EStatementOptionView.swift in Sources */,
 				D6B3D0ED2E27E8EC00FE51FC /* AccountCardDetailManagerActivityView.swift in Sources */,
 				A665EC652E28D48800F28B78 /* RiwayatMutasiFilterSectionCellView.swift in Sources */,
 				D6B3D0F02E27E8EC00FE51FC /* CardManagementVC.swift in Sources */,
 				A665EC6C2E29E05F00F28B78 /* RiwayaMutasiFilterContainerView.swift in Sources */,
 				D6B3D0F12E27E8EC00FE51FC /* NotifyTransactionView.swift in Sources */,
+				59CD6FB42E2A20B5002EEF1C /* EStatementEmptyCell.swift in Sources */,
 				D6B3D0F22E27E8EC00FE51FC /* LimitSettingCellView.swift in Sources */,
 				D6B3D0F32E27E8EC00FE51FC /* NotifyTransactionManagerVC.swift in Sources */,
 				D6B3D0F42E27E8EC00FE51FC /* BiFastActivatedPhoneVC.swift in Sources */,
@@ -812,6 +847,7 @@
 				D6B3D0F72E27E8EC00FE51FC /* BiFastSetupVC.swift in Sources */,
 				D6B3D0F82E27E8EC00FE51FC /* LimitSettingModel.swift in Sources */,
 				D665E9502E28FB7D00A9C8E1 /* SafeAreaHeight.swift in Sources */,
+				59CD6FB22E2A2092002EEF1C /* EStatementSegmentView.swift in Sources */,
 				D6B3D0F92E27E8EC00FE51FC /* AccountCardManagerCategoryView.swift in Sources */,
 				D6B3D0FA2E27E8EC00FE51FC /* CostumizedImage.swift in Sources */,
 				D6B3D0FB2E27E8EC00FE51FC /* CardAccountDetailInfoView.swift in Sources */,
@@ -828,6 +864,8 @@
 				D6B3D1062E27E8EC00FE51FC /* TransactionLimitBottomSheetVC.swift in Sources */,
 				D6B3D1082E27E8EC00FE51FC /* AccountCardManagerHeaderView.swift in Sources */,
 				D6B3D1092E27E8EC00FE51FC /* BIFastCardActiveView.swift in Sources */,
+				59CD6FA92E29CCC4002EEF1C /* CustomSingleCardComponentView.swift in Sources */,
+				59CD6FB02E2A2054002EEF1C /* EStatementMonthCell.swift in Sources */,
 				8726DE4F2E19207500EE4B73 /* DepositoKeyValueItemSet.swift in Sources */,
 				A665EC5D2E28A14A00F28B78 /* RiwayatMutasiDateHeaderView.swift in Sources */,
 				A665EC6A2E28E36900F28B78 /* ReusableBottomSheetViewController.swift in Sources */,
@@ -840,11 +878,13 @@
 				8793F78D2E11306E008A47D5 /* BrimoNsReusablePinProtocol.swift in Sources */,
 				8793F7842E1114FA008A47D5 /* RecommendedProductsView.swift in Sources */,
 				8619D2712A2C764300AB91A8 /* BrimonsBottomSheetVC.swift in Sources */,
+				59CD6FA72E29C955002EEF1C /* BrimoNsEStatementListViewController.swift in Sources */,
 				A665EC632E28D16000F28B78 /* RiwayatMutasiFilterViewController.swift in Sources */,
 				8619D25C2A2C751B00AB91A8 /* AppDelegate.swift in Sources */,
 				36432D8B2E1CBF3900055F79 /* FormFieldInformationView.swift in Sources */,
 				8793F78F2E1130AA008A47D5 /* AccountOpeningPinViewVM.swift in Sources */,
 				363EFD482E1B82000043BCFF /* Helper.swift in Sources */,
+				59CD6FAE2E2A1F1D002EEF1C /* EStatementDownloadSheet.swift in Sources */,
 				8793F7862E111657008A47D5 /* RecommendedProductCell.swift in Sources */,
 				A665EC612E28BEF800F28B78 /* EmptyStateCellView.swift in Sources */,
 				A665EC562E289CA100F28B78 /* MutasiViewController.swift in Sources */,

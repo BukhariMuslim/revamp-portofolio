@@ -72,7 +72,8 @@ final class CardDetailManagerVC: UIViewController {
             
             CardMenuItem(
                 title: "E-Statement",
-                image: "menu/pasca_bayar"
+                image: "menu/pasca_bayar",
+                action: showEStatementInformation
             )
         ]
 
@@ -123,7 +124,12 @@ final class CardDetailManagerVC: UIViewController {
         }
         navigationController?.pushViewController(vc, animated: true)
     }
-    
+
+    private func showEStatementInformation() {
+        let vc: BrimoNsEStatementListViewController = BrimoNsEStatementListViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
     private func setupConstraint(){
         backgroundContainerView.snp.remakeConstraints {
             $0.top.trailing.leading.equalToSuperview()
