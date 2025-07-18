@@ -9,13 +9,13 @@ import UIKit
 import SnapKit
 
 struct RiwayatMutasiFilterSectionCellData {
-    let title: String
+    let title: String?
     let value: String
     let icon: UIImage?
     let iconTintColor: UIColor?
     
-    init(title: String, value: String, systemIconName: String, iconTintColor: UIColor? = nil) {
-        self.title = title
+    init(title: String?, value: String, systemIconName: String, iconTintColor: UIColor? = nil) {
+        self.title = title ?? "Sumber Rekening"
         self.value = value
         self.icon = UIImage(systemName: systemIconName)
         self.iconTintColor = iconTintColor ?? UIColor.Brimo.Black.x600

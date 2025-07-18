@@ -51,7 +51,7 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
     
     private var selectedStartDate = Date()
     private var selectedEndDate = Date()
-    private var selectedAccount = "Semua Rekening"
+    private var selectedAccount = ""
     private var selectedTransactionType: TransactionType = .all
     
     var onFilterApplied: ((Date, Date, String, TransactionType) -> Void)?
@@ -156,7 +156,7 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
         }
         
         accountSection.onTapped = { [weak self] in
-            self?.showAccountSelector()
+            self?.showSumberRekening()
         }
         
         transactionTypeSection.onSelectionChanged = { [weak self] type in
@@ -224,15 +224,6 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
         navigationController?.popViewController(animated: true)
     }
     
-    private func showAccountSelector() {
-        let dateRangePicker: ReusableBottomSheetViewController = ReusableBottomSheetViewController.create(
-            title: "Sumber Rekening",
-            contentView: UIView()
-        )
-        
-        self.presentBrimonsBottomSheet(viewController: dateRangePicker)
-    }
-
     private func dismissDateRangePicker() {
         guard let dateRangePicker = view.viewWithTag(999) else { return }
         
@@ -290,5 +281,43 @@ extension RiwayatMutasiFilterViewController {
         )
         
         self.presentBrimonsBottomSheet(viewController: dateRangePicker)
+    }
+    
+    private func showSumberRekening() {
+        
+        let sumberRekeningViewModel = SumberRekeningViewModel()
+        sumberRekeningViewModel.getCardDetailData()
+        let sumberRekeningBottomSheetContent: SumberRekeningCollectionView = SumberRekeningCollectionView(viewModel: sumberRekeningViewModel)
+        
+        sumberRekeningBottomSheetContent.setData(sumberRekeningViewModel.getAllData())
+        
+        sumberRekeningBottomSheetContent.onTapCard = {[weak self] model in
+            guard let self = self else {
+                return
+            }
+            
+            self.selectedAccount = model.cardId
+            self.accountSection.updateValue(model.cardId)
+            
+            self.dismiss(animated: false)
+        }
+        
+        sumberRekeningBottomSheetContent.onTapSelectAllCard = {[weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            self.selectedAccount = ""
+            self.accountSection.updateValue("")
+            self.dismiss(animated: false)
+        }
+        
+        let showSumberRekening: ReusableBottomSheetViewController = ReusableBottomSheetViewController.create(
+            title: "Sumber Rekening",
+            contentView: sumberRekeningBottomSheetContent,
+            showActionButton: false
+        )
+        
+        self.presentBrimonsBottomSheet(viewController: showSumberRekening)
     }
 }

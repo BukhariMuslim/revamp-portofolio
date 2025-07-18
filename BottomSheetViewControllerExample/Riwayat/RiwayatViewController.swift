@@ -200,7 +200,7 @@ final class RiwayatViewController: UIViewController {
                 $0.tanggalMutasi < $1.tanggalMutasi
             }
             
-            let mutasiVC = MutasiViewController()
+            let mutasiVC = MutasiViewController(viewModel: RiwayatMutasiViewModel())
             
             mutasiVC.onTapFilter = {[weak self] in
                 guard let self = self else {
@@ -211,7 +211,12 @@ final class RiwayatViewController: UIViewController {
                 
                 filterVC.onFilterApplied = {[weak self] (selectedStartDate, selectedEndDate, selectedAccount, selectedTransactionType) in
                     
-                    mutasiVC.filterDataBy(startDate: selectedStartDate, endDate: selectedEndDate)
+                    mutasiVC.viewModel.filterDataBy(
+                        startDate: selectedStartDate,
+                        endDate: selectedEndDate,
+                        transactionType: selectedTransactionType,
+                        rekeningNumber: selectedAccount
+                    )
                 }
                 
                 navigationController?.pushViewController(filterVC, animated: true)

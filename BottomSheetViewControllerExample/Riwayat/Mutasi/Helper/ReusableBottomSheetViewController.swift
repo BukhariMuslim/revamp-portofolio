@@ -10,6 +10,9 @@ import SnapKit
 
 class ReusableBottomSheetViewController: BrimonsBottomSheetVC {
     
+    var onActionButtonTapped: (() -> Void)?
+    var onCloseButtonTapped: (() -> Void)?
+    
     private let containerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.Brimo.White.main
@@ -47,25 +50,18 @@ class ReusableBottomSheetViewController: BrimonsBottomSheetVC {
     }()
     
     var titleText: String = "Title" {
-        didSet {
-            titleLabel.text = titleText
-        }
+        didSet { titleLabel.text = titleText }
     }
     
     var buttonTitle: String = "Simpan" {
-        didSet {
-            actionButton.setTitle(buttonTitle, for: .normal)
-        }
+        didSet { actionButton.setTitle(buttonTitle, for: .normal) }
     }
     
     var contentView: UIView? {
-        didSet {
-            setupContentView()
-        }
+        didSet { setupContentView() }
     }
     
-    var onActionButtonTapped: (() -> Void)?
-    var onCloseButtonTapped: (() -> Void)?
+    var shouldShowButton: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,9 +73,12 @@ class ReusableBottomSheetViewController: BrimonsBottomSheetVC {
         containerView.addSubviews(
             titleLabel,
             closeButton,
-            contentContainerView,
-            actionButton
+            contentContainerView
         )
+        
+        if shouldShowButton {
+            containerView.addSubview(actionButton)
+        }
         
         setContent(content: containerView)
         
@@ -92,24 +91,28 @@ class ReusableBottomSheetViewController: BrimonsBottomSheetVC {
         
         closeButton.snp.makeConstraints { make in
             make.centerY.equalTo(titleLabel)
-            make.trailing.equalToSuperview().offset(-20)
+            make.trailing.equalToSuperview().inset(20)
             make.width.height.equalTo(24)
         }
         
         contentContainerView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(24)
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(actionButton.snp.top).offset(-20)
+            if shouldShowButton {
+                make.bottom.equalTo(actionButton.snp.top).offset(-20)
+            } else {
+                make.bottom.equalTo(containerView.safeAreaLayoutGuide.snp.bottom).offset(-20)
+            }
         }
         
-        actionButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(50)
-            make.bottom.equalTo(containerView.safeAreaLayoutGuide.snp.bottom).offset(-20)
+        if shouldShowButton {
+            actionButton.snp.makeConstraints { make in
+                make.leading.trailing.equalToSuperview().inset(20)
+                make.height.equalTo(50)
+                make.bottom.equalTo(containerView.safeAreaLayoutGuide.snp.bottom).offset(-20)
+            }
+            actionButton.setTitle(buttonTitle, for: .normal)
         }
-        
-        titleLabel.text = titleText
-        actionButton.setTitle(buttonTitle, for: .normal)
     }
     
     private func setupContentView() {
@@ -123,8 +126,10 @@ class ReusableBottomSheetViewController: BrimonsBottomSheetVC {
     }
     
     private func setupActions() {
-        actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        if shouldShowButton {
+            actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
+        }
     }
     
     @objc private func actionButtonTapped() {
@@ -145,6 +150,7 @@ extension ReusableBottomSheetViewController {
         title: String,
         buttonTitle: String = "Simpan",
         contentView: UIView,
+        showActionButton: Bool = true,
         onActionTapped: (() -> Void)? = nil,
         onCloseTapped: (() -> Void)? = nil
     ) -> ReusableBottomSheetViewController {
@@ -152,6 +158,7 @@ extension ReusableBottomSheetViewController {
         controller.titleText = title
         controller.buttonTitle = buttonTitle
         controller.contentView = contentView
+        controller.shouldShowButton = showActionButton
         controller.onActionButtonTapped = onActionTapped
         controller.onCloseButtonTapped = onCloseTapped
         return controller

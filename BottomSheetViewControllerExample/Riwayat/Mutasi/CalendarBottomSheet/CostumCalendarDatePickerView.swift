@@ -10,7 +10,6 @@ import SnapKit
 
 class CostumCalendarDatePickerView: UIView {
     
-    // MARK: - Properties
     private let monthYearLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.Brimo.Title.smallSemiBold
@@ -113,7 +112,6 @@ class CostumCalendarDatePickerView: UIView {
     
     var onDateRangeSelected: ((Date, Date) -> Void)?
     
-    // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -126,7 +124,6 @@ class CostumCalendarDatePickerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Setup Methods
     private func setupViews() {
         backgroundColor = UIColor.Brimo.White.main
         
@@ -383,7 +380,6 @@ extension CostumCalendarDatePickerView: UICollectionViewDataSource, UICollection
         return CGSize(width: width, height: 40)
     }
     
-    // MARK: - Helper Methods
     private func isDateSelected(_ date: Date?) -> Bool {
         guard let date = date else { return false }
         let calendar = Calendar.current

@@ -70,6 +70,10 @@
 		A665EC6C2E29E05F00F28B78 /* RiwayaMutasiFilterContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC6B2E29E04A00F28B78 /* RiwayaMutasiFilterContainerView.swift */; };
 		A665EC6E2E29EA5000F28B78 /* CostumCalendarDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC6D2E29EA3D00F28B78 /* CostumCalendarDatePickerView.swift */; };
 		A665EC712E29FD9700F28B78 /* CostumCalendarCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC702E29FD8A00F28B78 /* CostumCalendarCellView.swift */; };
+		A665EC762E2A229700F28B78 /* RiwayatMutasiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC752E2A228700F28B78 /* RiwayatMutasiViewModel.swift */; };
+		A69D08532E2A306A00BB83EB /* SumberRekeningCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69D08522E2A305C00BB83EB /* SumberRekeningCellView.swift */; };
+		A69D08552E2A368300BB83EB /* SumberRekeningCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69D08542E2A367600BB83EB /* SumberRekeningCollectionView.swift */; };
+		A69D08572E2A36CD00BB83EB /* SumberRekeningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69D08562E2A36C900BB83EB /* SumberRekeningViewModel.swift */; };
 		D64457FF2E1D29E3006BF51F /* MainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64457FE2E1D29E3006BF51F /* MainHelper.swift */; };
 		D64B9C2D2E29D78400453EF6 /* SourceDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64B9C2C2E29D78400453EF6 /* SourceDataView.swift */; };
 		D64B9C2F2E29D79E00453EF6 /* ReceiptDataViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64B9C2E2E29D79E00453EF6 /* ReceiptDataViewViewModel.swift */; };
@@ -199,6 +203,10 @@
 		A665EC6B2E29E04A00F28B78 /* RiwayaMutasiFilterContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayaMutasiFilterContainerView.swift; sourceTree = "<group>"; };
 		A665EC6D2E29EA3D00F28B78 /* CostumCalendarDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostumCalendarDatePickerView.swift; sourceTree = "<group>"; };
 		A665EC702E29FD8A00F28B78 /* CostumCalendarCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostumCalendarCellView.swift; sourceTree = "<group>"; };
+		A665EC752E2A228700F28B78 /* RiwayatMutasiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiViewModel.swift; sourceTree = "<group>"; };
+		A69D08522E2A305C00BB83EB /* SumberRekeningCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumberRekeningCellView.swift; sourceTree = "<group>"; };
+		A69D08542E2A367600BB83EB /* SumberRekeningCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumberRekeningCollectionView.swift; sourceTree = "<group>"; };
+		A69D08562E2A36C900BB83EB /* SumberRekeningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumberRekeningViewModel.swift; sourceTree = "<group>"; };
 		D64457FE2E1D29E3006BF51F /* MainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHelper.swift; sourceTree = "<group>"; };
 		D64B9C2C2E29D78400453EF6 /* SourceDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceDataView.swift; sourceTree = "<group>"; };
 		D64B9C2E2E29D79E00453EF6 /* ReceiptDataViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptDataViewViewModel.swift; sourceTree = "<group>"; };
@@ -478,6 +486,7 @@
 		A665EC722E2A1AEB00F28B78 /* MutasiPage */ = {
 			isa = PBXGroup;
 			children = (
+				A665EC752E2A228700F28B78 /* RiwayatMutasiViewModel.swift */,
 				A665EC6B2E29E04A00F28B78 /* RiwayaMutasiFilterContainerView.swift */,
 				A665EC4F2E289CA100F28B78 /* MutasiViewController.swift */,
 				A665EC4B2E289CA100F28B78 /* RiwayatMutasiCellView.swift */,
@@ -500,6 +509,9 @@
 		A665EC742E2A1C7E00F28B78 /* SumberRekeningPage */ = {
 			isa = PBXGroup;
 			children = (
+				A69D08562E2A36C900BB83EB /* SumberRekeningViewModel.swift */,
+				A69D08542E2A367600BB83EB /* SumberRekeningCollectionView.swift */,
+				A69D08522E2A305C00BB83EB /* SumberRekeningCellView.swift */,
 			);
 			path = SumberRekeningPage;
 			sourceTree = "<group>";
@@ -842,6 +854,7 @@
 				D6B3D0F22E27E8EC00FE51FC /* LimitSettingCellView.swift in Sources */,
 				D6B3D0F32E27E8EC00FE51FC /* NotifyTransactionManagerVC.swift in Sources */,
 				D6B3D0F42E27E8EC00FE51FC /* BiFastActivatedPhoneVC.swift in Sources */,
+				A69D08552E2A368300BB83EB /* SumberRekeningCollectionView.swift in Sources */,
 				D6B3D0F52E27E8EC00FE51FC /* LimitSettingVC.swift in Sources */,
 				D6B3D0F62E27E8EC00FE51FC /* CardSettingsItem.swift in Sources */,
 				D6B3D0F72E27E8EC00FE51FC /* BiFastSetupVC.swift in Sources */,
@@ -884,6 +897,8 @@
 				36432D8B2E1CBF3900055F79 /* FormFieldInformationView.swift in Sources */,
 				8793F78F2E1130AA008A47D5 /* AccountOpeningPinViewVM.swift in Sources */,
 				363EFD482E1B82000043BCFF /* Helper.swift in Sources */,
+				A665EC762E2A229700F28B78 /* RiwayatMutasiViewModel.swift in Sources */,
+				A69D08572E2A36CD00BB83EB /* SumberRekeningViewModel.swift in Sources */,
 				59CD6FAE2E2A1F1D002EEF1C /* EStatementDownloadSheet.swift in Sources */,
 				8793F7862E111657008A47D5 /* RecommendedProductCell.swift in Sources */,
 				A665EC612E28BEF800F28B78 /* EmptyStateCellView.swift in Sources */,
@@ -904,6 +919,7 @@
 				D665E94C2E28FACC00A9C8E1 /* ActivityHistoryItemViewModel.swift in Sources */,
 				D64B9C2D2E29D78400453EF6 /* SourceDataView.swift in Sources */,
 				8733248E2E0F813D0040698B /* InitialDepositDetailView.swift in Sources */,
+				A69D08532E2A306A00BB83EB /* SumberRekeningCellView.swift in Sources */,
 				873324902E0F82AD0040698B /* BranchOpeningView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,6 +20,17 @@ enum TransactionType: Int, CaseIterable {
         case .expense: return "Uang Keluar"
         }
     }
+    
+    init?(title: String) {
+        guard let match = TransactionType.allCases.first(where: { $0.title == title }) else {
+            return nil
+        }
+        self = match
+    }
+
+    static func from(title: String) -> TransactionType {
+        return TransactionType(title: title) ?? .all
+    }
 }
 
 class TransactionTypeCollectionView: UIView {
@@ -49,7 +60,7 @@ class TransactionTypeCollectionView: UIView {
         return cv
     }()
     
-    private var selectedType: TransactionType = .income
+    private var selectedType: TransactionType = .all
     private let transactionTypes = TransactionType.allCases
     
     var onSelectionChanged: ((TransactionType) -> Void)?
