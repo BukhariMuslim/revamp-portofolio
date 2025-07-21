@@ -9,10 +9,13 @@
 import Foundation
 import SnapKit
 import UIKit
+import SkeletonView
 
 class BrimoNsEStatementListViewController: UIViewController {
 
     var showEmptyForCell: Bool = false
+    var numOfAccounts: Int = 2 // layout different for more than 1
+    var isLoadingForData: Bool = false
 
     private lazy var backgroundImage: UIImageView = {
         let image = UIImageView()
@@ -28,16 +31,18 @@ class BrimoNsEStatementListViewController: UIViewController {
         view.layer.cornerRadius = 24
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.isSkeletonable = true
         return view
     }()
 
     private let segmentedView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
 
         let line = UIView()
         line.backgroundColor = .Brimo.Black.x300
         line.translatesAutoresizingMaskIntoConstraints = false
+        line.isSkeletonable = true
         view.addSubview(line)
 
         NSLayoutConstraint.activate([
@@ -47,11 +52,23 @@ class BrimoNsEStatementListViewController: UIViewController {
             line.heightAnchor.constraint(equalToConstant: 1)
         ])
 
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isSkeletonable = true
         return view
     }()
 
     private lazy var segment1View = EStatementSegmentView(title: "Rekening")
     private lazy var segment2View = EStatementSegmentView(title: "Gabungan")
+
+    private var sourceOfFundsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Sumber Rekening"
+        label.font = .Brimo.Body.largeSemiBold
+        label.textColor = .Brimo.Black.main
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isSkeletonable = true
+        return label
+    }()
 
     private let cardContainerView: UIView = {
         let view = UIView()
@@ -59,6 +76,7 @@ class BrimoNsEStatementListViewController: UIViewController {
         view.layer.masksToBounds = true
         view.backgroundColor = .Brimo.Black.x100
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.isSkeletonable = true
         return view
     }()
 
@@ -141,8 +159,14 @@ class BrimoNsEStatementListViewController: UIViewController {
         let tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.isSkeletonable = true
         return tableView
     }()
+
+    var segmentedHeightConstraint: NSLayoutConstraint!
+    var sumberFundsTopConstraint: NSLayoutConstraint!
+    var filterHeightConstraint: NSLayoutConstraint!
+    var tableViewTopConstraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,7 +189,8 @@ class BrimoNsEStatementListViewController: UIViewController {
         setupUI()
         setupConstraints()
 
-        showEmptyForCell = true
+        showEmptyForCell = false
+        isLoadingForData = true
         mainTableView.reloadData()
 
         if #available(iOS 15.0, *) {
@@ -173,29 +198,91 @@ class BrimoNsEStatementListViewController: UIViewController {
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        [segmentedView, sourceOfFundsLabel, cardContainerView, mainTableView].forEach {
+            $0.showAnimatedGradientSkeleton()
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+            let vc = BottomSheetWithTwoBtnVC()
+            vc.setupContent(item: BottomSheetTwoButtonContent(
+                image: "failed_bottomsheet_ic",
+                title: "Gagal Memuat Halaman",
+                subtitle: "Terjadi kendala saat memuat halaman. Silakan coba muat ulang untuk lanjutkan prosesmu.",
+                agreeBtnTitle: "Muat Ulang",
+                cancelBtnTitle: "",
+                hideCancelBtn: true,
+                actionButtonTap: { [weak self] in
+                    self?.fetchData()
+                }
+            ))
+
+            self.presentBrimonsBottomSheet(viewController: vc)
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+            [self.segmentedView, self.sourceOfFundsLabel, self.cardContainerView, self.mainTableView].forEach {
+                $0.hideSkeleton()
+            }
+            self.isLoadingForData = false
+            self.mainTableView.reloadData()
+        }
+    }
+
+    @objc
+    private func fetchData() {
+        showEmptyForCell = false
+        isLoadingForData = true
+        mainTableView.reloadData()
+        [segmentedView, sourceOfFundsLabel, cardContainerView, mainTableView].forEach {
+            $0.showAnimatedGradientSkeleton()
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+            [self.segmentedView, self.sourceOfFundsLabel, self.cardContainerView, self.mainTableView].forEach {
+                $0.hideSkeleton()
+            }
+            self.isLoadingForData = false
+            self.mainTableView.reloadData()
+        }
+    }
+
     private func setupConstraints() {
+        if numOfAccounts > 1 {
+            segmentedHeightConstraint = segmentedView.heightAnchor.constraint(equalToConstant: 36)
+            sumberFundsTopConstraint = sourceOfFundsLabel.topAnchor.constraint(equalTo: segmentedView.bottomAnchor, constant: 24)
+            filterHeightConstraint = filterScrollView.heightAnchor.constraint(equalToConstant: 0)
+            tableViewTopConstraint = mainTableView.topAnchor.constraint(equalTo: cardContainerView.bottomAnchor, constant: 24)
+        } else if numOfAccounts == 1 {
+            segmentedHeightConstraint = segmentedView.heightAnchor.constraint(equalToConstant: 0)
+            sumberFundsTopConstraint = sourceOfFundsLabel.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 24)
+            filterHeightConstraint = filterScrollView.heightAnchor.constraint(equalToConstant: 0)
+            tableViewTopConstraint = mainTableView.topAnchor.constraint(equalTo: cardContainerView.bottomAnchor, constant: 24)
+        }
+
         NSLayoutConstraint.activate([
             segmentedView.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 24),
-            segmentedView.leadingAnchor
-                .constraint(equalTo: mainView.leadingAnchor, constant: 16),
-            segmentedView.trailingAnchor
-                .constraint(equalTo: mainView.trailingAnchor, constant: -16),
-            segmentedView.heightAnchor.constraint(equalToConstant: 36),
+            segmentedView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 16),
+            segmentedView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -16),
+            segmentedHeightConstraint,
 
             segment1View.topAnchor.constraint(equalTo: segmentedView.topAnchor),
-            segment1View.leadingAnchor
-                .constraint(equalTo: segmentedView.leadingAnchor),
-            segment1View.bottomAnchor
-                .constraint(equalTo: segmentedView.bottomAnchor),
+            segment1View.leadingAnchor.constraint(equalTo: segmentedView.leadingAnchor),
+            segment1View.bottomAnchor.constraint(equalTo: segmentedView.bottomAnchor),
             segment2View.topAnchor.constraint(equalTo: segmentedView.topAnchor),
-            segment2View.leadingAnchor
-                .constraint(equalTo: segment1View.trailingAnchor, constant: 16),
-            segment2View.bottomAnchor
-                .constraint(equalTo: segmentedView.bottomAnchor),
+            segment2View.leadingAnchor.constraint(equalTo: segment1View.trailingAnchor, constant: 16),
+            segment2View.bottomAnchor.constraint(equalTo: segmentedView.bottomAnchor),
+
+            sourceOfFundsLabel.leadingAnchor.constraint(equalTo: segmentedView.leadingAnchor),
+            sourceOfFundsLabel.trailingAnchor.constraint(equalTo: segmentedView.trailingAnchor),
+            sumberFundsTopConstraint,
+            sourceOfFundsLabel.heightAnchor.constraint(equalToConstant: 20),
 
             cardContainerView.leadingAnchor.constraint(equalTo: segmentedView.leadingAnchor),
             cardContainerView.trailingAnchor.constraint(equalTo: segmentedView.trailingAnchor),
-            cardContainerView.topAnchor.constraint(equalTo: segmentedView.bottomAnchor, constant: 24),
+            cardContainerView.topAnchor.constraint(equalTo: sourceOfFundsLabel.bottomAnchor, constant: 8),
             cardContainerView.heightAnchor.constraint(equalToConstant: 68),
 
             cardSectionView.leadingAnchor.constraint(equalTo: cardContainerView.leadingAnchor, constant: 16),
@@ -207,7 +294,7 @@ class BrimoNsEStatementListViewController: UIViewController {
             filterScrollView.leadingAnchor.constraint(equalTo: segmentedView.leadingAnchor),
             filterScrollView.trailingAnchor.constraint(equalTo: segmentedView.trailingAnchor),
             filterScrollView.topAnchor.constraint(equalTo: cardContainerView.bottomAnchor, constant: 24),
-            filterScrollView.heightAnchor.constraint(equalToConstant: 32),
+            filterHeightConstraint,
 
             filterContainerView.leadingAnchor.constraint(equalTo: filterScrollView.leadingAnchor),
             filterContainerView.topAnchor.constraint(equalTo: filterScrollView.topAnchor),
@@ -235,9 +322,8 @@ class BrimoNsEStatementListViewController: UIViewController {
 
             mainTableView.leadingAnchor.constraint(equalTo: segmentedView.leadingAnchor),
             mainTableView.trailingAnchor.constraint(equalTo: segmentedView.trailingAnchor),
-            mainTableView.topAnchor.constraint(equalTo: filterScrollView.bottomAnchor, constant: 24),
+            tableViewTopConstraint,
             mainTableView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor)
-
         ])
     }
 
@@ -245,14 +331,17 @@ class BrimoNsEStatementListViewController: UIViewController {
         mainView.addSubview(segmentedView)
 
         segment1View.isSelected = true
+
         [segment1View, segment2View].forEach {
             segmentedView.addSubview($0)
             $0.addTapGesture(target: self, action: #selector(changeSegment(sender:)))
         }
 
+        mainView.addSubview(sourceOfFundsLabel)
         mainView.addSubview(cardContainerView)
         cardSectionView = CustomSingleCardComponentView(icon: nil, name: "@marselasatya", detail: "6013 3455 0999 120")
         cardSectionView.translatesAutoresizingMaskIntoConstraints = false
+        cardSectionView.isSkeletonable = true
         cardContainerView.addSubview(cardSectionView)
 
         mainView.addSubview(filterScrollView)
@@ -318,6 +407,14 @@ class BrimoNsEStatementListViewController: UIViewController {
         [segment1View, segment2View].forEach {
             $0.isSelected = ($0 == tappedView)
         }
+
+        if segment1View.isSelected {
+            showEmptyForCell = false
+        } else {
+            showEmptyForCell = true
+        }
+
+        mainTableView.reloadData()
     }
 }
 
@@ -339,6 +436,21 @@ extension BrimoNsEStatementListViewController: UITableViewDelegate, UITableViewD
             return tableView.dequeueReusableCell(withIdentifier: EStatementEmptyCell.identifier, for: indexPath)
         }
 
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: EStatementMonthCell.identifier, for: indexPath) as? EStatementMonthCell else {
+            return UITableViewCell()
+        }
+        if indexPath.row%2 == 0 {
+            cell.configure(title: "Month of Year", subtitle: "Period 1 - 30")
+        } else {
+            cell.configure(title: "Month of Year", subtitle: nil)
+        }
+        let totalRows = tableView.numberOfRows(inSection: indexPath.section)
+        let isLast = indexPath.row == totalRows - 1
+        cell.configureIsLast(isLast)
+        return cell
+
+        // MARK: (July 2025) filter may be added in the future - figma unclear
+
         if buttonMonthly.isSelected {
 
         } else if buttonPeriod.isSelected {
@@ -352,19 +464,6 @@ extension BrimoNsEStatementListViewController: UITableViewDelegate, UITableViewD
             return cell
 
         } else if buttonVisa1.isSelected {
-
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: EStatementMonthCell.identifier, for: indexPath) as? EStatementMonthCell else {
-                return UITableViewCell()
-            }
-            if indexPath.row%2 == 0 {
-                cell.configure(title: "Month of Year", subtitle: "Period 1 - 30")
-            } else {
-                cell.configure(title: "Month of Year", subtitle: nil)
-            }
-            let totalRows = tableView.numberOfRows(inSection: indexPath.section)
-            let isLast = indexPath.row == totalRows - 1
-            cell.configureIsLast(isLast)
-            return cell
 
         }else if buttonVisa2.isSelected {
 
@@ -389,8 +488,14 @@ extension BrimoNsEStatementListViewController: UITableViewDelegate, UITableViewD
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if buttonVisa1.isSelected {
+        if !showEmptyForCell && !isLoadingForData {
             return 28
+        }
+
+        // MARK: (July 2025) filter may be added in the future - figma unclear
+
+        if buttonVisa1.isSelected {
+
         }
         return 0
     }
@@ -399,28 +504,47 @@ extension BrimoNsEStatementListViewController: UITableViewDelegate, UITableViewD
         let view = UIView()
         view.backgroundColor = .Brimo.White.main
 
-        if buttonVisa1.isSelected {
-            let label = UILabel()
-            view.addSubview(label)
+        let label = UILabel()
+        view.addSubview(label)
 
-            label.text = "Year"
-            label.textColor = .Brimo.Black.x600
-            label.font = .Brimo.Body.largeSemiBold
+        label.text = "2025"
+        label.textColor = .Brimo.Black.x600
+        label.font = .Brimo.Body.largeSemiBold
 
-            label.snp.makeConstraints {
-                $0.top.leading.trailing.equalToSuperview()
-                $0.bottom.equalToSuperview().inset(8)
-            }
-        }else{
-            return nil
+        label.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(8)
         }
+
+        // MARK: (July 2025) filter may be added in the future - figma unclear
+
+        if buttonVisa1.isSelected {
+
+        }
+
         return view
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+}
 
+extension BrimoNsEStatementListViewController: SkeletonTableViewDataSource {
+    func numSections(in collectionSkeletonView: UITableView) -> Int {
+        return 1
+    }
+
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return EStatementMonthCell.identifier
+    }
+}
+
+extension BrimoNsEStatementListViewController {
     func downloadEStatement() {
         let bottomSheet = EStatementDownloadSheet()
         bottomSheet.onExportSelected = { [weak self] exportType in

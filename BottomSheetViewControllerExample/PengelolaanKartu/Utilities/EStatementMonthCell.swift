@@ -49,7 +49,14 @@ class EStatementMonthCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         backgroundColor = .clear
+
         setupUI()
+
+        isSkeletonable = true
+        contentView.isSkeletonable = true
+        [containerView, textStack, titleLabel, subtitleLabel, chevronImage].forEach {
+            $0.isSkeletonable = true
+        }
     }
 
     required init?(coder: NSCoder) {
