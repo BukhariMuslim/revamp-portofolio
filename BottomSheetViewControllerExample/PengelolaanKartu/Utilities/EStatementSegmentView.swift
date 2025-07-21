@@ -20,6 +20,8 @@ class EStatementSegmentView: UIView {
     init(title: String) {
         super.init(frame: .zero)
         setup(title: title)
+
+        isSkeletonable = true
     }
 
     required init?(coder: NSCoder) {
@@ -36,9 +38,11 @@ class EStatementSegmentView: UIView {
         segmentLabel.translatesAutoresizingMaskIntoConstraints = false
         segmentLabel.setContentHuggingPriority(.required, for: .horizontal)
         segmentLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        segmentLabel.isSkeletonable = true
         addSubview(segmentLabel)
 
         underline.translatesAutoresizingMaskIntoConstraints = false
+        underline.isSkeletonable = true
         addSubview(underline)
 
         NSLayoutConstraint.activate([

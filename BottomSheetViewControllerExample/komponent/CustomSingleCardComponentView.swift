@@ -40,16 +40,19 @@ class CustomSingleCardComponentView: UIView {
         iconImageView.contentMode = .scaleAspectFit
         iconImageView.layer.cornerRadius = 4
         iconImageView.clipsToBounds = true
+        iconImageView.isSkeletonable = true
 
         addSubview(iconImageView)
 
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.font = .Brimo.Body.mediumRegular
         nameLabel.textColor = ConstantsColor.black900
+        nameLabel.isSkeletonable = true
 
         detailLabel.translatesAutoresizingMaskIntoConstraints = false
         detailLabel.font = .Brimo.Body.mediumRegular
         detailLabel.textColor = ConstantsColor.black500
+        detailLabel.isSkeletonable = true
 
         addSubview(nameLabel)
         addSubview(detailLabel)
