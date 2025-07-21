@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 enum DateFilterType: String, CaseIterable {
+    case all = "Semua"
     case today = "Hari Ini"
     case last7Days = "7 Hari Terakhir"
     case selectMonth = "Pilih Bulan"

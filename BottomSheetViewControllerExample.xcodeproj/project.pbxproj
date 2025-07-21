@@ -60,7 +60,6 @@
 		A614C7152E2DF63200A5D7D6 /* RiwayatMutasiFilterDateCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614C7142E2DF61800A5D7D6 /* RiwayatMutasiFilterDateCellView.swift */; };
 		A614C7172E2DF64D00A5D7D6 /* RiwayatMutasiFilterDateCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614C7162E2DF64D00A5D7D6 /* RiwayatMutasiFilterDateCollectionView.swift */; };
 		A614C7192E2DF6E900A5D7D6 /* CostumeMonthPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614C7182E2DF6DF00A5D7D6 /* CostumeMonthPickerView.swift */; };
-		A614C71B2E2DF72600A5D7D6 /* CostumeMonthPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614C71A2E2DF72500A5D7D6 /* CostumeMonthPickerCell.swift */; };
 		A665EC562E289CA100F28B78 /* MutasiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC4F2E289CA100F28B78 /* MutasiViewController.swift */; };
 		A665EC572E289CA100F28B78 /* RiwayatMutasiCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC4B2E289CA100F28B78 /* RiwayatMutasiCellView.swift */; };
 		A665EC582E289CA100F28B78 /* AktivitasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665EC4D2E289CA100F28B78 /* AktivitasViewController.swift */; };
@@ -200,7 +199,6 @@
 		A614C7142E2DF61800A5D7D6 /* RiwayatMutasiFilterDateCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiFilterDateCellView.swift; sourceTree = "<group>"; };
 		A614C7162E2DF64D00A5D7D6 /* RiwayatMutasiFilterDateCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiFilterDateCollectionView.swift; sourceTree = "<group>"; };
 		A614C7182E2DF6DF00A5D7D6 /* CostumeMonthPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostumeMonthPickerView.swift; sourceTree = "<group>"; };
-		A614C71A2E2DF72500A5D7D6 /* CostumeMonthPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostumeMonthPickerCell.swift; sourceTree = "<group>"; };
 		A665EC492E289CA100F28B78 /* RiwayatMutasiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiModel.swift; sourceTree = "<group>"; };
 		A665EC4B2E289CA100F28B78 /* RiwayatMutasiCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatMutasiCellView.swift; sourceTree = "<group>"; };
 		A665EC4D2E289CA100F28B78 /* AktivitasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktivitasViewController.swift; sourceTree = "<group>"; };
@@ -500,7 +498,6 @@
 		A665EC6F2E29FD6A00F28B78 /* CalendarBottomSheet */ = {
 			isa = PBXGroup;
 			children = (
-				A614C71A2E2DF72500A5D7D6 /* CostumeMonthPickerCell.swift */,
 				A614C7182E2DF6DF00A5D7D6 /* CostumeMonthPickerView.swift */,
 				A665EC702E29FD8A00F28B78 /* CostumCalendarCellView.swift */,
 				A665EC6D2E29EA3D00F28B78 /* CostumCalendarDatePickerView.swift */,
@@ -884,7 +881,6 @@
 				D6B3D0F22E27E8EC00FE51FC /* LimitSettingCellView.swift in Sources */,
 				D6B3D0F32E27E8EC00FE51FC /* NotifyTransactionManagerVC.swift in Sources */,
 				D6B3D0F42E27E8EC00FE51FC /* BiFastActivatedPhoneVC.swift in Sources */,
-				A614C71B2E2DF72600A5D7D6 /* CostumeMonthPickerCell.swift in Sources */,
 				A69D08552E2A368300BB83EB /* SumberRekeningCollectionView.swift in Sources */,
 				D6B3D0F52E27E8EC00FE51FC /* LimitSettingVC.swift in Sources */,
 				D6B3D0F62E27E8EC00FE51FC /* CardSettingsItem.swift in Sources */,

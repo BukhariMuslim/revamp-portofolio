@@ -50,6 +50,59 @@ class RiwayatMutasiViewModel {
         self.onSaveFilter?()
     }
     
+    func isDefaultDateRange(start: Date, end: Date) -> Bool {
+        let calendar = Calendar.current
+        let defaultEnd = Date()
+        guard let defaultStart = calendar.date(byAdding: .day, value: -30, to: defaultEnd) else {
+            return false
+        }
+        
+        return calendar.isDate(start, inSameDayAs: defaultStart) && calendar.isDate(end, inSameDayAs: defaultEnd)
+    }
+    
+    func getFilterText(
+        filterType: DateFilterType = .all,
+        startDate: Date? = nil,
+        endDate: Date? = nil,
+        selectedMonth: Date? = nil
+    ) -> String {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "id_ID")
+        
+        switch filterType {
+        case .today:
+            return "Hari Ini"
+            
+        case .last7Days:
+            return "7 Hari Terakhir"
+            
+        case .selectMonth:
+            dateFormatter.dateFormat = "MMMM"
+            if let startDate = startDate {
+                let monthString = dateFormatter.string(from: startDate)
+                return "\(monthString)"
+            }
+            
+            else {
+                return "Semua"
+            }
+            
+        case .selectDate:
+            if let startDate = startDate, let endDate = endDate {
+                dateFormatter.dateFormat = "d MMMM yyyy"
+                let startString = dateFormatter.string(from: startDate)
+                let endString = dateFormatter.string(from: endDate)
+                return "\(startString) - \(endString)"
+            } else {
+                return "Semua"
+            }
+            
+        case .all:
+            return "Semua"
+        }
+    }
+    
     private func filterMutasi(
         models: [RiwayatMutasiModel],
         startDate: Date,

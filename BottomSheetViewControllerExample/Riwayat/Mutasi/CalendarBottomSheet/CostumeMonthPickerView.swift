@@ -60,7 +60,6 @@ final class CostumeMonthPickerView: UIView {
     }
     
     private func setupInitialSelection() {
-        let currentDate = Date()
         let calendar = Calendar.current
         
         if let previousMonth = previousSelectedMonth,

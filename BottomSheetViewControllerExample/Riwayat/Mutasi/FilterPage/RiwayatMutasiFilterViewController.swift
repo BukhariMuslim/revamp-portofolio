@@ -51,13 +51,14 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
     
     private var selectedStartDate = Date()
     private var selectedEndDate = Date()
+    private var selectedMonth = Date()
     private var selectedAccount = "Semua Rekening"
     private var selectedTransactionType: TransactionType = .all
-    private var selectedDateFilter: DateFilterType?
+    private var selectedDateFilter: DateFilterType = .today
     private var previousSelectedMonth: Int?
     private var previousSelectedYear: Int?
     
-    var onFilterApplied: ((Date, Date, String, TransactionType) -> Void)?
+    var onFilterApplied: ((Date, Date, String, TransactionType, DateFilterType) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -207,6 +208,8 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
             
         case .selectDate:
             showDateRangePickerUpdated()
+        case .all:
+            break
         }
     }
     
@@ -237,8 +240,10 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
     }
     
     @objc private func resetButtonTapped() {
+        selectedAccount = ""
+        accountSection.updateValue("")
         selectedTransactionType = .all
-        selectedDateFilter = nil
+        selectedDateFilter = .today
         previousSelectedMonth = nil
         previousSelectedYear = nil
         dateFilterSection.setSelectedFilter(nil)
@@ -246,11 +251,24 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
     }
     
     @objc private func applyButtonTapped() {
-        onFilterApplied?(selectedStartDate, selectedEndDate, selectedAccount, selectedTransactionType)
+        onFilterApplied?(selectedStartDate, selectedEndDate, selectedAccount, selectedTransactionType, selectedDateFilter)
         navigationController?.popViewController(animated: true)
     }
+}
+
+extension RiwayatMutasiFilterViewController {
+    static func create(
+        onFilterApplied: @escaping (Date, Date, String, TransactionType, DateFilterType) -> Void
+    ) -> RiwayatMutasiFilterViewController {
+        let controller = RiwayatMutasiFilterViewController()
+        controller.onFilterApplied = onFilterApplied
+        return controller
+    }
+}
+
+extension RiwayatMutasiFilterViewController {
     
-    private func showMonthPicker() {
+    func showMonthPicker() {
         let monthPickerView = CostumeMonthPickerView()
         
         if let previousMonth = previousSelectedMonth,
@@ -275,6 +293,7 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
             
             self.selectedStartDate = startOfMonth
             self.selectedEndDate = endOfMonth
+            self.selectedMonth = startOfMonth
             self.shouldDisableApplyButton(isEnable: true)
         }
         
@@ -283,10 +302,12 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
             buttonTitle: "Simpan",
             contentView: monthPickerView,
             onActionTapped: { [weak self] in
+                
                 guard let self = self else {
                     return
                 }
-                
+                self.shouldDisableApplyButton(isEnable: true)
+
                 let selection = monthPickerView.getCurrentSelection()
                 self.previousSelectedMonth = selection.month
                 self.previousSelectedYear = selection.year
@@ -297,19 +318,6 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
         
         self.presentBrimonsBottomSheet(viewController: monthPicker)
     }
-}
-
-extension RiwayatMutasiFilterViewController {
-    static func create(
-        onFilterApplied: @escaping (Date, Date, String, TransactionType) -> Void
-    ) -> RiwayatMutasiFilterViewController {
-        let controller = RiwayatMutasiFilterViewController()
-        controller.onFilterApplied = onFilterApplied
-        return controller
-    }
-}
-
-extension RiwayatMutasiFilterViewController {
     
     func showDateRangePickerUpdated() {
         let calendarView = CostumCalendarDatePickerView()

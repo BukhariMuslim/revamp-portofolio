@@ -209,7 +209,7 @@ final class RiwayatViewController: UIViewController {
                 
                 let filterVC = RiwayatMutasiFilterViewController()
                 
-                filterVC.onFilterApplied = {[weak self] (selectedStartDate, selectedEndDate, selectedAccount, selectedTransactionType) in
+                filterVC.onFilterApplied = {[weak self] (selectedStartDate, selectedEndDate, selectedAccount, selectedTransactionType, filterType) in
                     
                     mutasiVC.viewModel.filterDataBy(
                         startDate: selectedStartDate,
@@ -217,6 +217,19 @@ final class RiwayatViewController: UIViewController {
                         transactionType: selectedTransactionType,
                         rekeningNumber: selectedAccount
                     )
+                    
+                    let filterText = mutasiVC.viewModel.getFilterText(
+                        filterType: filterType,
+                        startDate: selectedStartDate,
+                        endDate: selectedStartDate,
+                        selectedMonth: selectedStartDate
+                    )
+                        
+                    let hasFilter = selectedTransactionType != .all ||
+                    selectedAccount != "Semua Rekening" ||
+                    !mutasiVC.viewModel.isDefaultDateRange(start: selectedStartDate, end: selectedEndDate)
+                    
+                    mutasiVC.filterView.setFilterApplied(hasFilter, filterText)
                 }
                 
                 navigationController?.pushViewController(filterVC, animated: true)

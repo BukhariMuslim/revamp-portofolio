@@ -17,20 +17,24 @@ final class RiwayaMutasiFilterContainerView: UIView {
     private let months = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun",
                           "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
     
-    private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 12
-        layout.sectionInset = .zero
-        
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .white
-        cv.showsHorizontalScrollIndicator = false
-        cv.delegate = self
-        cv.dataSource = self
-        cv.register(MonthCell.self, forCellWithReuseIdentifier: MonthCell.reuseID)
-        return cv
-    }()
+    // TODO: Santos - Implement month collection view when API is ready
+    /*
+     private lazy var collectionView: UICollectionView = {
+     let layout = UICollectionViewFlowLayout()
+     layout.scrollDirection = .horizontal
+     layout.minimumLineSpacing = 12
+     layout.sectionInset = .zero
+     
+     let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+     cv.backgroundColor = .white
+     cv.showsHorizontalScrollIndicator = false
+     cv.delegate = self
+     cv.dataSource = self
+     cv.register(RiwayatFilterMonthCell.self, forCellWithReuseIdentifier: RiwayatFilterMonthCell.reuseID)
+     return cv
+     }()
+     */
+    
     
     private lazy var buttonStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [clearButton, filterButton])
@@ -55,15 +59,39 @@ final class RiwayaMutasiFilterContainerView: UIView {
         button.tintColor = UIColor.Brimo.Black.main
         button.backgroundColor = ConstantsColor.black100
         button.layer.cornerRadius = 16
+        button.isHidden = true
         return button
     }()
     
+    private let filterBadgeView: UIView = {
+        let v = UIView()
+        v.backgroundColor = UIColor.Brimo.Primary.x100
+        v.layer.cornerRadius = 16
+        v.clipsToBounds = true
+        return v
+    }()
+    
+    private let filterBadgeLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.font = UIFont.Brimo.Body.mediumRegular
+        lbl.textColor = UIColor.Brimo.Primary.main
+        lbl.text = "Semua"
+        lbl.textAlignment = .center
+        return lbl
+    }()
+    
     private var selectedIndex: Int? = nil
+    private var hasAppliedFilter = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
-        addSubview(collectionView)
+        
+        // TODO: Santos - Add collectionView when API is ready
+        // addSubview(collectionView)
+        
+        addSubview(filterBadgeView)
+        filterBadgeView.addSubview(filterBadgeLabel)
         addSubview(buttonStackView)
         setupConstraints()
         
@@ -72,7 +100,7 @@ final class RiwayaMutasiFilterContainerView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
     
     @objc private func filterTapped() {
@@ -81,23 +109,41 @@ final class RiwayaMutasiFilterContainerView: UIView {
     
     @objc private func clearTapped() {
         selectedIndex = nil
-        collectionView.reloadData()
+        // TODO: Santos - Reload collection view when implemented
+        // collectionView.reloadData()
         didSelectMonth?(nil)
         onClearTap?()
+        setFilterApplied(true, DateFilterType.all.displayTitle)
     }
     
     private func setupConstraints() {
-        collectionView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
+        // TODO: Santos - Update constraints when collection view is implemented
+        /*
+         collectionView.snp.makeConstraints { make in
+         make.leading.equalToSuperview().offset(20)
+         make.centerY.equalToSuperview()
+         make.height.equalTo(32)
+         make.trailing.equalTo(buttonStackView.snp.leading).offset(-10)
+         }
+         */
+        
+        filterBadgeView.setContentHuggingPriority(.required, for: .horizontal)
+        filterBadgeView.setContentCompressionResistancePriority(.required, for: .horizontal)
+        filterBadgeView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
+            make.trailing.equalTo(buttonStackView.snp.leading).offset(-8)
+            make.leading.greaterThanOrEqualToSuperview().offset(20)
             make.height.equalTo(32)
-            make.trailing.equalTo(buttonStackView.snp.leading).offset(-10)
+        }
+        
+        filterBadgeLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 4, left: 12, bottom: 4, right: 12))
         }
         
         buttonStackView.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(20)
             make.centerY.equalToSuperview()
-            make.size.equalTo(CGSize(width: 72, height: 32))
+            make.height.equalTo(32)
         }
         
         filterButton.snp.makeConstraints { make in
@@ -108,34 +154,56 @@ final class RiwayaMutasiFilterContainerView: UIView {
             make.size.equalTo(CGSize(width: 32, height: 32))
         }
     }
-}
-
-extension RiwayaMutasiFilterContainerView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ cv: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return months.count
-    }
     
-    func collectionView(_ cv: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = cv.dequeueReusableCell(withReuseIdentifier: MonthCell.reuseID, for: indexPath) as! MonthCell
-        let month = months[indexPath.item]
-        let isSelected = (indexPath.item == selectedIndex)
-        cell.configure(text: month, selected: isSelected)
-        return cell
-    }
-    
-    func collectionView(_ cv: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedIndex = (selectedIndex == indexPath.item ? nil : indexPath.item)
-        cv.reloadData()
-        didSelectMonth?(selectedIndex)
-    }
-    
-    func collectionView(_ cv: UICollectionView, layout cvLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 54, height: 32)
+    func setFilterApplied(_ applied: Bool, _ filterText: String) {
+        hasAppliedFilter = applied
+        
+        UIView.animate(withDuration: 0.2) {
+            self.filterBadgeLabel.text = filterText
+            self.clearButton.isHidden = !applied
+            
+            if applied {
+                self.buttonStackView.snp.updateConstraints { make in
+                    make.height.equalTo(32)
+                }
+            }
+            
+            self.layoutIfNeeded()
+        }
     }
 }
 
-private final class MonthCell: UICollectionViewCell {
-    static let reuseID = "MonthCell"
+// TODO: Santos - Implement UICollectionView DataSource & Delegate when API is ready
+/*
+ extension RiwayaMutasiFilterContainerView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+ func collectionView(_ cv: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+ return months.count
+ }
+ 
+ func collectionView(_ cv: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+ guard let cell = cv.dequeueReusableCell(withReuseIdentifier: RiwayatFilterMonthCell.reuseID, for: indexPath) as? RiwayatFilterMonthCell else {
+ return UICollectionViewCell()
+ }
+ let month = months[indexPath.item]
+ let isSelected = (indexPath.item == selectedIndex)
+ cell.configure(text: month, selected: isSelected)
+ return cell
+ }
+ 
+ func collectionView(_ cv: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+ selectedIndex = (selectedIndex == indexPath.item ? nil : indexPath.item)
+ cv.reloadData()
+ didSelectMonth?(selectedIndex)
+ }
+ 
+ func collectionView(_ cv: UICollectionView, layout cvLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+ return CGSize(width: 54, height: 32)
+ }
+ }
+ */
+
+private final class RiwayatFilterMonthCell: UICollectionViewCell {
+    static let reuseID = "RiwayatFilterMonthCell"
     private let label = UILabel()
     
     override init(frame: CGRect) {

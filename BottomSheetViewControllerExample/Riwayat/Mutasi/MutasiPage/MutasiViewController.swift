@@ -35,8 +35,7 @@ class MutasiViewController: UIViewController {
         return cv
     }()
     
-    private let filterView: RiwayaMutasiFilterContainerView = RiwayaMutasiFilterContainerView()
-    
+    let filterView: RiwayaMutasiFilterContainerView = RiwayaMutasiFilterContainerView()
     var viewModel: RiwayatMutasiViewModel = RiwayatMutasiViewModel()
     
     init(viewModel: RiwayatMutasiViewModel) {
