@@ -101,7 +101,8 @@ class CostumCalendarDatePickerView: UIView {
     }()
     
     private let maxDate: Date = Date()
-    
+    private let maxSelectableRangeInDays = 92
+
     private lazy var minDate: Date = {
         let cal = Calendar.current
         guard let date = cal.date(byAdding: .year, value: -1, to: Date()) else {
@@ -322,12 +323,27 @@ extension CostumCalendarDatePickerView: UICollectionViewDataSource, UICollection
         }
         
         let date = days[idx.item]
-        
+        let cal  = Calendar.current
+
         let isDisabled: Bool = {
             guard let d = date else {
                 return true
             }
-            return d < minDate || d > maxDate
+            
+            if d < minDate || d > maxDate {
+                return true
+            }
+            
+          if let start = selectedStartDate, selectedEndDate == nil {
+            guard let daysDiff = cal.dateComponents([.day], from: start, to: d).day else {
+              return false
+            }
+              
+            if abs(daysDiff) > maxSelectableRangeInDays {
+              return true
+            }
+          }
+          return false
         }()
         
         cell.isUserInteractionEnabled = !isDisabled
