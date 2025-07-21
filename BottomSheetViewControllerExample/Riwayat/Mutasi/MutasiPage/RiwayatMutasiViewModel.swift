@@ -16,19 +16,13 @@ class RiwayatMutasiViewModel {
     var allMutasiData: [RiwayatMutasiModel] = []
     var selectedMonthIndex: Int? = nil
     
-    func filterDataByMonth(selectedMonth: Int = 0) {
+    func filterDataByMonth() {
         if let selectedIndex = selectedMonthIndex {
             let selectedMonth = selectedIndex + 1
             
             mutasiData = allMutasiData.filter { model in
                 let calendar = Calendar.current
                 let month = calendar.component(.month, from: model.tanggalMutasi)
-                return month == selectedMonth
-            }
-        } else if selectedMonth > 0  {
-            mutasiData = allMutasiData.filter { model in
-                let calendar = Calendar.current
-                let month = calendar.component(.month, from: model.tanggalMutasi + Double(selectedMonth))
                 return month == selectedMonth
             }
         } else {
@@ -42,9 +36,9 @@ class RiwayatMutasiViewModel {
         startDate: Date,
         endDate: Date,
         transactionType: TransactionType,
-        rekeningNumber: String)
-    {
-        let filteredByMonthsData = filterMutasi(
+        rekeningNumber: String
+    ) {
+        let filteredData = filterMutasi(
             models: allMutasiData,
             startDate: startDate,
             endDate: endDate,
@@ -52,7 +46,7 @@ class RiwayatMutasiViewModel {
             selectedRekeningId: rekeningNumber
         )
         
-        mutasiData = filteredByMonthsData
+        mutasiData = filteredData
         self.onSaveFilter?()
     }
     
@@ -61,25 +55,19 @@ class RiwayatMutasiViewModel {
         startDate: Date,
         endDate: Date,
         selectedType: TransactionType,
-        selectedRekeningId: String,
-        calendar: Calendar = .current
+        selectedRekeningId: String
     ) -> [RiwayatMutasiModel] {
         
+        let calendar: Calendar = .current
         let startOfDay = calendar.startOfDay(for: startDate)
-        guard let dayAfterEnd = calendar.date(
-            byAdding: .day,
-            value: 1,
-            to: calendar.startOfDay(for: endDate)
-        ) else {
-            return []
-        }
+        let endOfDay = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: endDate) ?? endDate
         
-        let shouldFilterByRekeningCard = selectedRekeningId.isEmpty
+        let shouldFilterByRekeningCard = !selectedRekeningId.isEmpty && selectedRekeningId != "Semua Rekening"
         
         return models.compactMap { model in
-            let modelDay = calendar.startOfDay(for: model.tanggalMutasi)
+            let modelDate = model.tanggalMutasi
             
-            guard modelDay >= startOfDay, modelDay < dayAfterEnd else {
+            guard modelDate >= startOfDay && modelDate <= endOfDay else {
                 return nil
             }
             
@@ -87,7 +75,7 @@ class RiwayatMutasiViewModel {
                 let itemType = TransactionType.from(title: item.transactionType)
                 let typeMatch = (selectedType == .all) || (itemType == selectedType)
                 
-                let rekeningMatch = shouldFilterByRekeningCard || item.cardID == selectedRekeningId
+                let rekeningMatch = !shouldFilterByRekeningCard || item.cardID == selectedRekeningId
                 
                 return typeMatch && rekeningMatch
             }

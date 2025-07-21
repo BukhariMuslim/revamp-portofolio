@@ -22,10 +22,12 @@ class RiwayatMutasiMockData {
     func loadSampleData() -> [RiwayatMutasiModel] {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
+        formatter.locale = Locale(identifier: "id_ID")
+
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "HH:mm:ss"
-        
+        formatter.locale = Locale(identifier: "id_ID")
+
         let june14Data = RiwayatMutasiModel(
             tanggalMutasi: formatter.date(from: "2025-06-14 00:00:00")!,
             riwayatMutasiItemModel: [
@@ -173,6 +175,34 @@ class RiwayatMutasiMockData {
             ]
         )
         
-        return [june14Data, june13Data, mayData, aprilData, january, january2, febuari]
+        let hariIni = RiwayatMutasiModel(
+            tanggalMutasi: Date(),
+            riwayatMutasiItemModel: [
+                RiwayatMutasiItemModel(
+                    transactionID: "Salary",
+                    description: "Monthly Salary",
+                    price: "+Rp5.000.000,00",
+                    time: timeFormatter.date(from: "09:00:00")!,
+                    transactionType: "Uang Masuk",
+                    cardID: "31298219"
+                )
+            ]
+        )
+        
+        let hari7 = RiwayatMutasiModel(
+            tanggalMutasi: formatter.date(from: "2025-07-15 00:00:00")!,
+            riwayatMutasiItemModel: [
+                RiwayatMutasiItemModel(
+                    transactionID: "Salary",
+                    description: "Monthly Salary",
+                    price: "+Rp5.000.000,00",
+                    time: timeFormatter.date(from: "09:00:00")!,
+                    transactionType: "Uang Masuk",
+                    cardID: "31298219"
+                )
+            ]
+        )
+        
+        return [june14Data, june13Data, mayData, aprilData, january, january2, febuari, hari7, hariIni]
     }
 }

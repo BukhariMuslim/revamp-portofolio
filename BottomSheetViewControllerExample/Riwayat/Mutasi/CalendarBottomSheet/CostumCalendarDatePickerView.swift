@@ -111,6 +111,15 @@ class CostumCalendarDatePickerView: UIView {
         return date
     }()
     
+    private var earliestAllowedDate: Date? {
+        guard let start = selectedStartDate else { return nil }
+        return Calendar.current.date(
+          byAdding: .day,
+          value: -maxSelectableRangeInDays,
+          to: start
+        )
+    }
+    
     var onDateRangeSelected: ((Date, Date) -> Void)?
     
     override init(frame: CGRect) {
@@ -124,6 +133,44 @@ class CostumCalendarDatePickerView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private func updateNavigationButtons() {
+        let cal = Calendar.current
+        
+        let prevMonthStart: Date? = {
+          guard let candidate = cal.date(
+                  byAdding: .month,
+                  value: -1,
+                  to: currentDate
+                )
+          else {
+              return nil
+          }
+            
+          let comps = cal.dateComponents([.year, .month], from: candidate)
+          return cal.date(from: comps)
+        }()
+        
+        var canGoBack = false
+        if let prev = prevMonthStart {
+          let minComps = cal.dateComponents([.year, .month], from: minDate)
+          if let minMonthStart = cal.date(from: minComps),
+             prev >= minMonthStart {
+            canGoBack = true
+          }
+        }
+        
+        if let earliest = earliestAllowedDate,
+           let prev = prevMonthStart {
+          if prev < Calendar.current.startOfDay(for: earliest) {
+            canGoBack = false
+          }
+        }
+        
+        previousButton.isEnabled = canGoBack
+        previousButton.alpha = canGoBack ? 1.0 : 0.3
+    }
+
     
     private func setupViews() {
         backgroundColor = UIColor.Brimo.White.main

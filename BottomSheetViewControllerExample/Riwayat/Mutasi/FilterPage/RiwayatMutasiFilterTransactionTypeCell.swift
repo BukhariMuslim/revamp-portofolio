@@ -8,28 +8,26 @@
 import UIKit
 import SnapKit
 
-enum TransactionType: Int, CaseIterable {
-    case all = 0
-    case income = 1
-    case expense = 2
+enum TransactionType: String, CaseIterable {
+    case all = "Semua"
+    case incoming = "Uang Masuk"
+    case outgoing = "Uang Keluar"
     
-    var title: String {
-        switch self {
-        case .all: return "Semua"
-        case .income: return "Uang Masuk"
-        case .expense: return "Uang Keluar"
-        }
+    var displayTitle: String {
+        return rawValue
     }
     
-    init?(title: String) {
-        guard let match = TransactionType.allCases.first(where: { $0.title == title }) else {
-            return nil
-        }
-        self = match
-    }
-
     static func from(title: String) -> TransactionType {
-        return TransactionType(title: title) ?? .all
+        let normalizedTitle = title.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        switch normalizedTitle {
+        case "uang masuk":
+            return .incoming
+        case "uang keluar":
+            return .outgoing
+        default:
+            return .outgoing
+        }
     }
 }
 
@@ -119,7 +117,7 @@ extension TransactionTypeCollectionView: UICollectionViewDataSource {
         let type = transactionTypes[indexPath.item]
         let isSelected = (type == selectedType)
         
-        cell.configure(with: type.title, isSelected: isSelected)
+        cell.configure(with: type.displayTitle, isSelected: isSelected)
         
         return cell
     }
@@ -138,7 +136,7 @@ extension TransactionTypeCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let type = transactionTypes[indexPath.item]
-        let width = type.title.width(withConstrainedHeight: 40, font: UIFont.Brimo.Title.smallRegular) + 32
+        let width = type.displayTitle.width(withConstrainedHeight: 40, font: UIFont.Brimo.Title.smallRegular) + 32
         return CGSize(width: max(width, 80), height: 40)
     }
 }
