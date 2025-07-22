@@ -209,33 +209,15 @@ final class RiwayatViewController: UIViewController {
                 
                 let filterVC = RiwayatMutasiFilterViewController()
                 
-                filterVC.onFilterApplied = {[weak self] (
-                    selectedStartDate,
-                    selectedEndDate,
-                    selectedAccount,
-                    selectedAccountName,
-                    selectedTransactionType,
-                    filterType
-                ) in
+                filterVC.onFilterApplied = {[weak self] (filterData) in
                     
-                    mutasiVC.viewModel.filterDataBy(
-                        startDate: selectedStartDate,
-                        endDate: selectedEndDate,
-                        transactionType: selectedTransactionType,
-                        rekeningNumber: selectedAccount,
-                        rekeningName: selectedAccountName
-                    )
+                    mutasiVC.viewModel.filterDataBy(filterData: filterData)
                     
-                    let filterText = mutasiVC.viewModel.getFilterText(
-                        filterType: filterType,
-                        startDate: selectedStartDate,
-                        endDate: selectedStartDate,
-                        selectedMonth: selectedStartDate
-                    )
+                    let filterText = mutasiVC.viewModel.getFilterText(data: filterData)
                         
-                    let hasFilter = selectedTransactionType != .all ||
-                    selectedAccount != "Semua Rekening" ||
-                    !mutasiVC.viewModel.isDefaultDateRange(start: selectedStartDate, end: selectedEndDate)
+                    let hasFilter = filterData.transactionType != .all ||
+                    filterData.rekeningId != "Semua Rekening" ||
+                    !mutasiVC.viewModel.isDefaultDateRange(start: filterData.startDate, end: filterData.endDate)
                     
                     mutasiVC.filterView.setFilterApplied(hasFilter, filterText)
                 }

@@ -62,13 +62,18 @@ class MutasiViewController: UIViewController {
     
     private func configureViewModel() {
         
-        viewModel.onSaveFilter = {[weak self] (rekeningId, rekeningName) in
+        viewModel.onSaveFilter = {[weak self] (rekeningDetailModel) in
             guard let self = self else {
                 return
             }
 
+            accountSection.updateValue(
+                rekeningDetailModel.rekeningName,
+                rekeningDetailModel.rekeningId,
+                true
+            )
+            
             let isEmpty = self.viewModel.mutasiData.isEmpty
-            accountSection.updateValue(rekeningName, rekeningId, true)
             emptyStateView.isHidden = !isEmpty
             collectionView.isHidden = isEmpty
             

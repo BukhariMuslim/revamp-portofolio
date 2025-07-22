@@ -7,9 +7,14 @@
 
 import UIKit
 
+struct RekeningCardDetailModel {
+    let rekeningName: String
+    let rekeningId: String
+}
+
 class RiwayatMutasiViewModel {
     
-    var onSaveFilter: ((String, String) -> Void)?
+    var onSaveFilter: ((RekeningCardDetailModel) -> Void)?
     var onTapMonthFilter: (() -> Void)?
     
     var mutasiData: [RiwayatMutasiModel] = []
@@ -33,23 +38,20 @@ class RiwayatMutasiViewModel {
         self.onTapMonthFilter?()
     }
     
-    func filterDataBy(
-        startDate: Date,
-        endDate: Date,
-        transactionType: TransactionType,
-        rekeningNumber: String,
-        rekeningName: String
-    ) {
+    func filterDataBy(filterData: FilterPageDataModel) {
+        
+        let rekeningDetail = RekeningCardDetailModel(rekeningName: filterData.rekeningName, rekeningId: filterData.rekeningId)
+        
         let filteredData = filterMutasi(
             models: allMutasiData,
-            startDate: startDate,
-            endDate: endDate,
-            selectedType: transactionType,
-            selectedRekeningId: rekeningNumber
+            startDate: filterData.startDate,
+            endDate: filterData.endDate,
+            selectedType: filterData.transactionType,
+            selectedRekeningId: filterData.rekeningId
         )
         
         mutasiData = filteredData
-        self.onSaveFilter?(rekeningNumber, rekeningName)
+        self.onSaveFilter?(rekeningDetail)
     }
     
     func isDefaultDateRange(start: Date, end: Date) -> Bool {
@@ -62,17 +64,12 @@ class RiwayatMutasiViewModel {
         return calendar.isDate(start, inSameDayAs: defaultStart) && calendar.isDate(end, inSameDayAs: defaultEnd)
     }
     
-    func getFilterText(
-        filterType: DateFilterType = .all,
-        startDate: Date? = nil,
-        endDate: Date? = nil,
-        selectedMonth: Date? = nil
-    ) -> String {
+    func getFilterText(data: FilterPageDataModel) -> String {
         
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "id_ID")
         
-        switch filterType {
+        switch data.dateFilterType {
         case .today:
             return "Hari Ini"
             
@@ -81,24 +78,17 @@ class RiwayatMutasiViewModel {
             
         case .selectMonth:
             dateFormatter.dateFormat = "MMMM"
-            if let startDate = startDate {
-                let monthString = dateFormatter.string(from: startDate)
-                return "\(monthString)"
-            }
-            
-            else {
-                return "Semua"
-            }
+            let startDate = data.startDate
+            let monthString = dateFormatter.string(from: startDate)
+            return "\(monthString)"
             
         case .selectDate:
-            if let startDate = startDate, let endDate = endDate {
-                dateFormatter.dateFormat = "d MMMM yyyy"
-                let startString = dateFormatter.string(from: startDate)
-                let endString = dateFormatter.string(from: endDate)
-                return "\(startString) - \(endString)"
-            } else {
-                return "Semua"
-            }
+            let startDate = data.startDate
+            let endDate = data.endDate
+            dateFormatter.dateFormat = "d MMMM yyyy"
+            let startString = dateFormatter.string(from: startDate)
+            let endString = dateFormatter.string(from: endDate)
+            return "\(startString) - \(endString)"
             
         case .all:
             return "Semua"

@@ -8,6 +8,15 @@
 import UIKit
 import SnapKit
 
+struct FilterPageDataModel {
+    let startDate: Date
+    let endDate: Date
+    let rekeningId: String
+    let rekeningName: String
+    let transactionType: TransactionType
+    let dateFilterType: DateFilterType
+}
+
 final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
     
     private let backgroundContainerView: UIImageView = {
@@ -59,7 +68,7 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
     private var previousSelectedMonth: Int?
     private var previousSelectedYear: Int?
     
-    var onFilterApplied: ((Date, Date, String, String, TransactionType, DateFilterType) -> Void)?
+    var onFilterApplied: ((FilterPageDataModel) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -252,21 +261,23 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
     }
     
     @objc private func applyButtonTapped() {
-        onFilterApplied?(
-            selectedStartDate,
-            selectedEndDate,
-            selectedAccount,
-            selectedAccountName,
-            selectedTransactionType,
-            selectedDateFilter
+        let filterData = FilterPageDataModel(
+            startDate: selectedStartDate,
+            endDate: selectedEndDate,
+            rekeningId: selectedAccount,
+            rekeningName: selectedAccountName,
+            transactionType: selectedTransactionType,
+            dateFilterType: selectedDateFilter
         )
+        
+        onFilterApplied?(filterData)
         navigationController?.popViewController(animated: true)
     }
 }
 
 extension RiwayatMutasiFilterViewController {
     static func create(
-        onFilterApplied: @escaping (Date, Date, String, String, TransactionType, DateFilterType) -> Void
+        onFilterApplied: @escaping (FilterPageDataModel) -> Void
     ) -> RiwayatMutasiFilterViewController {
         let controller = RiwayatMutasiFilterViewController()
         controller.onFilterApplied = onFilterApplied
