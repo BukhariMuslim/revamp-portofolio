@@ -37,7 +37,7 @@ class RiwayatMutasiMockData {
                     price: "-Rp31.000,00",
                     time: timeFormatter.date(from: "12:30:21")!,
                     transactionType: "Uang Keluar",
-                    cardID: "12989328"
+                    cardID: "6013 3455 0999 120"
                 ),
                 RiwayatMutasiItemModel(
                     transactionID: "QRISTRF7411084763726#17472627362762736",
@@ -45,7 +45,7 @@ class RiwayatMutasiMockData {
                     price: "-Rp20.000,00",
                     time: timeFormatter.date(from: "12:30:21")!,
                     transactionType: "Uang Keluar",
-                    cardID: "21291288"
+                    cardID: "6013 3455 0999 120"
                 ),
                 RiwayatMutasiItemModel(
                     transactionID: "Pembayaran Tokopedia",
@@ -53,7 +53,7 @@ class RiwayatMutasiMockData {
                     price: "-Rp101.000,00",
                     time: timeFormatter.date(from: "12:30:21")!,
                     transactionType: "Uang Keluar",
-                    cardID: "12989328"
+                    cardID: "6013 3455 0999 120"
                 ),
             ]
         )
@@ -67,7 +67,7 @@ class RiwayatMutasiMockData {
                     price: "+Rp280.000,00",
                     time: timeFormatter.date(from: "12:30:21")!,
                     transactionType: "Uang Masuk",
-                    cardID: "12989328"
+                    cardID: "6013 3455 0999 120"
                 ),
                 RiwayatMutasiItemModel(
                     transactionID: "Admin Fee",
@@ -75,7 +75,7 @@ class RiwayatMutasiMockData {
                     price: "-Rp5.500,00",
                     time: timeFormatter.date(from: "12:30:21")!,
                     transactionType: "Uang Keluar",
-                    cardID: "21291288"
+                    cardID: "6013 3455 0999 120"
                 )
             ]
         )
@@ -89,7 +89,7 @@ class RiwayatMutasiMockData {
                     price: "-Rp50.000,00",
                     time: timeFormatter.date(from: "10:15:30")!,
                     transactionType: "Uang Keluar",
-                    cardID: "31298219"
+                    cardID: "6013 3455 0999 121"
                 )
             ]
         )
@@ -103,7 +103,7 @@ class RiwayatMutasiMockData {
                     price: "+Rp5.000.000,00",
                     time: timeFormatter.date(from: "09:00:00")!,
                     transactionType: "Uang Masuk",
-                    cardID: "41298219"
+                    cardID: "6013 3455 0999 121"
                 ),
                 RiwayatMutasiItemModel(
                     transactionID: "Admin Fee",
@@ -111,7 +111,7 @@ class RiwayatMutasiMockData {
                     price: "-Rp5.500,00",
                     time: timeFormatter.date(from: "12:30:21")!,
                     transactionType: "Uang Keluar",
-                    cardID: "31298219"
+                    cardID: "6013 3455 0999 122"
                 ),
                 RiwayatMutasiItemModel(
                     transactionID: "Admin Fee",
@@ -119,7 +119,7 @@ class RiwayatMutasiMockData {
                     price: "-Rp5.500,00",
                     time: timeFormatter.date(from: "12:30:21")!,
                     transactionType: "Uang keluar",
-                    cardID: "41298219"
+                    cardID: "6013 3455 0999 122"
                 )
             ]
         )
@@ -133,7 +133,7 @@ class RiwayatMutasiMockData {
                     price: "+Rp5.000.000,00",
                     time: timeFormatter.date(from: "09:00:00")!,
                     transactionType: "Uang Masuk",
-                    cardID: "41298219"
+                    cardID: "6013 3455 0999 122"
                 )
             ]
         )
@@ -147,7 +147,7 @@ class RiwayatMutasiMockData {
                     price: "+Rp5.000.000,00",
                     time: timeFormatter.date(from: "09:00:00")!,
                     transactionType: "Uang Masuk",
-                    cardID: "41298219"
+                    cardID: "6013 3455 0999 122"
 
                 ),
                 RiwayatMutasiItemModel(
@@ -156,7 +156,7 @@ class RiwayatMutasiMockData {
                     price: "+Rp5.000.000,00",
                     time: timeFormatter.date(from: "10:00:00")!,
                     transactionType: "Uang Masuk",
-                    cardID: "41298219"
+                    cardID: "6013 3455 0999 122"
                 )
             ]
         )
@@ -170,7 +170,7 @@ class RiwayatMutasiMockData {
                     price: "+Rp5.000.000,00",
                     time: timeFormatter.date(from: "09:00:00")!,
                     transactionType: "Uang Masuk",
-                    cardID: "31298219"
+                    cardID: "6013 3455 0999 121"
                 )
             ]
         )
@@ -184,7 +184,7 @@ class RiwayatMutasiMockData {
                     price: "+Rp5.000.000,00",
                     time: timeFormatter.date(from: "09:00:00")!,
                     transactionType: "Uang Masuk",
-                    cardID: "31298219"
+                    cardID: "6013 3455 0999 121"
                 )
             ]
         )
@@ -198,7 +198,7 @@ class RiwayatMutasiMockData {
                     price: "+Rp5.000.000,00",
                     time: timeFormatter.date(from: "09:00:00")!,
                     transactionType: "Uang Masuk",
-                    cardID: "31298219"
+                    cardID: "6013 3455 0999 121"
                 )
             ]
         )

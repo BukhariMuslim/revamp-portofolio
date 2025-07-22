@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class MutasiViewController: UIViewController {
     
@@ -35,6 +36,8 @@ class MutasiViewController: UIViewController {
         return cv
     }()
     
+    private let accountSection = RiwayatMutasiFilterSectionCellView()
+    
     let filterView: RiwayaMutasiFilterContainerView = RiwayaMutasiFilterContainerView()
     var viewModel: RiwayatMutasiViewModel = RiwayatMutasiViewModel()
     
@@ -54,16 +57,18 @@ class MutasiViewController: UIViewController {
         setupConstraints()
         configureEmptyState()
         configureFilterView()
+        setupAccountView()
     }
     
     private func configureViewModel() {
         
-        viewModel.onSaveFilter = {[weak self] in
+        viewModel.onSaveFilter = {[weak self] (rekeningId, rekeningName) in
             guard let self = self else {
                 return
             }
-            
+
             let isEmpty = self.viewModel.mutasiData.isEmpty
+            accountSection.updateValue(rekeningName, rekeningId, true)
             emptyStateView.isHidden = !isEmpty
             collectionView.isHidden = isEmpty
             
@@ -81,6 +86,23 @@ class MutasiViewController: UIViewController {
             
             collectionView.reloadData()
         }
+    }
+    
+    private func setupAccountView() {
+        
+        //TODO: Santos - Remove Mock Data
+        let mockData = SumberRekeningViewModel()
+        mockData.getCardDetailData()
+        let defaultData = mockData.getAllData().first
+        
+        let accountData = RiwayatMutasiFilterSectionCellData(
+            title: defaultData?.name,
+            value: defaultData?.cardId ?? "",
+            systemIconName: "chevron.down",
+            bankImage: defaultData?.cardImage ?? ""
+        )
+        
+        accountSection.configure(with: accountData, true)
     }
     
     private func configureFilterView() {
@@ -112,9 +134,7 @@ class MutasiViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .white
-        view.addSubview(filterView)
-        view.addSubview(collectionView)
-        view.addSubview(emptyStateView)
+        view.addSubviews(accountSection, filterView, collectionView, emptyStateView)
     }
     
     @objc func didtapFilter() {
@@ -131,12 +151,20 @@ class MutasiViewController: UIViewController {
     
     private func setupConstraints() {
         
-        filterView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
+        accountSection.snp.remakeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(68)
+            make.bottom.equalTo(filterView.snp.top).offset(-12)
+        }
+        
+        filterView.snp.remakeConstraints { make in
+            make.top.equalTo(accountSection.snp.bottom).offset(12)
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(60)
         }
         
-        collectionView.snp.makeConstraints { make in
+        collectionView.snp.remakeConstraints { make in
             make.top.equalTo(filterView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
@@ -174,11 +202,11 @@ extension MutasiViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let mutasiData = self.viewModel.mutasiData
-
+        
         guard indexPath.section < mutasiData.count else {
-          return UICollectionViewCell()
+            return UICollectionViewCell()
         }
-
+        
         let mutasi = mutasiData[indexPath.section]
         
         if indexPath.item == 0 {

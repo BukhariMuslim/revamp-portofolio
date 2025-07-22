@@ -53,12 +53,13 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
     private var selectedEndDate = Date()
     private var selectedMonth = Date()
     private var selectedAccount = "Semua Rekening"
+    private var selectedAccountName = ""
     private var selectedTransactionType: TransactionType = .all
     private var selectedDateFilter: DateFilterType = .today
     private var previousSelectedMonth: Int?
     private var previousSelectedYear: Int?
     
-    var onFilterApplied: ((Date, Date, String, TransactionType, DateFilterType) -> Void)?
+    var onFilterApplied: ((Date, Date, String, String, TransactionType, DateFilterType) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -175,9 +176,10 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
         let accountData = RiwayatMutasiFilterSectionCellData(
             title: "Sumber Rekening",
             value: selectedAccount,
-            systemIconName: "chevron.down"
+            systemIconName: "chevron.down",
+            bankImage: ""
         )
-        accountSection.configure(with: accountData)
+        accountSection.configure(with: accountData, false)
         
         transactionTypeSection.setSelectedType(selectedTransactionType)
         shouldDisableApplyButton(isEnable: false)
@@ -241,7 +243,6 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
     
     @objc private func resetButtonTapped() {
         selectedAccount = ""
-        accountSection.updateValue("")
         selectedTransactionType = .all
         selectedDateFilter = .today
         previousSelectedMonth = nil
@@ -251,14 +252,21 @@ final class RiwayatMutasiFilterViewController: BrimonsBottomSheetVC {
     }
     
     @objc private func applyButtonTapped() {
-        onFilterApplied?(selectedStartDate, selectedEndDate, selectedAccount, selectedTransactionType, selectedDateFilter)
+        onFilterApplied?(
+            selectedStartDate,
+            selectedEndDate,
+            selectedAccount,
+            selectedAccountName,
+            selectedTransactionType,
+            selectedDateFilter
+        )
         navigationController?.popViewController(animated: true)
     }
 }
 
 extension RiwayatMutasiFilterViewController {
     static func create(
-        onFilterApplied: @escaping (Date, Date, String, TransactionType, DateFilterType) -> Void
+        onFilterApplied: @escaping (Date, Date, String, String, TransactionType, DateFilterType) -> Void
     ) -> RiwayatMutasiFilterViewController {
         let controller = RiwayatMutasiFilterViewController()
         controller.onFilterApplied = onFilterApplied
@@ -361,7 +369,8 @@ extension RiwayatMutasiFilterViewController {
             }
             
             self.selectedAccount = model.cardId
-            self.accountSection.updateValue(model.cardId)
+            self.selectedAccountName = model.name
+            self.accountSection.updateValue(model.cardId, model.name, false)
             
             self.dismiss(animated: false)
         }
@@ -372,7 +381,8 @@ extension RiwayatMutasiFilterViewController {
             }
             
             self.selectedAccount = ""
-            self.accountSection.updateValue("")
+            self.selectedAccountName = ""
+            self.accountSection.updateValue("", "", false)
             self.dismiss(animated: false)
         }
         

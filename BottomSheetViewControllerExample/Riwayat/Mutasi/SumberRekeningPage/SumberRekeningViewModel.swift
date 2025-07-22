@@ -15,12 +15,11 @@ class SumberRekeningViewModel {
     
     func getCardDetailData() {
         //TODO: Santos to remove mock and use actual data fromApi
-        let mockData1 = mockDataProvider.loadMockCarDetail(id: "12989328", name: "Personal")
-        let mockData2 = mockDataProvider.loadMockCarDetail(id: "21291288", name: "Business")
-        let mockData3 = mockDataProvider.loadMockCarDetail(id: "31298219", name: "Savings")
-        let mockData4 = mockDataProvider.loadMockCarDetail(id: "41298219", name: "Investment")
+        let mockData1 = mockDataProvider.loadMockCarDetail(id: "6013 3455 0999 120", name: "@marselasatya")
+        let mockData2 = mockDataProvider.loadMockCarDetail(id: "6013 3455 0999 121", name: "@marselasatya2")
+        let mockData3 = mockDataProvider.loadMockCarDetail(id: "6013 3455 0999 122", name: "@marselasatya3")
         
-        self.data = [mockData1, mockData2, mockData3, mockData4]
+        self.data = [mockData1, mockData2, mockData3]
     }
     
     func getAllData() -> [RiwayatMutasiCardDetailModel] {

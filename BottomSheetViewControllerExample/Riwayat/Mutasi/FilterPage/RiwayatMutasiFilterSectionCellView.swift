@@ -12,12 +12,20 @@ struct RiwayatMutasiFilterSectionCellData {
     let title: String?
     let value: String
     let icon: UIImage?
+    let bankImage: String?
     let iconTintColor: UIColor?
     
-    init(title: String?, value: String, systemIconName: String, iconTintColor: UIColor? = nil) {
+    init(
+        title: String?,
+        value: String,
+        systemIconName: String,
+        iconTintColor: UIColor? = nil,
+        bankImage: String
+    ) {
         self.title = title ?? "Sumber Rekening"
         self.value = value
         self.icon = UIImage(systemName: systemIconName)
+        self.bankImage = bankImage
         self.iconTintColor = iconTintColor ?? UIColor.Brimo.Black.x600
     }
 }
@@ -51,6 +59,14 @@ class RiwayatMutasiFilterSectionCellView: UIView {
         return imageView
     }()
     
+    private let bankCardImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 4
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+    
     var onTapped: (() -> Void)?
     
     override init(frame: CGRect) {
@@ -69,7 +85,7 @@ class RiwayatMutasiFilterSectionCellView: UIView {
     
     private func setupView() {
         addSubview(containerView)
-        containerView.addSubviews(titleLabel, valueLabel, iconImageView)
+        containerView.addSubviews(bankCardImageView, titleLabel, valueLabel, iconImageView)
     }
     
     private func setupConstraints() {
@@ -78,14 +94,22 @@ class RiwayatMutasiFilterSectionCellView: UIView {
             make.height.equalTo(80)
         }
         
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
+        bankCardImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(58)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(bankCardImageView).offset(2)
+            make.leading.equalTo(bankCardImageView.snp.trailing).offset(12)
+            make.trailing.lessThanOrEqualTo(iconImageView.snp.leading).offset(-12)
         }
         
         valueLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
-            make.leading.equalToSuperview().offset(16)
+            make.leading.equalTo(bankCardImageView.snp.trailing).offset(12)
+            make.trailing.lessThanOrEqualTo(iconImageView.snp.leading).offset(-12)
         }
         
         iconImageView.snp.makeConstraints { make in
@@ -104,31 +128,47 @@ class RiwayatMutasiFilterSectionCellView: UIView {
         onTapped?()
     }
     
-    func configure(with data: RiwayatMutasiFilterSectionCellData) {
+    func configure(with data: RiwayatMutasiFilterSectionCellData, _ isFromMutasiPage: Bool) {
+        
+        if let image = data.bankImage,
+           !image.isEmpty,
+           let image = UIImage(named: image) {
+            bankCardImageView.image = image
+        } else {
+            bankCardImageView.image = UIImage(named: "debit")
+        }
+        
         titleLabel.text = data.title
         valueLabel.text = data.value
         iconImageView.image = data.icon
         iconImageView.tintColor = data.iconTintColor
         
-        updateLayoutForValue(data.value)
+        updateLayoutForValue(data.value, isFromMutasiPage)
     }
     
-    func updateValue(_ value: String) {
+    func updateValue(
+        _ value: String,
+        _ title: String,
+        _ isFromMutasiPage: Bool
+    ) {
+        titleLabel.text = title
         valueLabel.text = value
-        updateLayoutForValue(value)
+        updateLayoutForValue(value, isFromMutasiPage)
     }
     
-    private func updateLayoutForValue(_ value: String) {
+    private func updateLayoutForValue(_ value: String, _ isFromMutasiPage: Bool) {
         let isEmpty = value.isEmpty
         valueLabel.isHidden = isEmpty
-        
+        iconImageView.isHidden = isFromMutasiPage
         titleLabel.snp.remakeConstraints { make in
+            make.leading.equalTo(bankCardImageView.snp.trailing).offset(12)
+            make.trailing.equalToSuperview().inset(16)
             if isEmpty {
                 make.centerY.equalToSuperview()
             } else {
                 make.top.equalToSuperview().offset(16)
             }
-            make.leading.equalToSuperview().offset(16)
         }
     }
+    
 }

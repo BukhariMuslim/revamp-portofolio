@@ -59,7 +59,7 @@ final class RiwayaMutasiFilterContainerView: UIView {
         button.tintColor = UIColor.Brimo.Black.main
         button.backgroundColor = ConstantsColor.black100
         button.layer.cornerRadius = 16
-        button.isHidden = true
+        button.isHidden = false
         return button
     }()
     

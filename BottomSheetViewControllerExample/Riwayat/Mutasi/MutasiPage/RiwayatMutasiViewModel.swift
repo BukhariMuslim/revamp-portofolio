@@ -9,11 +9,12 @@ import UIKit
 
 class RiwayatMutasiViewModel {
     
-    var onSaveFilter: (() -> Void)?
+    var onSaveFilter: ((String, String) -> Void)?
     var onTapMonthFilter: (() -> Void)?
     
     var mutasiData: [RiwayatMutasiModel] = []
     var allMutasiData: [RiwayatMutasiModel] = []
+    var selectedAccount = "Semua Rekening"
     var selectedMonthIndex: Int? = nil
     
     func filterDataByMonth() {
@@ -36,7 +37,8 @@ class RiwayatMutasiViewModel {
         startDate: Date,
         endDate: Date,
         transactionType: TransactionType,
-        rekeningNumber: String
+        rekeningNumber: String,
+        rekeningName: String
     ) {
         let filteredData = filterMutasi(
             models: allMutasiData,
@@ -47,7 +49,7 @@ class RiwayatMutasiViewModel {
         )
         
         mutasiData = filteredData
-        self.onSaveFilter?()
+        self.onSaveFilter?(rekeningNumber, rekeningName)
     }
     
     func isDefaultDateRange(start: Date, end: Date) -> Bool {
@@ -114,6 +116,7 @@ class RiwayatMutasiViewModel {
         let calendar: Calendar = .current
         let startOfDay = calendar.startOfDay(for: startDate)
         let endOfDay = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: endDate) ?? endDate
+        self.selectedAccount = selectedRekeningId.isEmpty ? "Semua Rekening" : selectedRekeningId
         
         let shouldFilterByRekeningCard = !selectedRekeningId.isEmpty && selectedRekeningId != "Semua Rekening"
         
