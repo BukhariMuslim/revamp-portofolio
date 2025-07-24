@@ -35,10 +35,29 @@ final class CardDetailManagerVC: UIViewController {
     
     private let listActivityView: AccountCardDetailManagerActivityView = AccountCardDetailManagerActivityView()
     
+    private let filterView: ActivityFilterHeaderView = ActivityFilterHeaderView()
+    
     private let contentView: UIView = UIView()
     private var scrollContainerView: StickyRoundedContainerView!
     
     private var isBlocked: Bool = false
+    
+    private var saldoLoading: Bool = false {
+        didSet {
+            headerContent.isLoading = saldoLoading
+            menuCollectionView.isLoading = saldoLoading
+        }
+    }
+    
+    private var activityListLoading: Bool = false {
+        didSet {
+            listActivityView.isLoading = activityListLoading
+            filterView.isLoading = activityListLoading
+            if scrollContainerView != nil {
+                scrollContainerView.isLoading = activityListLoading
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,13 +87,13 @@ final class CardDetailManagerVC: UIViewController {
                 title: "Detail Kartu",
                 image: "menu/credit_card",
                 action: isBlocked ? showBlockedDetailCard : showDetailCard
-            ),
+            )//,
             
-            CardMenuItem(
-                title: "E-Statement",
-                image: "menu/pasca_bayar",
-                action: showEStatementInformation
-            )
+//            CardMenuItem(
+//                title: "E-Statement",
+//                image: "menu/pasca_bayar",
+//                action: showEStatementInformation
+//            )
         ]
 
         menuCollectionView.configure(items: menuItems)
@@ -88,8 +107,8 @@ final class CardDetailManagerVC: UIViewController {
             headerView: headerView,
             contentView: contentView,
             isStickyEnabled: true,
-            compositeHeaderBuilder: { container in
-                let filterView: AccountCardDetailFilter = AccountCardDetailFilter()
+            compositeHeaderBuilder: { [weak self] container in
+                guard let self = self else { return }
                 container.addSubview(filterView)
                 
                 filterView.snp.makeConstraints {

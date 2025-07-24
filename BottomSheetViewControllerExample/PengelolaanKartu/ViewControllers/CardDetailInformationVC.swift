@@ -301,7 +301,7 @@ extension CardDetailInformationVC {
                     subtitle: "Kamu tidak dapat melakukan transaksi menggunakan rekening di BRImo jika dinonaktifkan",
                     agreeBtnTitle: "Nonaktifkan",
                     cancelBtnTitle: "Batalkan",
-                    hideCancelBtn: true
+                    hideCancelBtn: false
                 ))
                 
                 self.presentBrimonsBottomSheet(viewController: vc)

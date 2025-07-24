@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
+import SkeletonView
 
 class AccountCardManagerCard: UIView {
     
@@ -18,6 +19,7 @@ class AccountCardManagerCard: UIView {
         imageView.backgroundColor = .white
         imageView.layer.cornerRadius = 16
         imageView.layer.masksToBounds = true
+        imageView.configureSkeleton(cornerRadius: 16)
         return imageView
     }()
     
@@ -27,6 +29,7 @@ class AccountCardManagerCard: UIView {
         label.textColor = ConstantsColor.white900
         label.numberOfLines = 2
         label.textAlignment = .center
+        label.configureSkeleton(cornerRadius: 7)
         return label
     }()
     
@@ -45,6 +48,7 @@ class AccountCardManagerCard: UIView {
     }
     
     private func setupUI() {
+        configureSkeleton()
         addSubview(iconView)
         addSubview(titleLabel)
         
@@ -82,6 +86,12 @@ class AccountCardManagerCategoryView: UIView {
         return stack
     }()
     
+    public var isLoading: Bool = false {
+        didSet {
+            setSkeleton()
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -92,9 +102,14 @@ class AccountCardManagerCategoryView: UIView {
     }
     
     private func setupUI() {
+        configureSkeleton()
+        stackView.configureSkeleton()
         addSubview(stackView)
         stackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.verticalEdges.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.leading.greaterThanOrEqualToSuperview().offset(12)
+            make.trailing.lessThanOrEqualToSuperview().inset(12)
         }
     }
     
@@ -108,16 +123,36 @@ class AccountCardManagerCategoryView: UIView {
             stackView.addArrangedSubview(view)
         }
         
-        if items.count <= 2 {
-            stackView.distribution = .equalSpacing
-        } else {
-            stackView.distribution = .fillEqually
-        }
+        stackView.distribution = .fillEqually
     }
     
     @objc private func handleCardTap(_ sender: UITapGestureRecognizer) {
         guard let tappedView = sender.view else { return }
         let index = tappedView.tag
         selectedIndex?(index)
+    }
+    
+    private func setSkeleton() {
+        if isLoading {
+            showAnimatedSkeleton(usingColor: .Brimo.Primary.main)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in
+                guard let self = self else { return }
+                self.stackView.subviews.forEach { $0.showAnimatedSkeleton(usingColor: .Brimo.Primary.main) }
+            }
+        } else {
+            stopSkeletonAnimation()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in
+                guard let self = self else { return }
+                self.stackView.subviews.forEach { $0.stopSkeletonAnimation() }
+            }
+        }
+    }
+}
+
+
+extension UIView {
+    func prepareSkeletonRecursively() {
+        isSkeletonable = true
+        subviews.forEach { $0.prepareSkeletonRecursively() }
     }
 }

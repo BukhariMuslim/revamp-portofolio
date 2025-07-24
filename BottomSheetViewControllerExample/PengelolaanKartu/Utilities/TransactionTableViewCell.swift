@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SkeletonView
 
 class TransactionTableViewCell: UITableViewCell {
     private let iconView: UIImageView = UIImageView()
@@ -32,23 +33,29 @@ class TransactionTableViewCell: UITableViewCell {
     }
 
     private func setupLayout() {
+        configureSkeleton()
         iconView.contentMode = .scaleAspectFit
         iconView.tintColor = .black
+        iconView.configureSkeleton(cornerRadius: 12)
         iconView.snp.makeConstraints { $0.size.equalTo(24) }
 
         titleLabel.font = .Brimo.Body.mediumSemiBold
         titleLabel.textColor = .Brimo.Black.main
+        titleLabel.configureSkeleton(cornerRadius: 7)
         
         subtitleLabel.font = .Brimo.Body.mediumRegular
         subtitleLabel.textColor = .Brimo.Black.x600
         subtitleLabel.numberOfLines = 0
+        subtitleLabel.configureSkeleton(cornerRadius: 7)
 
         amountLabel.font = .Brimo.Body.largeSemiBold
         amountLabel.textColor = .Brimo.Black.main
         amountLabel.textAlignment = .right
+        amountLabel.configureSkeleton(cornerRadius: 8)
         
         statusView.backgroundColor = .Brimo.Green.x100
         statusView.layer.cornerRadius = 8
+        statusView.configureSkeleton(cornerRadius: 8)
         
         statusLabel.font = .Brimo.Body.smallSemiBold
         statusLabel.textColor = .Brimo.Green.main
@@ -58,6 +65,7 @@ class TransactionTableViewCell: UITableViewCell {
         descriptionStack.spacing = 4
         descriptionStack.addArrangedSubview(titleLabel)
         descriptionStack.addArrangedSubview(subtitleLabel)
+        descriptionStack.configureSkeleton()
         
         rightStack.axis = .vertical
         rightStack.spacing = 0
@@ -65,6 +73,7 @@ class TransactionTableViewCell: UITableViewCell {
         rightStack.distribution = .equalSpacing
         rightStack.addArrangedSubview(amountLabel)
         rightStack.addArrangedSubview(statusView)
+        rightStack.configureSkeleton()
 
         containerStack.axis = .horizontal
         containerStack.spacing = 12
@@ -72,8 +81,10 @@ class TransactionTableViewCell: UITableViewCell {
         containerStack.addArrangedSubview(iconView)
         containerStack.addArrangedSubview(descriptionStack)
         containerStack.addArrangedSubview(rightStack)
+        containerStack.configureSkeleton()
 
         contentView.addSubview(containerStack)
+        contentView.configureSkeleton()
         
         bottomBorderView.backgroundColor = .Brimo.Black.x200
         

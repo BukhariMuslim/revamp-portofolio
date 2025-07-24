@@ -8,6 +8,39 @@
 import Foundation
 import UIKit
 import SnapKit
+import SkeletonView
+
+struct QittaActivity: Decodable {
+    let id: String?
+    let iconName: String?
+    let iconPath: String?
+    let title: String?
+    let subtitle: String?
+    let date: String?
+    let status: String?
+    let trxType: String?
+    let referenceNumber: String?
+    let trxStatus: String?
+}
+
+extension QittaActivity {
+    func toActivityHistoryViewModel() -> ActivityHistoryItemViewModel {
+        var subTitleArray = subtitle?.split(separator: "\n").map(String.init) ?? []
+        let amount = subTitleArray.count > 1 ? subTitleArray.popLast() ?? "" : ""
+        
+        return ActivityHistoryItemViewModel(
+            id: id ?? "",
+            iconName: iconName ?? "",
+            iconPath: iconPath ?? "",
+            title: title ?? "",
+            subTitle: subTitleArray.joined(separator: "\n"),
+            referenceNumber: referenceNumber ?? "",
+            date: date ?? "",
+            amount: amount,
+            status: trxStatus ?? ""
+        )
+    }
+}
 
 class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITableViewDelegate {
     typealias DetailActivitySelectedHandler = (_ viewController: UIViewController) -> Void
@@ -15,6 +48,7 @@ class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITab
     private let tableView = UITableView()
     
     private var transactions: [ActivityHistoryItemViewModel] = []
+    private var placeHolderTransactions: [ActivityHistoryItemViewModel] = []
     
     private var lastTableContentHeight: CGFloat = 0
     private var tableHeightConstraint: Constraint?
@@ -22,6 +56,12 @@ class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITab
     private var isShowBorder: Bool = false
     
     var onItemSelected: DetailActivitySelectedHandler?
+    
+    public var isLoading: Bool = false {
+        didSet {
+            setSkeleton()
+        }
+    }
 
     init(isShowBorder: Bool = false) {
         super.init(frame: .zero)
@@ -50,12 +90,15 @@ class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITab
     }
 
     private func setupLayout() {
+        configureSkeleton()
+        tableView.configureSkeleton()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = isShowBorder
         tableView.showsVerticalScrollIndicator = false
-        tableView.register(TransactionTableViewCell.self, forCellReuseIdentifier: "TransactionTableViewCell")
+        tableView.register(TransactionTableViewCell.self, forCellReuseIdentifier: String(describing: TransactionTableViewCell.self))
+        tableView.register(EmptyTransactionCell.self, forCellReuseIdentifier: String(describing: EmptyTransactionCell.self))
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 80
         tableView.contentInset.bottom = 16
@@ -64,7 +107,7 @@ class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITab
         addSubview(tableView)
 
         tableView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(isShowBorder ? 0 : 100)
+            $0.top.equalToSuperview().offset(isShowBorder ? 0 : 60)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().inset(16)
             $0.bottom.equalToSuperview()
@@ -75,7 +118,7 @@ class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITab
     }
 
     private func setupDummyTransactions() {
-        transactions = [
+        placeHolderTransactions = [
             ActivityHistoryItemViewModel(
                 iconName: "icon_e_wallet",
                 iconPath: "https://brimo.bri.co.id/erangel/assets/activity/icon_e_wallet.png",
@@ -161,80 +204,160 @@ class AccountCardDetailManagerActivityView: UIView, UITableViewDataSource, UITab
 
     // MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return transactions.count
+        if isLoading {
+            return placeHolderTransactions.count
+        }
+        return transactions.isEmpty ? 1 : transactions.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if !isLoading && transactions.isEmpty {
+            let height = tableView.bounds.height - 60
+            return height
+        }
+        return UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: TransactionTableViewCell.self),
-            for: indexPath
-        ) as? TransactionTableViewCell else {
-            return UITableViewCell()
+        if isLoading {
+            return loadingCell(for: tableView, at: indexPath)
         }
-
-        let item = transactions[indexPath.row]
-        cell.configure(item: item, isShowBorder: isShowBorder && (transactions.count - 1) != indexPath.row)
-        return cell
+        
+        if transactions.isEmpty {
+            return emptyStateCell(for: tableView, at: indexPath)
+        }
+        
+        return transactionCell(for: tableView, at: indexPath)
     }
     
     func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
+        if !isLoading && !transactions.isEmpty {
+            let item = transactions[indexPath.row]
+            let detailViewModel: DetailRekeningViewModel = DetailRekeningViewModel(
+                amountDataView: [
+                    .init(name: "Nominal", style: "", value: item.amount),
+                    .init(name: "Biaya Admin", style: "", value: "Rp0")
+                ],
+                billingDetail: .init(
+                    description: "0230 0113 7093 501",
+                    iconName: "",
+                    iconPath: "",
+                    listType: "name",
+                    receiptAvatar: "",
+                    subtitle: "BANK BRI",
+                    title: "ADIXXXXXXXXXXXXXXLTI"
+                ),
+                closeButtonString: "Halaman Utama",
+                dataViewTransaction: [
+                    .init(name: "Jenis Transaksi", style: "", value: "Transfer Bank BRI"),
+                    .init(name: "Catatan", style: "", value: "-")
+                ],
+                dateTransaction: item.date,
+                footer: "",
+                footerHtml: "<html><body style=\"margin:0;padding:-16px;color:#777777;font-family:avenir\"><table><tr><td colspan=\"3\" align=\"left\" valign=\"top\" style=\"color:#777777;font-size:14px\" width=\"260\"><strong>INFORMASI:</strong></td></tr><tr><td colspan=\"3\" align=\"left\" valign=\"top\" width=\"260\"><div style=\"color:#777777;font-size:12px;line-height:18px;margin-left:-1px\"><br>Biaya Termasuk PPN (Apabila Dikenakan/Apabila Ada)<br>PT. Bank Rakyat Indonesia (Persero) Tbk.<br>Kantor Pusat BRI - Jakarta Pusat<br>NPWP : 01.001.608.7-093.000</div></td></tr></table></body></html>",
+                headerDataView: [
+                    .init(name: "No. Ref", style: "", value: "323534297666")
+                ],
+                helpFlag: false,
+                immediatelyFlag: true,
+                onProcess: false,
+                referenceNumber: "323534297666",
+                rowDataShow: 0,
+                share: true,
+                shareButtonString: "Bagikan Bukti Transaksi",
+                sourceAccountDataView: .init(
+                    description: "0230 **** **** 308",
+                    iconName: "",
+                    iconPath: "",
+                    listType: "name",
+                    receiptAvatar: "",
+                    subtitle: "BANK BRI",
+                    title: "Infinite"
+                ),
+                title: "Transaksi Berhasil",
+                titleImage: "receipt_00_revamp",
+                totalDataView: [
+                    .init(name: "Total Transaksi", style: "", value: item.amount)
+                ],
+                voucherDataView: []
+            )
+            let detailVC: DetailRekeningVC = DetailRekeningVC(
+                viewModel: detailViewModel
+            )
+            
+            onItemSelected?(detailVC)
+        }
+    }
+    
+    public func updateList(activityList: [QittaActivity]) {
+        let list: [ActivityHistoryItemViewModel] = activityList.map {
+            $0.toActivityHistoryViewModel()
+        }
+        transactions = list
+        tableView.reloadData()
+    }
+    
+    private func loadingCell(for tableView: UITableView, at indexPath: IndexPath) -> TransactionTableViewCell {
+        let cell = dequeueTransactionCell(from: tableView, at: indexPath)
+        if placeHolderTransactions.count > indexPath.row {
+            cell.configure(item: placeHolderTransactions[indexPath.row], isShowBorder: false)
+        }
+        return cell
+    }
+    
+    private func transactionCell(for tableView: UITableView, at indexPath: IndexPath) -> TransactionTableViewCell {
+        let cell = dequeueTransactionCell(from: tableView, at: indexPath)
         let item = transactions[indexPath.row]
-        let detailViewModel: DetailRekeningViewModel = DetailRekeningViewModel(
-            amountDataView: [
-                .init(name: "Nominal", style: "", value: item.amount),
-                .init(name: "Biaya Admin", style: "", value: "Rp0")
-            ],
-            billingDetail: .init(
-                description: "0230 0113 7093 501",
-                iconName: "",
-                iconPath: "",
-                listType: "name",
-                receiptAvatar: "",
-                subtitle: "BANK BRI",
-                title: "ADIXXXXXXXXXXXXXXLTI"
-            ),
-            closeButtonString: "Halaman Utama",
-            dataViewTransaction: [
-                .init(name: "Jenis Transaksi", style: "", value: "Transfer Bank BRI"),
-                .init(name: "Catatan", style: "", value: "-")
-            ],
-            dateTransaction: item.date,
-            footer: "",
-            footerHtml: "<html><body style=\"margin:0;padding:-16px;color:#777777;font-family:avenir\"><table><tr><td colspan=\"3\" align=\"left\" valign=\"top\" style=\"color:#777777;font-size:14px\" width=\"260\"><strong>INFORMASI:</strong></td></tr><tr><td colspan=\"3\" align=\"left\" valign=\"top\" width=\"260\"><div style=\"color:#777777;font-size:12px;line-height:18px;margin-left:-1px\"><br>Biaya Termasuk PPN (Apabila Dikenakan/Apabila Ada)<br>PT. Bank Rakyat Indonesia (Persero) Tbk.<br>Kantor Pusat BRI - Jakarta Pusat<br>NPWP : 01.001.608.7-093.000</div></td></tr></table></body></html>",
-            headerDataView: [
-                .init(name: "No. Ref", style: "", value: "323534297666")
-            ],
-            helpFlag: false,
-            immediatelyFlag: true,
-            onProcess: false,
-            referenceNumber: "323534297666",
-            rowDataShow: 0,
-            share: true,
-            shareButtonString: "Bagikan Bukti Transaksi",
-            sourceAccountDataView: .init(
-                description: "0230 **** **** 308",
-                iconName: "",
-                iconPath: "",
-                listType: "name",
-                receiptAvatar: "",
-                subtitle: "BANK BRI",
-                title: "Infinite"
-            ),
-            title: "Transaksi Berhasil",
-            titleImage: "receipt_00_revamp",
-            totalDataView: [
-                .init(name: "Total Transaksi", style: "", value: item.amount)
-            ],
-            voucherDataView: []
-        )
-        let detailVC: DetailRekeningVC = DetailRekeningVC(
-            viewModel: detailViewModel
-        )
-        
-        onItemSelected?(detailVC)
+        let showBorder = isShowBorder && indexPath.row != transactions.count - 1
+        cell.configure(item: item, isShowBorder: showBorder)
+        return cell
+    }
+    
+    private func dequeueTransactionCell(from tableView: UITableView, at indexPath: IndexPath) -> TransactionTableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: String(describing: TransactionTableViewCell.self),
+            for: indexPath
+        ) as? TransactionTableViewCell else {
+            fatalError("Failed to dequeue TransactionTableViewCell")
+        }
+        return cell
+    }
+    
+    private func emptyStateCell(for tableView: UITableView, at indexPath: IndexPath) -> EmptyTransactionCell {
+        let identifier = String(describing: EmptyTransactionCell.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! EmptyTransactionCell
+        return cell
+    }
+    
+    private func setSkeleton() {
+        if isLoading {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in
+                guard let self = self else { return }
+                self.tableView.showAnimatedSkeleton(usingColor: .Brimo.Black.x200)
+            }
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in
+                guard let self = self else { return }
+                self.tableView.hideSkeleton()
+            }
+        }
+    }
+}
+
+extension AccountCardDetailManagerActivityView: SkeletonTableViewDataSource {
+    func numSections(in collectionSkeletonView: UITableView) -> Int {
+        return 1
+    }
+
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 6
+    }
+
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return String(describing: TransactionTableViewCell.self)
     }
 }
 

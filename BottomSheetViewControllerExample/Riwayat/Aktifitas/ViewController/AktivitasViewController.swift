@@ -14,7 +14,14 @@ final class AktivitasViewController: UIViewController {
         isShowBorder: true
     )
     
-    private let headerTitle: AccountCardDetailFilter = AccountCardDetailFilter()
+    private let headerTitle: ActivityFilterHeaderView = ActivityFilterHeaderView()
+    
+    private var isActivityLoading: Bool = false {
+        didSet {
+            listActivityView.isLoading = isActivityLoading
+            headerTitle.isLoading = isActivityLoading
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +33,7 @@ final class AktivitasViewController: UIViewController {
     
     private func setupView() {
         listActivityView.onItemSelected = listActivityItemSelected
-        headerTitle.updateTitle("Semua Aktifitas")
+        headerTitle.updateTitle("Aktivitas Qitta")
         view.addSubviews(headerTitle, listActivityView)
     }
     

@@ -8,16 +8,18 @@
 import Foundation
 import UIKit
 import SnapKit
+import SkeletonView
 
 class AccountCardManagerHeaderView: UIView {
 
     // MARK: - UI Elements
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "6013 01 3455 504"
+        label.text = "6013 01 3455 504\nksajdks"
         label.font = .Brimo.Body.largeRegular
         label.textColor = ConstantsColor.white900
         label.numberOfLines = 1
+        label.configureSkeleton(cornerRadius: 7)
         return label
     }()
 
@@ -30,6 +32,7 @@ class AccountCardManagerHeaderView: UIView {
                 for: .normal
             )
         btn.tintColor = ConstantsColor.white900
+        btn.configureSkeleton(cornerRadius: 7)
         return btn
     }()
 
@@ -38,6 +41,7 @@ class AccountCardManagerHeaderView: UIView {
         label.font = .Brimo.Headline.smallSemiBold
         label.textColor = ConstantsColor.white900
         label.numberOfLines = 1
+        label.configureSkeleton(cornerRadius: 16)
         return label
     }()
 
@@ -49,6 +53,7 @@ class AccountCardManagerHeaderView: UIView {
                     .withRenderingMode(.alwaysTemplate),
                 for: .normal
             )
+        btn.configureSkeleton(cornerRadius: 10)
         return btn
     }()
     
@@ -60,6 +65,12 @@ class AccountCardManagerHeaderView: UIView {
     public var subtitle: String? {
         didSet {
             updateMaskedText()
+        }
+    }
+    
+    public var isLoading: Bool = false {
+        didSet {
+            setSkeleton()
         }
     }
 
@@ -78,6 +89,7 @@ class AccountCardManagerHeaderView: UIView {
     // MARK: - Setup
 
     private func setupView() {
+        configureSkeleton()
         addSubview(titleLabel)
         addSubview(copyBtn)
         addSubview(subtitleLabel)
@@ -96,6 +108,7 @@ class AccountCardManagerHeaderView: UIView {
         copyBtn.snp.makeConstraints { make in
             make.centerY.equalTo(titleLabel)
             make.leading.equalTo(titleLabel.snp.trailing).offset(8)
+            make.height.width.equalTo(16)
         }
 
         subtitleLabel.snp.makeConstraints { make in
@@ -107,6 +120,7 @@ class AccountCardManagerHeaderView: UIView {
             make.centerY.equalTo(subtitleLabel)
             make.leading.equalTo(subtitleLabel.snp.trailing).offset(8)
             make.bottom.equalToSuperview()
+            make.height.width.equalTo(24)
         }
     }
     
@@ -122,5 +136,54 @@ class AccountCardManagerHeaderView: UIView {
     @objc private func toggleEye() {
         isMasked.toggle()
         updateMaskedText()
+    }
+    
+    private func setSkeleton() {
+        if isLoading {
+            showAnimatedSkeleton(usingColor: .Brimo.Primary.main)
+        } else {
+            stopSkeletonAnimation()
+        }
+    }
+}
+
+
+extension UIView {
+    func configureSkeleton(cornerRadius: CGFloat = 0.0) {
+        self.isSkeletonable = true
+        
+        if let label = self as? UILabel {
+            label.linesCornerRadius = Int(cornerRadius)
+            label.skeletonCornerRadius = Float(cornerRadius)
+            if label.numberOfLines == 1 {
+                label.layer.cornerRadius = cornerRadius
+                label.layer.masksToBounds = true
+                label.lastLineFillPercent = 100
+            }
+        } else {
+            skeletonCornerRadius = Float(cornerRadius)
+        }
+    }
+    
+    func showAnimatedSkeletonRecursively(usingColor color: UIColor = .Brimo.Black.x200) {
+        self.isSkeletonable = true
+        
+        if self.subviews.isEmpty {
+            self.showAnimatedSkeleton(usingColor: color)
+        } else {
+            for subview in subviews {
+                subview.showAnimatedSkeletonRecursively(usingColor: color)
+            }
+        }
+    }
+    
+    func stopSkeletonRecursively() {
+        if self.subviews.isEmpty {
+            self.hideSkeleton(reloadDataAfter: true, transition: .none)
+        } else {
+            for subview in subviews {
+                subview.stopSkeletonRecursively()
+            }
+        }
     }
 }

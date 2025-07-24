@@ -125,6 +125,8 @@ final class AccountOpeningCompleteViewController: UIViewController {
             $0.top.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(56)
         }
+        
+        doneBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
     }
 
     private func configureDetailViewData() {
@@ -148,5 +150,10 @@ final class AccountOpeningCompleteViewController: UIViewController {
             descHeading: "Informasi Hubungi Call Center 789",
             descContent: "Biaya Termasuk PPN (Apabila Dikenakan/Apabila Ada)\nPT. Bank Rakyat Indonesia (Persero) Tbk. Kantor Pusat\nBRI - Jakarta Pusat\nNPWP : 01.001.608.7-093.000"
         )
+    }
+    
+    @objc
+    private func back() {
+        navigationController?.popViewController(animated: true)
     }
 }

@@ -128,6 +128,8 @@
 		D6B3D10F2E28874E00FE51FC /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B3D10E2E28874E00FE51FC /* PassthroughView.swift */; };
 		D6B3D1112E28ACA200FE51FC /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B3D1102E28ACA200FE51FC /* TransactionTableViewCell.swift */; };
 		D6B3D1142E28ACC300FE51FC /* ActivityHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B3D1132E28ACC300FE51FC /* ActivityHistoryViewModel.swift */; };
+		D6E646DA2E324C9700C8683B /* ActivityFilterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E646D92E324C9700C8683B /* ActivityFilterHeaderView.swift */; };
+		D6E646DC2E325A9B00C8683B /* EmptyTransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E646DB2E325A9B00C8683B /* EmptyTransactionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -269,6 +271,8 @@
 		D6B3D10E2E28874E00FE51FC /* PassthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
 		D6B3D1102E28ACA200FE51FC /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		D6B3D1132E28ACC300FE51FC /* ActivityHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityHistoryViewModel.swift; sourceTree = "<group>"; };
+		D6E646D92E324C9700C8683B /* ActivityFilterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFilterHeaderView.swift; sourceTree = "<group>"; };
+		D6E646DB2E325A9B00C8683B /* EmptyTransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTransactionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -570,6 +574,7 @@
 				59CD6FAF2E2A2053002EEF1C /* EStatementMonthCell.swift */,
 				59CD6FAA2E2A1E6B002EEF1C /* EStatementOptionView.swift */,
 				D6B3D10C2E28002C00FE51FC /* AccountCardDetailFilter.swift */,
+				D6E646D92E324C9700C8683B /* ActivityFilterHeaderView.swift */,
 				D6B3D0B42E27E8EC00FE51FC /* AccountCardDetailManagerActivityView.swift */,
 				D6B3D0B52E27E8EC00FE51FC /* AccountCardManagerCategoryView.swift */,
 				D6B3D0B62E27E8EC00FE51FC /* AccountCardManagerHeaderView.swift */,
@@ -577,6 +582,7 @@
 				D64B9C2C2E29D78400453EF6 /* SourceDataView.swift */,
 				D6B3D0B02E27E8EC00FE51FC /* StickyRoundedContainerView.swift */,
 				D6B3D1102E28ACA200FE51FC /* TransactionTableViewCell.swift */,
+				D6E646DB2E325A9B00C8683B /* EmptyTransactionCell.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -866,6 +872,7 @@
 				87B2B4BC2E1A590B00F7D6CB /* Brimo.swift in Sources */,
 				A665EC5F2E28ABDB00F28B78 /* RiwayatMutasiMockData.swift in Sources */,
 				D6B3D0E22E27E8EC00FE51FC /* CostumizedSwitch.swift in Sources */,
+				D6E646DC2E325A9B00C8683B /* EmptyTransactionCell.swift in Sources */,
 				D6B3D0E32E27E8EC00FE51FC /* WhatsAppNotificationConfigVC.swift in Sources */,
 				D6B3D0E42E27E8EC00FE51FC /* BiFastActivatedEmaillVC.swift in Sources */,
 				D6B3D10F2E28874E00FE51FC /* PassthroughView.swift in Sources */,
@@ -896,6 +903,7 @@
 				59CD6FB22E2A2092002EEF1C /* EStatementSegmentView.swift in Sources */,
 				D6B3D0F92E27E8EC00FE51FC /* AccountCardManagerCategoryView.swift in Sources */,
 				D6B3D0FA2E27E8EC00FE51FC /* CostumizedImage.swift in Sources */,
+				D6E646DA2E324C9700C8683B /* ActivityFilterHeaderView.swift in Sources */,
 				D6B3D0FB2E27E8EC00FE51FC /* CardAccountDetailInfoView.swift in Sources */,
 				D64B9C312E29D7AB00453EF6 /* SourceDetailViewModel.swift in Sources */,
 				D6B3D0FC2E27E8EC00FE51FC /* TransactionLimitTextFieldCellView.swift in Sources */,

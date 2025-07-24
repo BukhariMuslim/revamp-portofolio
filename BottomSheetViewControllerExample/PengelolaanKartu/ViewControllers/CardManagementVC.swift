@@ -105,10 +105,10 @@ class CardManagementVC: UIViewController {
         ]
         
         switches = [
-            CustomSizedSwitch(),
-            CustomSizedSwitch(),
-            CustomSizedSwitch(),
-            CustomSizedSwitch()
+            CustomSizedSwitch(isEnalbed: false),
+            CustomSizedSwitch(isEnalbed: false),
+            CustomSizedSwitch(isEnalbed: false),
+            CustomSizedSwitch(isEnalbed: false)
         ]
         
         settingsSectionView.items = [
@@ -142,7 +142,7 @@ class CardManagementVC: UIViewController {
             ),
             CardSettingsItem(
                 icon: UIImage(named: "utilities/setting_outline"),
-                text: "Transaksi Ubah Limit",
+                text: "Ubah Limit",
                 showBottomBorder: true,
                 rightView: CustomizedImage(imageName: "arrows/chevron_right"),
                 onTap: showTransactionLimitSetting
@@ -155,7 +155,7 @@ class CardManagementVC: UIViewController {
             ),
             CardSettingsItem(
                 icon: UIImage(named: "utilities/lock"),
-                text: "Blokir kartu permanen",
+                text: "Blokir Kartu Permanen",
                 rightView: CustomizedImage(imageName: "arrows/chevron_right"),
                 onTap: showPermanentBlockCard
             )
@@ -235,7 +235,7 @@ extension CardManagementVC {
             cancelBtnTitle: "Batalkan",
             actionButtonTap: { [weak self] in
                 guard let self = self else { return }
-                self.switches[itemIndex].isOn.toggle()
+                self.switches[itemIndex].setOn(!self.switches[itemIndex].isOn, animated: true)
                 if let item = self.settingsSectionView.items[itemIndex] as? CardSettingsItem {
                     item.rightView = self.switches[itemIndex]
                     var tempItems = self.settingsSectionView.items
@@ -268,7 +268,7 @@ extension CardManagementVC {
             cancelBtnTitle: "Batalkan",
             actionButtonTap: { [weak self] in
                 guard let self = self else { return }
-                self.switches[itemIndex].isOn.toggle()
+                self.switches[itemIndex].setOn(!self.switches[itemIndex].isOn, animated: true)
                 if let item = self.settingsSectionView.items[itemIndex] as? CardSettingsItem {
                     item.rightView = self.switches[itemIndex]
                     var tempItems = self.settingsSectionView.items
@@ -301,7 +301,7 @@ extension CardManagementVC {
             cancelBtnTitle: "Batalkan",
             actionButtonTap: { [weak self] in
                 guard let self = self else { return }
-                self.switches[itemIndex].isOn.toggle()
+                self.switches[itemIndex].setOn(!self.switches[itemIndex].isOn, animated: true)
                 if let item = self.settingsSectionView.items[itemIndex] as? CardSettingsItem {
                     item.rightView = self.switches[itemIndex]
                     var tempItems = self.settingsSectionView.items
@@ -334,7 +334,7 @@ extension CardManagementVC {
             cancelBtnTitle: "Batalkan",
             actionButtonTap: { [weak self] in
                 guard let self = self else { return }
-                self.switches[itemIndex].isOn.toggle()
+                self.switches[itemIndex].setOn(!self.switches[itemIndex].isOn, animated: true)
                 if let item = self.settingsSectionView.items[itemIndex] as? CardSettingsItem {
                     item.rightView = self.switches[itemIndex]
                     var tempItems = self.settingsSectionView.items

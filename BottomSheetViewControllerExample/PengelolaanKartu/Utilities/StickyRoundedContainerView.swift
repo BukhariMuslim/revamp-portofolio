@@ -1,5 +1,6 @@
 import UIKit
 import SnapKit
+import SkeletonView
 
 final class StickyRoundedContainerView: UIView {
     private let headerView: UIView
@@ -19,6 +20,12 @@ final class StickyRoundedContainerView: UIView {
     private var compositeHeader: StickyCompositeHeader?
     
     var roundedContainerView: UIView { roundedContainer }
+    
+    public var isLoading: Bool = false {
+        didSet {
+            setSkeleton()
+        }
+    }
 
     init(
         headerView: UIView,
@@ -50,13 +57,21 @@ final class StickyRoundedContainerView: UIView {
     }
 
     private func setupLayout(compositeHeaderBuilder: StickyCompositeHeader.ContainerBuilder?) {
+        configureSkeleton()
         addSubviews(headerView, roundedContainer, scrollView)
 
+        scrollView.configureSkeleton()
         scrollView.backgroundColor = .clear
         scrollView.addSubview(scrollContent)
         scrollContent.addSubviews(spacerView, contentWrapper)
         contentWrapper.addSubview(contentView)
 
+        scrollContent.configureSkeleton()
+        contentView.configureSkeleton()
+        spacerView.configureSkeleton()
+        contentWrapper.configureSkeleton()
+        headerView.configureSkeleton()
+        
         scrollView.showsVerticalScrollIndicator = false
         scrollView.isScrollEnabled = false
 
@@ -139,6 +154,15 @@ final class StickyRoundedContainerView: UIView {
 
         if isStickyEnabled {
             spacerView.snp.updateConstraints { $0.height.equalTo(height) }
+        }
+    }
+    
+    private func setSkeleton() {
+//        compositeHeader.isLoading = isLoading
+        if isLoading {
+            showAnimatedSkeleton(usingColor: .Brimo.Black.x200)
+        } else {
+            stopSkeletonAnimation()
         }
     }
 }

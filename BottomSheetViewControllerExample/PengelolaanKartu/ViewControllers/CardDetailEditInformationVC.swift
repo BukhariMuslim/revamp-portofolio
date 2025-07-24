@@ -9,9 +9,7 @@ import UIKit
 import SnapKit
 
 class CardDetailEditInformationVC: UIViewController, UITextFieldDelegate {
-
     // MARK: - UI Components
-
     private let backgroundContainerView: UIImageView = {
         let img = UIImageView()
         img.image = UIImage(named: "background_blue_secondary")
@@ -47,7 +45,8 @@ class CardDetailEditInformationVC: UIViewController, UITextFieldDelegate {
     private lazy var saveBtn: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .Brimo.Primary.main
-        btn.setTitleColor(ConstantsColor.white900, for: .normal)
+        btn.setTitleColor(.Brimo.White.main, for: .normal)
+        btn.setTitleColor(.Brimo.Black.x600, for: .disabled)
         btn.setTitle("Simpan", for: .normal)
         btn.titleLabel?.font = .Brimo.Title.smallSemiBold
         btn.layer.cornerRadius = 28
@@ -103,6 +102,9 @@ class CardDetailEditInformationVC: UIViewController, UITextFieldDelegate {
         view.addSubviews(backgroundContainerView, roundBackgroundView)
         roundBackgroundView.addSubviews(aliasField, backgroundBtnView)
         backgroundBtnView.addSubviews(separatorBtnView, saveBtn)
+        
+        aliasField.textField.addTarget(self, action: #selector(aliasFieldTextChanged), for: .editingChanged)
+        aliasFieldTextChanged()
     }
 
     private func setupLayout() {
@@ -139,8 +141,8 @@ class CardDetailEditInformationVC: UIViewController, UITextFieldDelegate {
     }
 
     // MARK: - Keyboard Handling
-
-    @objc private func handleKeyboard(notification: Notification) {
+    @objc
+    private func handleKeyboard(notification: Notification) {
         guard
             let userInfo = notification.userInfo,
             let endFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
@@ -164,5 +166,12 @@ class CardDetailEditInformationVC: UIViewController, UITextFieldDelegate {
                 self.view.layoutIfNeeded()
             }
         )
+    }
+    
+    @objc
+    private func aliasFieldTextChanged() {
+        let isEmpty = aliasField.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
+        saveBtn.isEnabled = !isEmpty
+        saveBtn.backgroundColor = isEmpty ? .Brimo.Black.x300 : .Brimo.Primary.main
     }
 }
