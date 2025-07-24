@@ -126,7 +126,8 @@ final class CardDetailManagerVC: UIViewController {
     }
 
     private func showEStatementInformation() {
-        let vc: BrimoNsEStatementListViewController = BrimoNsEStatementListViewController()
+        //let vc: BrimoNsEStatementListViewController = BrimoNsEStatementListViewController()
+        let vc: EStatementEntryVC = EStatementEntryVC()
         navigationController?.pushViewController(vc, animated: true)
     }
 

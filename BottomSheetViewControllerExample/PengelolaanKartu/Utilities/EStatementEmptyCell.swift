@@ -43,6 +43,17 @@ class EStatementEmptyCell: UITableViewCell {
         return label
     }()
 
+    public let actionButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setTitle("Buat e-Statement", for: .normal)
+        button.setTitleColor(.Brimo.Primary.main, for: .normal)
+        button.titleLabel?.font = .Brimo.Body.mediumSemiBold
+        button.layer.cornerRadius = 16
+        button.layer.borderWidth = 1.5
+        button.layer.borderColor = UIColor(hex: "#0054F3").cgColor
+        return button
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
@@ -59,6 +70,7 @@ class EStatementEmptyCell: UITableViewCell {
         containerView.addSubview(boxImageView)
         containerView.addSubview(titleLabel)
         containerView.addSubview(subtitleLabel)
+        containerView.addSubview(actionButton)
 
         containerView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(16)
@@ -79,7 +91,24 @@ class EStatementEmptyCell: UITableViewCell {
         subtitleLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
             make.leading.trailing.equalToSuperview().inset(8)
-            make.bottom.equalToSuperview().inset(24)
         }
+
+        actionButton.snp.makeConstraints { make in
+            make.top.equalTo(subtitleLabel.snp.bottom).offset(16)
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().inset(24)
+            make.height.equalTo(32)
+        }
+
+        actionButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+
+    }
+}
+
+extension EStatementEmptyCell {
+    public func configure(icon: UIImage, header: String, desc: String) {
+        boxImageView.image = icon
+        titleLabel.text = header
+        subtitleLabel.text = desc
     }
 }

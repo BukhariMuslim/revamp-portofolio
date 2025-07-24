@@ -78,3 +78,15 @@ class CustomSingleCardComponentView: UIView {
         ])
     }
 }
+
+extension CustomSingleCardComponentView {
+    func changeTextColors(color1: UIColor, color2: UIColor) {
+        nameLabel.textColor = color1
+        detailLabel.textColor = color2
+    }
+
+    func changeTextFonts(font1: UIFont, font2: UIFont) {
+        nameLabel.font = font1
+        detailLabel.font = font2
+    }
+}

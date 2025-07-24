@@ -594,15 +594,15 @@ extension BrimoNsEStatementListViewController {
                         self.loading(false)
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        if fileExtension == "csv" {
+                        //if fileExtension == "csv" {
                             let previewVC = EStatementCSVQuickLookVC()
                             previewVC.previewFile(url: destinationURL)
                             self.present(previewVC, animated: true)
-                        } else if fileExtension == "pdf" {
+                        /*} else if fileExtension == "pdf" {
                             let previewVC = EStatementQuickLookVC()
                             previewVC.previewFile(url: destinationURL)
                             self.present(previewVC, animated: true)
-                        }
+                        }*/
                     }
                 } catch {
                     print("File move error: \(error)")

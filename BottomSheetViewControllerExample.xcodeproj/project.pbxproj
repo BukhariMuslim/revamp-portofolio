@@ -12,6 +12,8 @@
 		36432D8B2E1CBF3900055F79 /* FormFieldInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36432D8A2E1CBF3900055F79 /* FormFieldInformationView.swift */; };
 		3687FBED2E1E3D0F00BCC6EC /* BottomSheetWithTwoBtnVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3687FBEC2E1E3D0F00BCC6EC /* BottomSheetWithTwoBtnVC.swift */; };
 		369483872E1FB9C20069E46F /* AccountOpeningCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369483822E1FB9C20069E46F /* AccountOpeningCompleteViewController.swift */; };
+		59AEBFE52E307D84004BC574 /* EStatementEntryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEBFE42E307D66004BC574 /* EStatementEntryVC.swift */; };
+		59AEBFE72E308DCC004BC574 /* EStatementMakerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEBFE62E308DC4004BC574 /* EStatementMakerVC.swift */; };
 		59CD6FA72E29C955002EEF1C /* BrimoNsEStatementListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CD6FA62E29C955002EEF1C /* BrimoNsEStatementListViewController.swift */; };
 		59CD6FA92E29CCC4002EEF1C /* CustomSingleCardComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CD6FA82E29CCA9002EEF1C /* CustomSingleCardComponentView.swift */; };
 		59CD6FAB2E2A1E6E002EEF1C /* EStatementOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CD6FAA2E2A1E6B002EEF1C /* EStatementOptionView.swift */; };
@@ -149,6 +151,8 @@
 		3687FBEC2E1E3D0F00BCC6EC /* BottomSheetWithTwoBtnVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetWithTwoBtnVC.swift; sourceTree = "<group>"; };
 		369483822E1FB9C20069E46F /* AccountOpeningCompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOpeningCompleteViewController.swift; sourceTree = "<group>"; };
 		4293F4D43D94AD655BC8BE2B /* Pods-BottomSheetViewControllerExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BottomSheetViewControllerExample.debug.xcconfig"; path = "Target Support Files/Pods-BottomSheetViewControllerExample/Pods-BottomSheetViewControllerExample.debug.xcconfig"; sourceTree = "<group>"; };
+		59AEBFE42E307D66004BC574 /* EStatementEntryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EStatementEntryVC.swift; sourceTree = "<group>"; };
+		59AEBFE62E308DC4004BC574 /* EStatementMakerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EStatementMakerVC.swift; sourceTree = "<group>"; };
 		59CD6FA62E29C955002EEF1C /* BrimoNsEStatementListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrimoNsEStatementListViewController.swift; sourceTree = "<group>"; };
 		59CD6FA82E29CCA9002EEF1C /* CustomSingleCardComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSingleCardComponentView.swift; sourceTree = "<group>"; };
 		59CD6FAA2E2A1E6B002EEF1C /* EStatementOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EStatementOptionView.swift; sourceTree = "<group>"; };
@@ -580,6 +584,8 @@
 		D6B3D0C52E27E8EC00FE51FC /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				59AEBFE62E308DC4004BC574 /* EStatementMakerVC.swift */,
+				59AEBFE42E307D66004BC574 /* EStatementEntryVC.swift */,
 				59CD6FB92E2A40E6002EEF1C /* EStatementCSVQuickLookVC.swift */,
 				59CD6FB72E2A2643002EEF1C /* EStatementQuickLookVC.swift */,
 				D6B3D0BF2E27E8EC00FE51FC /* BiFastActivatedEmaillVC.swift */,
@@ -917,6 +923,7 @@
 				8793F7952E11453B008A47D5 /* CustomNumberKeyboard.swift in Sources */,
 				A665EC6E2E29EA5000F28B78 /* CostumCalendarDatePickerView.swift in Sources */,
 				36432D862E1CB50000055F79 /* InputField.swift in Sources */,
+				59AEBFE52E307D84004BC574 /* EStatementEntryVC.swift in Sources */,
 				8793F7932E113A6D008A47D5 /* BrimoNsReachMaxAttemptPinVC.swift in Sources */,
 				8793F78D2E11306E008A47D5 /* BrimoNsReusablePinProtocol.swift in Sources */,
 				A614C7192E2DF6E900A5D7D6 /* CostumeMonthPickerView.swift in Sources */,
@@ -931,6 +938,7 @@
 				A665EC762E2A229700F28B78 /* RiwayatMutasiViewModel.swift in Sources */,
 				A69D08572E2A36CD00BB83EB /* SumberRekeningViewModel.swift in Sources */,
 				59CD6FAE2E2A1F1D002EEF1C /* EStatementDownloadSheet.swift in Sources */,
+				59AEBFE72E308DCC004BC574 /* EStatementMakerVC.swift in Sources */,
 				8793F7862E111657008A47D5 /* RecommendedProductCell.swift in Sources */,
 				A665EC612E28BEF800F28B78 /* EmptyStateCellView.swift in Sources */,
 				A665EC562E289CA100F28B78 /* MutasiViewController.swift in Sources */,
@@ -1098,8 +1106,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 352ZVXGCGX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BottomSheetViewControllerExample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1112,8 +1122,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.brontoxx.BottomSheetViewControllerExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jfsk.BottomSheetViewControllerExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1126,8 +1137,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 352ZVXGCGX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BottomSheetViewControllerExample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1140,8 +1153,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.brontoxx.BottomSheetViewControllerExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jfsk.BottomSheetViewControllerExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

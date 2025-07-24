@@ -44,6 +44,9 @@ final class InputField: UIView {
     
     private let type: InputFieldType
 
+    private var chevronWidthConstraint: NSLayoutConstraint!
+    private var chevronHeightConstraint: NSLayoutConstraint!
+
     // MARK: - UI Components
     private let containerView: UIView = {
         let view = UIView()
@@ -330,6 +333,9 @@ final class InputField: UIView {
         containerTopToTitleConstraint = containerView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16)
         containerTopToViewConstraint = containerView.topAnchor.constraint(equalTo: topAnchor)
 
+        chevronWidthConstraint = chevronImageView.widthAnchor.constraint(equalToConstant: 16)
+        chevronHeightConstraint = chevronImageView.heightAnchor.constraint(equalToConstant: 16)
+
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -341,9 +347,9 @@ final class InputField: UIView {
 
             chevronImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             chevronImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            chevronImageView.widthAnchor.constraint(equalToConstant: 16),
-            chevronImageView.heightAnchor.constraint(equalToConstant: 16),
-            
+            chevronWidthConstraint,
+            chevronHeightConstraint,
+
             bottomLabel.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 4)
         ])
 
@@ -507,3 +513,60 @@ extension InputField: UITextFieldDelegate {
     }
 }
 
+extension InputField {
+    func setInputField(isUserInteraction: Bool) {
+        textField.isUserInteractionEnabled = isUserInteraction
+    }
+
+    func setInputFieldFont(_ font: UIFont) {
+        textField.font = font
+    }
+
+    func setInputFieldTextColor(_ color: UIColor) {
+        textField.textColor = color
+    }
+
+    func borderOff() {
+        containerView.layer.borderWidth = 0
+    }
+
+    func changeImageView(icon: UIImage) {
+        chevronImageView.image = icon
+    }
+
+    public func resizeImageView(width: CGFloat, height: CGFloat, animated: Bool = false) {
+        chevronWidthConstraint.constant = width
+        chevronHeightConstraint.constant = height
+
+        if animated {
+            UIView.animate(withDuration: 0.3) {
+                self.layoutIfNeeded()
+            }
+        } else {
+            self.layoutIfNeeded()
+        }
+    }
+
+    func showFloatingLabelForced(font: UIFont, color: UIColor, text: String? = "") {
+        let animated = false
+        floatingLabelYConstraint?.constant = floatingAnimationOffset
+        floatingLabel.isHidden = false
+
+        let animator = UIViewPropertyAnimator(duration: animated ? 0.3 : 0, curve: .easeInOut) {
+            self.floatingLabel.font = font
+            self.floatingLabel.textColor = color
+            if self.floatingLabel.text != "" {
+                self.floatingLabel.text = text
+            }
+            self.layoutIfNeeded()
+        }
+        animator.startAnimation()
+    }
+
+    func setupFloatingLabel() {
+        guard case .dropdown = type else { return }
+        floatingLabel.leadingAnchor.constraint(equalTo: textField.leadingAnchor).isActive = true
+        floatingLabelYConstraint = floatingLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+        floatingLabelYConstraint?.isActive = true
+    }
+}
