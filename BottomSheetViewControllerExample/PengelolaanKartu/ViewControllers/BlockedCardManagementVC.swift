@@ -17,7 +17,7 @@ class BlockedCardManagementVC: UIViewController {
     
     private lazy var mainImage: UIImageView = {
         let img = UIImageView()
-        img.image = UIImage(named: "illustrations/empty")
+        img.image = UIImage(named: "illustrations/warning2")
         img.contentMode = .scaleAspectFit
         img.snp.makeConstraints { make in
             make.width.height.equalTo(96)
@@ -27,8 +27,8 @@ class BlockedCardManagementVC: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Kamu tidak memiliki kartu aktif"
-        label.font = .Brimo.Body.largeSemiBold
+        label.text = "Kamu tidak memiliki kartu terhubung"
+        label.font = .Brimo.Title.smallSemiBold
         label.textColor = .Brimo.Black.main
         label.textAlignment = .center
         return label
@@ -36,17 +36,17 @@ class BlockedCardManagementVC: UIViewController {
     
     private lazy var subTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Kamu dapat datang ke kantor cabang terdekat untuk membuat Kartu Debit, atau buat Kartu Debit Virtual sekarang"
+        label.text = "Saat ini kamu tidak memiliki kartu aktif yang terhubung"
         label.numberOfLines = 0
-        label.font = .Brimo.Body.mediumRegular
-        label.textColor = .Brimo.Black.x700
+        label.font = .Brimo.Body.largeRegular
+        label.textColor = UIColor(hex: "#7B90A6")
         label.textAlignment = .center
         return label
     }()
     
     private lazy var backgroundBtnView: UIView = {
         let view = UIView()
-        view.backgroundColor = ConstantsColor.white900
+        view.backgroundColor = .Brimo.White.main
         return view
     }()
 
@@ -59,13 +59,25 @@ class BlockedCardManagementVC: UIViewController {
     private lazy var saveBtn: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .Brimo.Primary.main
-        btn.setTitleColor(ConstantsColor.white900, for: .normal)
+        btn.setTitleColor(.Brimo.White.main, for: .normal)
         btn.titleLabel?.font = .Brimo.Title.smallSemiBold
         btn.setTitle("Buat Kartu Debit Virtual", for: .normal)
         btn.layer.cornerRadius = 28
         return btn
     }()
-    
+
+    private lazy var secondBtn: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = .Brimo.White.main
+        btn.setTitleColor(.Brimo.Primary.main, for: .normal)
+        btn.titleLabel?.font = .Brimo.Title.smallSemiBold
+        btn.setTitle("Buat Kartu Debit Fisik", for: .normal)
+        btn.layer.cornerRadius = 28
+        btn.layer.borderWidth = 1
+        btn.layer.borderColor = btn.titleLabel?.textColor.cgColor
+        return btn
+    }()
+
     private let headerView: UIView = UIView()
     private let contentView: UIView = UIView()
     private let centerContainerView: UIView = UIView()
@@ -103,12 +115,12 @@ class BlockedCardManagementVC: UIViewController {
         contentStackView.setCustomSpacing(16, after: mainImage)
 
         contentStackView.addArrangedSubview(titleLabel)
-        contentStackView.setCustomSpacing(4, after: titleLabel)
+        contentStackView.setCustomSpacing(8, after: titleLabel)
 
         contentStackView.addArrangedSubview(subTitleLabel)
         
         centerContainerView.addSubviews(contentStackView, backgroundBtnView)
-        backgroundBtnView.addSubviews(separatorBtnView, saveBtn)
+        backgroundBtnView.addSubviews(separatorBtnView, saveBtn, secondBtn)
         contentView.addSubviews(centerContainerView)
         
         scrollContainerView = StickyRoundedContainerView(
@@ -154,20 +166,26 @@ class BlockedCardManagementVC: UIViewController {
         backgroundBtnView.snp.remakeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(96)
         }
 
         separatorBtnView.snp.remakeConstraints {
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(-18)
             $0.height.equalTo(1)
-            $0.bottom.equalTo(backgroundBtnView.snp.top)
+            $0.top.equalTo(backgroundBtnView.snp.top)
         }
 
         saveBtn.snp.remakeConstraints {
-            $0.leading.top.trailing.equalToSuperview().inset(16)
+            $0.top.equalTo(separatorBtnView.snp.bottom).offset(16)
+            $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(56)
         }
 
+        secondBtn.snp.makeConstraints {
+            $0.top.equalTo(saveBtn.snp.bottom).offset(12)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(56)
+            $0.bottom.equalToSuperview()
+        }
     }
     
     private func updateScrollHeaderHeight() {
